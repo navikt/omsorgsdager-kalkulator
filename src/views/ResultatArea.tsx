@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Dispatch } from 'react';
 import {Feiloppsummering, FeiloppsummeringFeil} from 'nav-frontend-skjema';
-import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import ResultBox from './ResultBox';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Action, beregn } from '../utils/actions';
@@ -9,6 +8,7 @@ import { caseResultViewOf, ResultView } from '../types/ResultView';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import bemUtils from "../utils/bemUtils";
 import FormBlock from "../components/form-block/FormBlock";
+import Omsorgsprinsipper from "../calculator/types/Omsorgsprinsipper";
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 

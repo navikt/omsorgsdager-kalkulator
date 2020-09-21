@@ -1,6 +1,6 @@
 import { ISODateString } from 'nav-datovelger';
-import Barn from '@navikt/omsorgspenger-kalkulator/lib/types/Barn';
 import { Option } from 'fp-ts/lib/Option';
+import Barn from "../calculator/types/Barn";
 
 export enum YesOrNo {
     Yes = 'Yes',

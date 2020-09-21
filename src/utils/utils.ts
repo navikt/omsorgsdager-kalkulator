@@ -1,14 +1,10 @@
-import { BarnApi, BarnInfo } from './types';
-import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
-import { separate, sequence } from 'fp-ts/lib/Array';
-import { ISODateString } from 'nav-datovelger';
-import { AlderEnum, AlderType } from '@navikt/omsorgspenger-kalkulator/lib/types/Barn';
-import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
-import { omsorgsdager } from '@navikt/omsorgspenger-kalkulator/lib/components/kalkulerOmsorgsdager';
-import moment from 'moment';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { pipe } from 'fp-ts/lib/pipeable';
-import { isSome } from 'fp-ts/lib/Option';
+import {BarnApi, BarnInfo} from './types';
+import {chain as andThen, either, Either, fold, left, map, right} from 'fp-ts/lib/Either';
+import {separate, sequence} from 'fp-ts/lib/Array';
+import {ISODateString} from 'nav-datovelger';
+import {FeiloppsummeringFeil} from 'nav-frontend-skjema';
+import {pipe} from 'fp-ts/lib/pipeable';
+import {isSome} from 'fp-ts/lib/Option';
 import {
     beregnButton,
     beregnButtonAndErrorSummary,
@@ -26,6 +22,10 @@ import {
     validateFodselsdato,
     validateKroniskSykt,
 } from './validationUtils';
+import {AlderEnum, AlderType} from "../calculator/types/Barn";
+import Omsorgsprinsipper from "../calculator/types/Omsorgsprinsipper";
+import {omsorgsdager} from "../calculator/kalkulerOmsorgsdager";
+import moment = require("moment");
 
 export const erOver = (fodselsdato: ISODateString, aar: number): boolean => moment().diff(fodselsdato, 'years') >= aar;
 export const erOverTolv = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 12);
@@ -71,7 +71,7 @@ export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFei
 
     return pipe(
         fodselsdatoOrError,
-        map((fodselsdato: string) => ({ alder: fodselsdatoToAlderType(fodselsdato) })),
+        map((fodselsdato: string) => ({ alder: (fodselsdatoToAlderType(fodselsdato) as AlderType) })),
         andThen((partial) => map((kroniskSykt: boolean) => ({ ...partial, kroniskSykt }))(kroniskSyktOrError)),
         andThen((partial) => map((borSammen: boolean) => ({ ...partial, borSammen }))(borSammenOrError)),
         andThen((partial) => map((alene: boolean) => ({ ...partial, søkerHarAleneomsorgFor: alene }))(aleneOrError)),
