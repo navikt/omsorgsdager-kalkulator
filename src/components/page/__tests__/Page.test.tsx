@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { shallow } from 'enzyme';
 
-import DocumentTitle from '../../../components/document-title/DocumentTitle';
+import DocumentTitle from '../../document-title/DocumentTitle';
 import Page from '../Page';
 
 const title = 'Some title';
