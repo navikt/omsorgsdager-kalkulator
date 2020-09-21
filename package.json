@@ -10,7 +10,7 @@
         "build-lib": "npm-run-all clean-lib compile-lib-script copy-files-to-lib",
         "clean-lib": "rimraf ./lib",
         "compile-lib-script": "tsc -p tsconfig-build-lib.json",
-        "copy-files-to-lib": "copyfiles -u 2 \"src/forms/**/*.less\" lib/ && copyfiles -u 2 \"src/forms/**/assets/**/*\" lib/ && copyfiles -u 2 \"src/forms/**/*.json\" lib/",
+        "copy-files-to-lib": "copyfiles -u 2 \"src/omsorgsdager-kalkulator/**/*.less\" lib/",
         "build-dev-app": "craco build",
         "predeploy": "npm run build-dev-app",
         "deploy": "gh-pages -d build",
