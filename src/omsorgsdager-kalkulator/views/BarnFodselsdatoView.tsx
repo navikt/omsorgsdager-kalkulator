@@ -26,8 +26,8 @@ const BarnFodselsdatoView = ({ barnInfo, dispatch, state }: Props) => (
             <Element>Når er barnet født?</Element>
             <ExpandableInfo title="Hvorfor spør vi om det?">
                 Omsorgsdager gjelder i utgangspunktet ut kalenderåret barnet er 12 år. Hvis barnet ditt er 13 år eller
-                eldre har du ikke rett til omsorgsdager for dette barnet med mindre du har søkt om og fått utvidet rett
-                fordi barnet har en kronisk sykdom eller funksjonshemning.
+                eldre har du ikke rett til omsorgsdager for dette barnet med mindre du har søkt om og fått ekstra
+                omsorgsdager fordi barnet har en kronisk sykdom eller funksjonshemning.
             </ExpandableInfo>
             <Datovelger
                 id={barnInfo.fodselsdato.id}
