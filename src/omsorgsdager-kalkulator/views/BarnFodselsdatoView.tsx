@@ -11,8 +11,8 @@ import { isNone } from 'fp-ts/lib/Option';
 import { isBeregnButtonAndErrorSummary } from '../types/ResultView';
 import { barnetErOverAtten } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import FormBlock from "../components/form-block/FormBlock";
-import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
+import FormBlock from '../components/form-block/FormBlock';
+import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
 
 interface Props {
     barnInfo: BarnInfo;
@@ -26,8 +26,8 @@ const BarnFodselsdatoView = ({ barnInfo, dispatch, state }: Props) => (
             <Element>Når er barnet født?</Element>
             <ExpandableInfo title="Hvorfor spør vi om det?">
                 Omsorgsdager gjelder i utgangspunktet ut kalenderåret barnet er 12 år. Hvis barnet ditt er 13 år eller
-                eldre må du ha søkt og fått vedtak fra NAV om at du får omsorgsdager fordi barnet har en kronisk sykdom
-                eller en funksjonshemning.
+                eldre har du ikke rett til omsorgsdager for dette barnet med mindre du har søkt om og fått utvidet rett
+                fordi barnet har en kronisk sykdom eller funksjonshemning.
             </ExpandableInfo>
             <Datovelger
                 id={barnInfo.fodselsdato.id}

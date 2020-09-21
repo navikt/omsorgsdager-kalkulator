@@ -55,7 +55,7 @@ const BarnKroniskSyktView = ({ dispatch, barnInfo, state }: Props) => (
         {barnetErOverTolvOgIkkeKroniskSykt(barnInfo) && (
             <FormBlock>
                 <AlertStripeAdvarsel>
-                    For å få omsorgsdager for barn som er 13 år eller eldre, må du ha søkt og fått innvilget
+                    For å få omsorgsdager for barn som er 13 år eller eldre, må du ha søkt og fått innvilget ekstra
                     omsorgsdager fra NAV fordi barnet har en kronisk sykdom eller en funksjonshemning.
                 </AlertStripeAdvarsel>
             </FormBlock>

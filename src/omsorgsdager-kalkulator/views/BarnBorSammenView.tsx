@@ -30,7 +30,7 @@ const BarnBorSammenView = ({ state, dispatch, barnInfo }: Props) => (
                         <div>
                             <Element>Bor barnet fast hos deg?</Element>
                             <ExpandableInfo title="Hva betyr dette?">
-                                Du kan svare ja på dette spørsmålet hvis barnet har folkeregistrertadresse hos deg,
+                                Du skal svare ja på dette spørsmålet hvis barnet har folkeregistrertadresse hos deg,
                                 eller om du har en avtale om delt bosted med den andre forelderen.
                             </ExpandableInfo>
                         </div>

@@ -30,8 +30,8 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => (
                         <div>
                             <Element>Er du alene om omsorgen med barnet?</Element>
                             <ExpandableInfo title="Hva betyr det å være alene om omsorgen?">
-                                <Box>
-                                    Når det gjelder omsorgspenger, er du regnet som alene om omsorgen hvis du ikke bor
+                                <Box padBottom={'l'}>
+                                    Når det gjelder omsorgsdager, er du regnet som alene om omsorgen hvis du ikke bor
                                     sammen med den andre forelderen, og barnet bor fast bare hos deg. Dette gjelder også
                                     hvis du får ny samboer eller ektefelle.
                                 </Box>
