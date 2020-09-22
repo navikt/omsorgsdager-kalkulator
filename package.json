@@ -6,7 +6,7 @@
         "build-lib": "npm-run-all clean-lib compile-lib-script copy-files-to-lib",
         "clean-lib": "rimraf ./lib",
         "compile-lib-script": "tsc -p tsconfig-build-lib.json",
-        "copy-files-to-lib": "copyfiles -u 2 \"src/omsorgsdager-kalkulator/**/*.less\" lib/",
+        "copy-files-to-lib": "copyfiles -u 1 \"src/**/*.less\" lib/",
         "patchit": "npm-run-all build-lib patch do-publish",
         "patch": "npm version patch",
         "do-publish": "npm publish"
@@ -84,6 +84,7 @@
         "nav-frontend-typografi-style": "^1.0.22",
         "prop-types": "^15.7.2",
         "react-collapse": "^5.0.0",
+        "react-day-picker": "^7.4.8",
         "react-motion": "^0.5.2"
     },
     "devDependencies": {
