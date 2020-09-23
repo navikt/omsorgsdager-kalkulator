@@ -5,7 +5,7 @@ import ResultBox from './ResultBox';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Action, beregn } from '../utils/actions';
 import { caseResultViewOf, ResultView } from '../types/ResultView';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 import bemUtils from '../utils/bemUtils';
 import FormBlock from '../components/form-block/FormBlock';
@@ -47,7 +47,9 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
                         avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du
                     </FormBlock>
                     <FormBlock>
-                        <Element>0 omsorgsdager fra 1. juli 2020 – 31.12.2020</Element>
+                        <Normaltekst className={bem.element('large-normal-tekst')}>
+                            0 omsorgsdager fra 1. juli 2020 – 31.12.2020
+                        </Normaltekst>
                     </FormBlock>
                     <FormBlock>Opplysningene du har gitt om din situasjon gir ikke rett til omsorgsdager.</FormBlock>
                 </ResultBox>
