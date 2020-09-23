@@ -11,7 +11,7 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "isolatedModules": false,
+        "isolatedModules": true,
         "jsx": "react",
         "removeComments": true,
         "strictNullChecks": true,
@@ -19,7 +19,7 @@
         "declaration": true,
         "moduleResolution": "node",
         "noEmit": false,
-        "baseUrl": "./src/forms"
+        "baseUrl": "./src/common"
     },
     "include": ["src/omsorgsdager-kalkulator"],
     "exclude": ["node_modules", "src/dev"]

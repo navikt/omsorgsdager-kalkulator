@@ -7,7 +7,6 @@ import {
     shouldViewKroniskSyktQuestion,
 } from './viewUtils';
 
-
 export enum ValueCheckAction {
     CHECK_KRONISKT_SYK = 'CHECK_KRONISKT_SYK',
     CHECK_BOR_SAMMEN = 'CHECK_BOR_SAMMEN',

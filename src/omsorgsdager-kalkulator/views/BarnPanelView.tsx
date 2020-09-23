@@ -3,10 +3,10 @@ import { PropsWithChildren } from 'react';
 import { isRight } from 'fp-ts/lib/Either';
 import { validateBarnInfo } from '../utils/utils';
 import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { BarnInfo } from '../utils/types';
 import bemUtils from "../utils/bemUtils";
 import FormBlock from "../components/form-block/FormBlock";
-import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 
 const bem = bemUtils('BarnPanelView');
 

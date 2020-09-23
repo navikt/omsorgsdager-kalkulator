@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { BarnInfo } from '../utils/types';
+import * as React from 'react';
 import { Dispatch } from 'react';
 import { Action, fjernFodselsdatoForBarnInfo, setFodselsdatoForBarnInfo } from '../utils/actions';
 import { State } from '../utils/state';
@@ -51,7 +51,11 @@ const BarnFodselsdatoView = ({ barnInfo, dispatch, state }: Props) => (
         </FormBlock>
         {barnetErOverAtten(barnInfo) && (
             <FormBlock>
-                <AlertStripeAdvarsel>Du kan kun ha omsorgsdager ut kalenderåret barnet er 18 år.</AlertStripeAdvarsel>
+                <AlertStripeAdvarsel>
+                    Du har ikke rett på omsorgsdager for barn som er 19 år eller eldre. Omsorgsdager gjelder i
+                    utgangspunktet ut kalenderåret barnet er 12 år. I noen tilfeller kan du få omsorgsdager ut
+                    kalenderåret barnet er 18 år.
+                </AlertStripeAdvarsel>
             </FormBlock>
         )}
     </>

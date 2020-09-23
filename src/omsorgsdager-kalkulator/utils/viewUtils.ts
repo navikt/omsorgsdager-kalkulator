@@ -27,7 +27,7 @@ export const YesOrNoToBool = (yesOrNo: YesOrNo): boolean => yesOrNo === YesOrNo.
 
 export const yesOrNoRadios = (id: string) => [
     { label: 'Ja', id: `${id}`, name: `radio-name-ja-${id}`, value: YesOrNo.Yes },
-    { label: 'Nei', id: `${id}`, name: `radio-name-nei-${id}`, value: YesOrNo.No },
+    { label: 'Nei', id: `nei-${id}`, name: `radio-name-nei-${id}`, value: YesOrNo.No },
 ];
 
 export const toFodselsdatoOrUndefined = (maybeISODate: Option<ISODateString>): ISODateString | undefined =>

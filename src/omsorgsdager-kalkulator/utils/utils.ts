@@ -2,9 +2,6 @@ import { BarnApi, BarnInfo } from './types';
 import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
 import { separate, sequence } from 'fp-ts/lib/Array';
 import { ISODateString } from 'nav-datovelger';
-import { AlderEnum, AlderType } from '@navikt/omsorgspenger-kalkulator/lib/types/Barn';
-import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
-import { omsorgsdager } from '@navikt/omsorgspenger-kalkulator/lib/components/kalkulerOmsorgsdager';
 import moment from 'moment';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { pipe } from 'fp-ts/lib/pipeable';
@@ -26,13 +23,24 @@ import {
     validateFodselsdato,
     validateKroniskSykt,
 } from './validationUtils';
+import {AlderType} from "@navikt/kalkuler-omsorgsdager/lib/types/Barn";
+import Omsorgsprinsipper from "@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper";
+import {beregnOmsorgsdager} from "@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager";
+
+export function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const r = (Math.random() * 16) | 0,
+            v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    });
+}
 
 export const erOver = (fodselsdato: ISODateString, aar: number): boolean => moment().diff(fodselsdato, 'years') >= aar;
 export const erOverTolv = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 12);
 export const erOverAtten = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 18);
 
 export const fodselsdatoToAlderType = (isoDateStringFodselsdato: ISODateString): AlderType =>
-    erOverTolv(isoDateStringFodselsdato) ? AlderEnum.OVER12 : AlderEnum.UNDER12;
+    erOverTolv(isoDateStringFodselsdato) ? AlderType.OVER12 : AlderType.UNDER12;
 
 export const barnetErOverAtten = (barnInfo: BarnInfo): boolean =>
     isSome(barnInfo.fodselsdato.value) && erOverAtten(barnInfo.fodselsdato.value.value);
@@ -113,7 +121,7 @@ export const updateResultView = (
             if (barnApiListe.length === 0) {
                 return noValidChildrenOrange;
             }
-            const omsorgsprinsipper: Omsorgsprinsipper = omsorgsdager(barnApiListe, false);
+            const omsorgsprinsipper: Omsorgsprinsipper = beregnOmsorgsdager(barnApiListe, false);
             return resultBox<Omsorgsprinsipper>(omsorgsprinsipper);
         }
     )(validationResult);

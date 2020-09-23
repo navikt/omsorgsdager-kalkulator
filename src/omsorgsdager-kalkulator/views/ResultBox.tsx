@@ -2,9 +2,11 @@ import * as React from 'react';
 import { PropsWithChildren } from 'react';
 import SvgChild from '../svgs/SvgChild';
 import SvgChildSad from '../svgs/SvgChildSad';
+import './ResultBox.less';
 import bemUtils from "../utils/bemUtils";
 import FormBlock from "../components/form-block/FormBlock";
-import './ResultBox.less';
+
+export const bem = bemUtils('OmsCalcResultBox');
 
 const resultWrapperClassName = (type: ResultBoxType): string => {
     switch (type) {
@@ -23,8 +25,6 @@ const resultTopArrowClassName = (type: ResultBoxType): string => {
             return bem.element('result-top-arrow-green');
     }
 };
-
-export const bem = bemUtils('OmsCalcResultBox');
 
 type ResultBoxType = 'SUCCESS' | 'WARNING';
 

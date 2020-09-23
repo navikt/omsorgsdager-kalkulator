@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { BarnInfo } from '../utils/types';
 import { State } from '../utils/state';
 import { Dispatch } from 'react';
@@ -11,6 +10,7 @@ import { validateKroniskSykt } from '../utils/validationUtils';
 import { isYesOrNo } from '../utils/typeguards';
 import { barnetErOverTolvOgIkkeKroniskSykt } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import * as React from 'react';
 import FormBlock from "../components/form-block/FormBlock";
 import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
 
@@ -47,7 +47,7 @@ const BarnKroniskSyktView = ({ dispatch, barnInfo, state }: Props) => (
                     }}
                     checked={toRadioValue(barnInfo.kroniskSykt.value)}
                     radios={yesOrNoRadios(barnInfo.kroniskSykt.id)}
-                    className={'twoColumnPanelGruppe'}
+                    className={'omsorgsdagerkalkulatorTwoColumnPanelGruppe'}
                 />
             </FormBlock>
         )}

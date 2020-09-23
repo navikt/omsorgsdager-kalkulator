@@ -4,8 +4,11 @@ import { Dispatch } from 'react';
 import { Action, setNBarn, setNBarnInvalid } from '../utils/actions';
 import { Select } from 'nav-frontend-skjema';
 import { isNumber } from '../utils/typeguards';
-import bemUtils from "../utils/bemUtils";
-import FormBlock from "../components/form-block/FormBlock";
+import bemUtils from '../utils/bemUtils';
+import FormBlock from '../components/form-block/FormBlock';
+import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
+import { Element } from 'nav-frontend-typografi';
+
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -19,7 +22,16 @@ const NbarnSelectView = ({ state, dispatch, nBarnMaks }: Props) => (
     <div className={bem.element('align-content-centre')}>
         <FormBlock paddingBottom={'l'}>
             <Select
-                label={'Hvor mange egne barn har du i husstanden?'}
+                label={
+                    <div>
+                        <Element>Hvor mange egne barn har du i husstanden?</Element>
+                        <ExpandableInfo title="Hva menes med egne barn?">
+                            <div className={bem.element('text-align-left')}>
+                                Med egne barn menes biologiske barn, adoptivbarn og fosterbarn.
+                            </div>
+                        </ExpandableInfo>
+                    </div>
+                }
                 id={state.nBarn.id}
                 value={state.nBarn.value}
                 bredde={'xs'}

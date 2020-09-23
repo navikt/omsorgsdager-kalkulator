@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { BarnInfo } from '../utils/types';
 import { State } from '../utils/state';
 import { Dispatch } from 'react';
@@ -11,6 +10,7 @@ import { validateBorSammen } from '../utils/validationUtils';
 import { isYesOrNo } from '../utils/typeguards';
 import { isVisibleAndBorIkkeSammen } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
+import * as React from 'react';
 import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
 import FormBlock from "../components/form-block/FormBlock";
 
@@ -43,7 +43,7 @@ const BarnBorSammenView = ({ state, dispatch, barnInfo }: Props) => (
                     }}
                     checked={toRadioValue(barnInfo.borSammen.value)}
                     radios={yesOrNoRadios(barnInfo.borSammen.id)}
-                    className={'twoColumnPanelGruppe'}
+                    className={'omsorgsdagerkalkulatorTwoColumnPanelGruppe'}
                 />
             </FormBlock>
         )}

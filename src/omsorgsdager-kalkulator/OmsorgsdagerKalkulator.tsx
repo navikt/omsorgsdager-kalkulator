@@ -17,7 +17,10 @@ import BarnAleneOmOmsorgenView from './views/BarnAleneOmOmsorgenView';
 import MaybeNesteBarnKnapp from './views/MaybeNesteBarnKnapp';
 import Page from "./components/page/Page";
 import FormBlock from "./components/form-block/FormBlock";
-import './OmsorgsdagerKalkulator.less';
+import './OmsorgsdagerKalkulator.less'
+import bemUtils from "./utils/bemUtils";
+
+const bem = bemUtils('omsorgsdagerkalkulator');
 
 export interface Props {
     initialBarnListe?: BarnInfo[];
@@ -28,7 +31,7 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe }: Props) => {
     const { nBarnMaks, barn }: State = state;
 
     return (
-        <Page title={'Omsorgspenger kalkulator'}>
+        <Page title={'Omsorgspenger kalkulator'} className={bem.block}>
             <FormBlock paddingBottom={'xxl'}>
                 <FormBlock>
                     <KalkulatorLogoAndTitle />

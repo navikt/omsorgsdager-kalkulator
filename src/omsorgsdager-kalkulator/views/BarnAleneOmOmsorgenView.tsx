@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { BarnInfo } from '../utils/types';
 import { shouldViewAleneOmOmsorgenQuestion, toRadioValue, yesOrNoRadios, YesOrNoToBool } from '../utils/viewUtils';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
@@ -8,10 +7,11 @@ import { valueToFeilProps } from '../utils/componentUtils';
 import { validateAleneOmOmsorgen } from '../utils/validationUtils';
 import { isYesOrNo } from '../utils/typeguards';
 import { Action, setAleneOmOmsorgen } from '../utils/actions';
+import * as React from 'react';
 import { Dispatch } from 'react';
 import { State } from '../utils/state';
-import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
 import FormBlock from "../components/form-block/FormBlock";
+import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
 import Box from "../components/box/Box";
 
 interface Props {
@@ -60,7 +60,7 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => (
                     }}
                     checked={toRadioValue(barnInfo.aleneOmOmsorgen.value)}
                     radios={yesOrNoRadios(barnInfo.aleneOmOmsorgen.id)}
-                    className={'twoColumnPanelGruppe'}
+                    className={'omsorgsdagerkalkulatorTwoColumnPanelGruppe'}
                 />
             </FormBlock>
         )}

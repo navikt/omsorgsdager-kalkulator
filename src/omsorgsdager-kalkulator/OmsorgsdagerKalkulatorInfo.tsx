@@ -1,12 +1,12 @@
-import * as React from 'react';
 import KalkulatorLogoAndTitle from './views/KalkulatorLogoAndTitle';
 import { Undertittel } from 'nav-frontend-typografi';
-import bemUtils from './utils/bemUtils';
-import Page from './components/page/Page';
-import FormBlock from './components/form-block/FormBlock';
-import Box from './components/box/Box';
-import Knappelenke from './components/knappelenke/Knappelenke';
-import ExpandableInfo from './components/expandable-content/ExpandableInfo';
+import * as React from 'react';
+import Page from "./components/page/Page";
+import FormBlock from "./components/form-block/FormBlock";
+import ExpandableInfo from "./components/expandable-content/ExpandableInfo";
+import Box from "./components/box/Box";
+import Knappelenke from "./components/knappelenke/Knappelenke";
+import bemUtils from "./utils/bemUtils";
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
