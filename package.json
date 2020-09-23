@@ -11,6 +11,8 @@
         "deploy": "gh-pages -d build",
         "dev": "craco start",
         "eject": "react-scripts eject",
+        "do-publish": "npm publish",
+        "patch": "npm version patch",
         "patchit": "npm-run-all build-lib patch do-publish",
         "predeploy": "npm run build-dev-app",
         "test": "jest --maxWorkers=2 --config ./jest/jest.config.js",

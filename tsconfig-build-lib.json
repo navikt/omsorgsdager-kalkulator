@@ -19,8 +19,8 @@
         "declaration": true,
         "moduleResolution": "node",
         "noEmit": false,
-        "baseUrl": "./src/common"
+        "baseUrl": "./src/omsorgsdager-kalkulator"
     },
     "include": ["src/omsorgsdager-kalkulator"],
-    "exclude": ["node_modules", "src/dev"]
+    "exclude": ["node_modules", "src/dev", "*/**/**__tests__**"]
 }
