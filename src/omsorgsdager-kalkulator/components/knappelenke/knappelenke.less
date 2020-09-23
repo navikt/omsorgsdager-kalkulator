@@ -1,6 +1,12 @@
 @import '~nav-frontend-knapper-style/src/index.less';
-@import '../../styles/mixins.less';
-@import '../../styles/variables.less';
+
+@lightProfileColor: #c1b5d0;
+@darkProfileColor: #a190b8;
+@lightAdvarsel: #ffe9cc;
+@darkAdvarsel: #d87f0a;
+
+@c-buttonBlue: #0067c5;
+@button-height: 46px;
 
 a.knappelenke {
     padding: 0 1rem;
@@ -20,4 +26,13 @@ a.knappelenke {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+}
+
+.focusOutline() {
+    outline: none;
+    box-shadow: 0 0 0 3px @fokusFarge;
+}
+
+.buttonFocus() {
+    .focusOutline();
 }
