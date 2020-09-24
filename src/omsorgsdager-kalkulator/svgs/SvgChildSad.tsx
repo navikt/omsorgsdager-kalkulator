@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const SvgChildSad = () => (
-    <svg width={61} height={85} viewBox="0 0 61 85" fill="none">
+    <svg focusable={false} width={61} height={85} viewBox="0 0 61 85" fill="none">
         <path
             fillRule="evenodd"
             clipRule="evenodd"

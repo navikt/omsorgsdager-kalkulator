@@ -16,9 +16,9 @@ import BarnBorSammenView from './views/BarnBorSammenView';
 import BarnAleneOmOmsorgenView from './views/BarnAleneOmOmsorgenView';
 import MaybeNesteBarnKnapp from './views/MaybeNesteBarnKnapp';
 import FormBlock from './components/form-block/FormBlock';
-import './OmsorgsdagerKalkulator.less';
 import bemUtils from './utils/bemUtils';
 import Box from './components/box/Box';
+import './OmsorgsdagerKalkulator.less';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 

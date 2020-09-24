@@ -7,6 +7,7 @@ import Box from './components/box/Box';
 import Knappelenke from './components/knappelenke/Knappelenke';
 import bemUtils from './utils/bemUtils';
 import { getStartDate, getYear } from './utils/dateUtils';
+import './OmsorgsdagerKalkulator.less';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 

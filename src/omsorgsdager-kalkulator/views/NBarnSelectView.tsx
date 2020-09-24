@@ -33,6 +33,7 @@ const NbarnSelectView = ({ state, dispatch, nBarnMaks }: Props) => (
                 value={state.nBarn.value}
                 bredde={'xs'}
                 feil={undefined}
+                autoComplete={'off'}
                 onChange={(event) => {
                     const maybeNumber: number = parseInt(event.target.value, 10);
                     if (isNumber(maybeNumber) && maybeNumber > 0) {
