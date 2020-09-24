@@ -10,9 +10,9 @@ import { Action, setAleneOmOmsorgen } from '../utils/actions';
 import * as React from 'react';
 import { Dispatch } from 'react';
 import { State } from '../utils/state';
-import FormBlock from "../components/form-block/FormBlock";
-import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
-import Box from "../components/box/Box";
+import FormBlock from '../components/form-block/FormBlock';
+import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
+import Box from '../components/box/Box';
 
 interface Props {
     state: State;
@@ -26,31 +26,29 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => (
             <FormBlock>
                 <RadioPanelGruppe
                     name={`radio-panel-gruppe-name-${barnInfo.aleneOmOmsorgen.id}`}
-                    legend={
-                        <div>
-                            <Element>Er du alene om omsorgen med barnet?</Element>
-                            <ExpandableInfo title="Hva betyr det å være alene om omsorgen?">
-                                <Box padBottom={'l'}>
-                                    Når det gjelder omsorgsdager, er du regnet som alene om omsorgen hvis du ikke bor
-                                    sammen med den andre forelderen, og barnet bor fast bare hos deg. Dette gjelder også
-                                    hvis du får ny samboer eller ektefelle.
-                                </Box>
-                                <Box padBottom={'l'}>
-                                    Hvis du og den andre forelderen har en avtale om delt bosted, hvor barnet bor fast
-                                    hos dere begge, vil ingen av dere bli regnet som alene om omsorgen.
-                                </Box>
-                                <Box>
-                                    <Lenke
-                                        href={
-                                            'https://www.regjeringen.no/no/tema/familie-og-barn/innsiktsartikler/bosted-og-samvar/samvar/id749587/'
-                                        }
-                                        target={'_blank'}
-                                        rel={'noopener noreferer'}>
-                                        Les mer om fast bosted og samvær
-                                    </Lenke>
-                                </Box>
-                            </ExpandableInfo>
-                        </div>
+                    legend={<Element>Er du alene om omsorgen med barnet?</Element>}
+                    description={
+                        <ExpandableInfo title="Hva betyr det å være alene om omsorgen?">
+                            <Box padBottom={'l'}>
+                                Når det gjelder omsorgsdager, er du regnet som alene om omsorgen hvis du ikke bor sammen
+                                med den andre forelderen, og barnet bor fast bare hos deg. Dette gjelder også hvis du
+                                får ny samboer eller ektefelle.
+                            </Box>
+                            <Box padBottom={'l'}>
+                                Hvis du og den andre forelderen har en avtale om delt bosted, hvor barnet bor fast hos
+                                dere begge, vil ingen av dere bli regnet som alene om omsorgen.
+                            </Box>
+                            <Box>
+                                <Lenke
+                                    href={
+                                        'https://www.regjeringen.no/no/tema/familie-og-barn/innsiktsartikler/bosted-og-samvar/samvar/id749587/'
+                                    }
+                                    target={'_blank'}
+                                    rel={'noopener noreferer'}>
+                                    Les mer om fast bosted og samvær
+                                </Lenke>
+                            </Box>
+                        </ExpandableInfo>
                     }
                     feil={valueToFeilProps(barnInfo.aleneOmOmsorgen, state.resultViewData, validateAleneOmOmsorgen)}
                     onChange={(evt, value) => {
@@ -60,7 +58,7 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => (
                     }}
                     checked={toRadioValue(barnInfo.aleneOmOmsorgen.value)}
                     radios={yesOrNoRadios(barnInfo.aleneOmOmsorgen.id)}
-                    className={'omsorgsdagerkalkulatorTwoColumnPanelGruppe'}
+                    className={'twoColumnsPanelGroup'}
                 />
             </FormBlock>
         )}

@@ -1,5 +1,6 @@
 import { BarnInfo } from '../utils/types';
 import { State } from '../utils/state';
+import * as React from 'react';
 import { Dispatch } from 'react';
 import { Action, setKroniskSykt } from '../utils/actions';
 import { shouldViewKroniskSyktQuestion, toRadioValue, yesOrNoRadios, YesOrNoToBool } from '../utils/viewUtils';
@@ -10,9 +11,8 @@ import { validateKroniskSykt } from '../utils/validationUtils';
 import { isYesOrNo } from '../utils/typeguards';
 import { barnetErOverTolvOgIkkeKroniskSykt } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import * as React from 'react';
-import FormBlock from "../components/form-block/FormBlock";
-import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
+import FormBlock from '../components/form-block/FormBlock';
+import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
 
 interface Props {
     barnInfo: BarnInfo;
@@ -27,17 +27,17 @@ const BarnKroniskSyktView = ({ dispatch, barnInfo, state }: Props) => (
                 <RadioPanelGruppe
                     name={`radio-panel-gruppe-name-${barnInfo.kroniskSykt.id}`}
                     legend={
-                        <div>
-                            <Element>
-                                Har du fått ekstra omsorgsdager fordi barnet har en kronisk sykdom eller en
-                                funksjonshemning?
-                            </Element>
-                            <ExpandableInfo title="Hva betyr dette?">
-                                Hvis barnet har en kronisk sykdom eller en funksjonshemning kan du ha rett på ekstra
-                                omsorgsdager. Du kan svare ja på dette spørsmålet dersom du har søkt og fått svar fra
-                                NAV om at du har fått ekstra omsorgsdager.
-                            </ExpandableInfo>
-                        </div>
+                        <Element>
+                            Har du fått ekstra omsorgsdager fordi barnet har en kronisk sykdom eller en
+                            funksjonshemning?
+                        </Element>
+                    }
+                    description={
+                        <ExpandableInfo title="Hva betyr dette?">
+                            Hvis barnet har en kronisk sykdom eller en funksjonshemning kan du ha rett på ekstra
+                            omsorgsdager. Du kan svare ja på dette spørsmålet dersom du har søkt og fått svar fra NAV om
+                            at du har fått ekstra omsorgsdager.
+                        </ExpandableInfo>
                     }
                     feil={valueToFeilProps(barnInfo.kroniskSykt, state.resultViewData, validateKroniskSykt)}
                     onChange={(evt, value) => {
@@ -47,7 +47,7 @@ const BarnKroniskSyktView = ({ dispatch, barnInfo, state }: Props) => (
                     }}
                     checked={toRadioValue(barnInfo.kroniskSykt.value)}
                     radios={yesOrNoRadios(barnInfo.kroniskSykt.id)}
-                    className={'omsorgsdagerkalkulatorTwoColumnPanelGruppe'}
+                    className={'twoColumnsPanelGroup'}
                 />
             </FormBlock>
         )}

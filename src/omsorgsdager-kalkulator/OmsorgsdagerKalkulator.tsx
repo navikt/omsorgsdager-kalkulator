@@ -15,10 +15,10 @@ import BarnKroniskSyktView from './views/BarnKroniskSyktView';
 import BarnBorSammenView from './views/BarnBorSammenView';
 import BarnAleneOmOmsorgenView from './views/BarnAleneOmOmsorgenView';
 import MaybeNesteBarnKnapp from './views/MaybeNesteBarnKnapp';
-import Page from "./components/page/Page";
-import FormBlock from "./components/form-block/FormBlock";
-import './OmsorgsdagerKalkulator.less'
-import bemUtils from "./utils/bemUtils";
+import FormBlock from './components/form-block/FormBlock';
+import './OmsorgsdagerKalkulator.less';
+import bemUtils from './utils/bemUtils';
+import Box from './components/box/Box';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -31,41 +31,37 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe }: Props) => {
     const { nBarnMaks, barn }: State = state;
 
     return (
-        <Page title={'Omsorgspenger kalkulator'} className={bem.block}>
-            <FormBlock paddingBottom={'xxl'}>
-                <FormBlock>
-                    <KalkulatorLogoAndTitle />
-                    <IntroTextView nBarn={state.barn.length} />
-                    <NbarnSelectView state={state} dispatch={dispatch} nBarnMaks={nBarnMaks} />
-                </FormBlock>
-                <FlereBarnUtfyllingsInfoView nBarn={state.barn.length} />
-                <FormBlock>
-                    {barn.map((barnInfo: BarnInfo, index: number, listeAvBarn: BarnInfo[]) => {
-                        return (
-                            <FormBlock key={index}>
-                                <BarnPanelView
-                                    index={index}
-                                    length={state.barn.length}
+        <Box className={bem.element('wrapper')}>
+            <KalkulatorLogoAndTitle />
+            <IntroTextView nBarn={state.barn.length} />
+            <NbarnSelectView state={state} dispatch={dispatch} nBarnMaks={nBarnMaks} />
+            <FlereBarnUtfyllingsInfoView nBarn={state.barn.length} />
+            <FormBlock>
+                {barn.map((barnInfo: BarnInfo, index: number, listeAvBarn: BarnInfo[]) => {
+                    return (
+                        <FormBlock key={index}>
+                            <BarnPanelView
+                                index={index}
+                                length={state.barn.length}
+                                barnInfo={barnInfo}
+                                apen={panelSkalVæreÅpent(barnInfo, state)}>
+                                <BarnFodselsdatoView barnInfo={barnInfo} dispatch={dispatch} state={state} />
+                                <BarnKroniskSyktView barnInfo={barnInfo} state={state} dispatch={dispatch} />
+                                <BarnBorSammenView state={state} dispatch={dispatch} barnInfo={barnInfo} />
+                                <BarnAleneOmOmsorgenView state={state} dispatch={dispatch} barnInfo={barnInfo} />
+                                <MaybeNesteBarnKnapp
                                     barnInfo={barnInfo}
-                                    apen={panelSkalVæreÅpent(barnInfo, state)}>
-                                    <BarnFodselsdatoView barnInfo={barnInfo} dispatch={dispatch} state={state} />
-                                    <BarnKroniskSyktView barnInfo={barnInfo} state={state} dispatch={dispatch} />
-                                    <BarnBorSammenView state={state} dispatch={dispatch} barnInfo={barnInfo} />
-                                    <BarnAleneOmOmsorgenView state={state} dispatch={dispatch} barnInfo={barnInfo} />
-                                    <MaybeNesteBarnKnapp
-                                        barnInfo={barnInfo}
-                                        index={index}
-                                        listeAvBarn={listeAvBarn}
-                                        dispatch={dispatch}
-                                    />
-                                </BarnPanelView>
-                            </FormBlock>
-                        );
-                    })}
-                </FormBlock>
-                <ResultatArea resultView={state.resultViewData} dispatch={dispatch} />
+                                    index={index}
+                                    listeAvBarn={listeAvBarn}
+                                    dispatch={dispatch}
+                                />
+                            </BarnPanelView>
+                        </FormBlock>
+                    );
+                })}
             </FormBlock>
-        </Page>
+            <ResultatArea resultView={state.resultViewData} dispatch={dispatch} />
+        </Box>
     );
 };
 

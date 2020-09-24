@@ -1,12 +1,12 @@
 import KalkulatorLogoAndTitle from './views/KalkulatorLogoAndTitle';
 import { Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
-import Page from "./components/page/Page";
-import FormBlock from "./components/form-block/FormBlock";
-import ExpandableInfo from "./components/expandable-content/ExpandableInfo";
-import Box from "./components/box/Box";
-import Knappelenke from "./components/knappelenke/Knappelenke";
-import bemUtils from "./utils/bemUtils";
+import FormBlock from './components/form-block/FormBlock';
+import ExpandableInfo from './components/expandable-content/ExpandableInfo';
+import Box from './components/box/Box';
+import Knappelenke from './components/knappelenke/Knappelenke';
+import bemUtils from './utils/bemUtils';
+import { getStartDate, getYear } from './utils/dateUtils';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -15,11 +15,12 @@ interface Props {
 }
 
 const OmsorgsdagerKalkulatorInfo = ({ kalkulatorHref }: Props) => (
-    <Page title={'Omsorgspenger kalkulator intro side'}>
+    <Box className={bem.element('wrapper')}>
         <KalkulatorLogoAndTitle />
         <FormBlock margin={'l'}>
             <Undertittel>
-                Her kan du regne ut hvor mange omsorgsdager du kan ha rett på fra 1. juli 2020 – 31.12.20
+                Her kan du regne ut hvor mange omsorgsdager du kan ha rett på fra {getStartDate()} {getYear()} – 31.
+                desember {getYear()}
             </Undertittel>
         </FormBlock>
         <FormBlock>
@@ -47,7 +48,7 @@ const OmsorgsdagerKalkulatorInfo = ({ kalkulatorHref }: Props) => (
                 </Knappelenke>
             </div>
         </FormBlock>
-    </Page>
+    </Box>
 );
 
 export default OmsorgsdagerKalkulatorInfo;

@@ -11,8 +11,8 @@ import { isYesOrNo } from '../utils/typeguards';
 import { isVisibleAndBorIkkeSammen } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import * as React from 'react';
-import ExpandableInfo from "../components/expandable-content/ExpandableInfo";
-import FormBlock from "../components/form-block/FormBlock";
+import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
+import FormBlock from '../components/form-block/FormBlock';
 
 interface Props {
     state: State;
@@ -26,14 +26,12 @@ const BarnBorSammenView = ({ state, dispatch, barnInfo }: Props) => (
             <FormBlock>
                 <RadioPanelGruppe
                     name={`radio-panel-gruppe-name-${barnInfo.borSammen.id}`}
-                    legend={
-                        <div>
-                            <Element>Bor barnet fast hos deg?</Element>
-                            <ExpandableInfo title="Hva betyr dette?">
-                                Du skal svare ja på dette spørsmålet hvis barnet har folkeregistrertadresse hos deg,
-                                eller om du har en avtale om delt bosted med den andre forelderen.
-                            </ExpandableInfo>
-                        </div>
+                    legend={<Element>Bor barnet fast hos deg?</Element>}
+                    description={
+                        <ExpandableInfo title="Hva betyr dette?">
+                            Du skal svare ja på dette spørsmålet hvis barnet har folkeregistrertadresse hos deg, eller
+                            om du har en avtale om delt bosted med den andre forelderen.
+                        </ExpandableInfo>
                     }
                     feil={valueToFeilProps(barnInfo.borSammen, state.resultViewData, validateBorSammen)}
                     onChange={(evt, value) => {
@@ -43,7 +41,7 @@ const BarnBorSammenView = ({ state, dispatch, barnInfo }: Props) => (
                     }}
                     checked={toRadioValue(barnInfo.borSammen.value)}
                     radios={yesOrNoRadios(barnInfo.borSammen.id)}
-                    className={'omsorgsdagerkalkulatorTwoColumnPanelGruppe'}
+                    className={'twoColumnsPanelGroup'}
                 />
             </FormBlock>
         )}

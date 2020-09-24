@@ -9,6 +9,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 import bemUtils from '../utils/bemUtils';
 import FormBlock from '../components/form-block/FormBlock';
+import { getStartDate, getYear } from '../utils/dateUtils';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -48,7 +49,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
                     </FormBlock>
                     <FormBlock>
                         <Normaltekst className={bem.element('large-normal-tekst')}>
-                            0 omsorgsdager fra 1. juli 2020 – 31.12.2020
+                            0 omsorgsdager fra {getStartDate()} {getYear()} – 31. desember {getYear()}
                         </Normaltekst>
                     </FormBlock>
                     <FormBlock>Opplysningene du har gitt om din situasjon gir ikke rett til omsorgsdager.</FormBlock>
@@ -71,27 +72,12 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
                     </FormBlock>
                     <FormBlock>
                         <Normaltekst className={bem.element('large-normal-tekst')}>
-                            {sumDager} omsorgsdager fra 1. juli 2020 – 31.12.2020
+                            {sumDager} omsorgsdager fra {getStartDate()} 2020 – 31. desember {getYear()}
                         </Normaltekst>
                     </FormBlock>
-
-                    {/* TODO: Implementer når skisser er klare. */}
-                    {/*<FormBlock>*/}
-                    {/*    <ExpandableInfo title="Vis detaljer for utregning" closeTitle={'Skjul detaljer for utregning'}>*/}
-                    {/*        <div>grunnrett: {result.grunnrett.normaldager}</div>*/}
-                    {/*        <div>kroniskSykt: {result.kroniskSykt.normaldager}</div>*/}
-                    {/*        <div>aleneomsorgKroniskSyke: {result.aleneomsorgKroniskSyke.normaldager}</div>*/}
-                    {/*        <div>aleneomsorg: {result.aleneomsorg.normaldager}</div>*/}
-                    {/*    </ExpandableInfo>*/}
-                    {/*</FormBlock>*/}
-
-                    {/*<FormBlock>*/}
-                    {/*    Du får 20 dager fordi du er alene om omsorgen for ett barn Du får 15 dager fordi du har to barn*/}
-                    {/*</FormBlock>*/}
-
                     <FormBlock>
-                        Hvis du etter 1. juli 2020 har brukt omsorgsdager, eller delt dager med en annen, må du trekke
-                        fra disse dagene selv.
+                        Hvis du etter {getStartDate()} {getYear} har brukt omsorgsdager, eller delt dager med en annen,
+                        må du trekke fra disse dagene selv.
                     </FormBlock>
                 </ResultBox>
             );
