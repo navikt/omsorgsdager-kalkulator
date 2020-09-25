@@ -13,11 +13,12 @@ const bem = bemUtils('omsorgsdagerkalkulator');
 
 interface Props {
     kalkulatorHref: string;
+    includeHeader?: boolean;
 }
 
-const OmsorgsdagerKalkulatorInfo = ({ kalkulatorHref }: Props) => (
+const OmsorgsdagerKalkulatorInfo = ({ kalkulatorHref, includeHeader = true }: Props) => (
     <Box className={bem.element('wrapper')}>
-        <KalkulatorLogoAndTitle />
+        {includeHeader && <KalkulatorLogoAndTitle />}
         <FormBlock margin={'l'}>
             <Undertittel>
                 Her kan du regne ut hvor mange omsorgsdager du kan ha rett på fra {getStartDate()} {getYear()} – 31.

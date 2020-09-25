@@ -10,7 +10,7 @@ const App: React.FC = () => {
             <Router>
                 <Switch>
                     <Route path="/kalkulator-info">
-                        <OmsorgsdagerKalkulatorInfo kalkulatorHref={'/kalkulator'} />
+                        <OmsorgsdagerKalkulatorInfo kalkulatorHref={'/kalkulator'} includeHeader={true} />
                     </Route>
                     <Route path="/kalkulator">
                         <OmsorgsdagerKalkulator initialBarnListe={[]} />

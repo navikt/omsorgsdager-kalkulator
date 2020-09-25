@@ -24,15 +24,16 @@ const bem = bemUtils('omsorgsdagerkalkulator');
 
 export interface Props {
     initialBarnListe?: BarnInfo[];
+    includeHeader?: boolean;
 }
 
-const OmsorgsdagerKalkulator = ({ initialBarnListe }: Props) => {
+const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true }: Props) => {
     const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, createInitialState(initialBarnListe || []));
     const { nBarnMaks, barn }: State = state;
 
     return (
         <Box className={bem.element('wrapper')}>
-            <KalkulatorLogoAndTitle />
+            {includeHeader && <KalkulatorLogoAndTitle />}
             <IntroTextView nBarn={state.barn.length} />
             <NbarnSelectView state={state} dispatch={dispatch} nBarnMaks={nBarnMaks} />
             <FlereBarnUtfyllingsInfoView nBarn={state.barn.length} />

@@ -40,11 +40,32 @@
         overflow: hidden;
         display: flex;
         justify-content: flex-start;
+        padding-right: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+
+        @media (max-width: 768px) {
+            flex-flow: column;
+            padding-right: 0;
+        }
     }
+
     &__result-child-wrapper {
+        margin-left: 1rem;
         padding: 1rem;
+        justify-content: center;
+
+        @media (max-width: 768px) {
+            order: 2;
+            text-align: center;
+        }
+
     }
     &__result-content-wrapper {
-        padding: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        @media (min-width: 768px) {
+            margin-bottom: 1.5rem;
+        }
     }
 }

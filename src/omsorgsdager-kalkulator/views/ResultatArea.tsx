@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Dispatch } from 'react';
-import { Feiloppsummering, FeiloppsummeringFeil } from 'nav-frontend-skjema';
+import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import ResultBox from './ResultBox';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Action, beregn } from '../utils/actions';
@@ -10,6 +10,8 @@ import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgspr
 import bemUtils from '../utils/bemUtils';
 import FormBlock from '../components/form-block/FormBlock';
 import { getStartDate, getYear } from '../utils/dateUtils';
+import Box from '../components/box/Box';
+import ValidationSummary from '../components/validation-summary/ValidationSummary';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -22,21 +24,21 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
     caseResultViewOf(
         () => null,
         () => (
-            <FormBlock margin={'xxl'}>
+            <Box margin={'xxl'} className={bem.element('flex-center')}>
                 <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
                     Beregn
                 </Hovedknapp>
-            </FormBlock>
+            </Box>
         ),
         (errors: FeiloppsummeringFeil[]) => (
             <FormBlock margin={'xxl'}>
-                <FormBlock>
+                <Box margin={'xl'} className={bem.element('flex-center')}>
                     <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
                         Beregn
                     </Hovedknapp>
-                </FormBlock>
+                </Box>
                 <FormBlock>
-                    <Feiloppsummering tittel={'Feil i skjema'} feil={errors} />
+                    <ValidationSummary title={'Feil i skjema'} errorMessages={errors} />
                 </FormBlock>
             </FormBlock>
         ),
