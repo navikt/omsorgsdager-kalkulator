@@ -1,10 +1,13 @@
 import * as React from 'react';
+import { Dispatch } from 'react';
 import { BarnInfo } from '../utils/types';
 import { skalViseGåTilNesteBarnKnapp } from '../utils/viewUtils';
 import { Knapp } from 'nav-frontend-knapper';
 import { Action, setAktivtBarnPanel } from '../utils/actions';
-import { Dispatch } from 'react';
-import FormBlock from "../components/form-block/FormBlock";
+import Box from '../components/box/Box';
+import bemUtils from '../utils/bemUtils';
+
+const bem = bemUtils('omsorgsdagerkalkulator');
 
 interface Props {
     barnInfo: BarnInfo;
@@ -16,7 +19,7 @@ interface Props {
 const MaybeNesteBarnKnapp = ({ dispatch, index, listeAvBarn, barnInfo }: Props) => (
     <>
         {skalViseGåTilNesteBarnKnapp(barnInfo, index, listeAvBarn.length) && (
-            <FormBlock>
+            <Box margin={'xl'} className={bem.element('flex-left')}>
                 <Knapp
                     onClick={() => {
                         const maybeNesteBarnInfo: BarnInfo | undefined = listeAvBarn[index + 1];
@@ -26,7 +29,7 @@ const MaybeNesteBarnKnapp = ({ dispatch, index, listeAvBarn, barnInfo }: Props) 
                     }}>
                     Neste barn
                 </Knapp>
-            </FormBlock>
+            </Box>
         )}
     </>
 );
