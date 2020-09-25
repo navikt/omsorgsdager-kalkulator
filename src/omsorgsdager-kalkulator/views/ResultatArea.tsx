@@ -78,7 +78,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
                         </Normaltekst>
                     </FormBlock>
                     <FormBlock>
-                        Hvis du etter {getStartDate()} {getYear} har brukt omsorgsdager, eller delt dager med en annen,
+                        Hvis du etter {getStartDate()} {getYear()} har brukt omsorgsdager, eller delt dager med en annen,
                         må du trekke fra disse dagene selv.
                     </FormBlock>
                 </ResultBox>
