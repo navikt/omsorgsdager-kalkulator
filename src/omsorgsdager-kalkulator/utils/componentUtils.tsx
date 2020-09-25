@@ -4,7 +4,7 @@ import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { Either, isLeft } from 'fp-ts/lib/Either';
 import { ValueWithId } from './types';
 import { Option } from 'fp-ts/lib/Option';
-import Omsorgsprinsipper from "@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper";
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 
 export function valueToFeilProps<T>(
     value: ValueWithId<Option<T>>,

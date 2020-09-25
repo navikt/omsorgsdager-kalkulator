@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
-import FormBlock from "../components/form-block/FormBlock";
+import FormBlock from '../components/form-block/FormBlock';
 
 const FlereBarnUtfyllingsInfoView = ({ nBarn }: { nBarn: number }) => (
     <>

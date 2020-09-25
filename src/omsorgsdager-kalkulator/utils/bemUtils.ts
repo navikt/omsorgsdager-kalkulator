@@ -7,7 +7,7 @@ const bemUtils = (cls: string) => ({
     modifierConditional: (m: string | undefined, condition: boolean | undefined) =>
         condition === true && m !== undefined ? `${cls}--${m}` : undefined,
     child: (c: string) => bemUtils(bemUtils(cls).element(c)),
-    classNames
+    classNames,
 });
 
 export default bemUtils;

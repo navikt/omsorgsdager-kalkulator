@@ -3,8 +3,8 @@ import { PropsWithChildren } from 'react';
 import SvgChild from '../svgs/SvgChild';
 import SvgChildSad from '../svgs/SvgChildSad';
 import './ResultBox.less';
-import bemUtils from "../utils/bemUtils";
-import FormBlock from "../components/form-block/FormBlock";
+import bemUtils from '../utils/bemUtils';
+import FormBlock from '../components/form-block/FormBlock';
 
 export const bem = bemUtils('OmsCalcResultBox');
 

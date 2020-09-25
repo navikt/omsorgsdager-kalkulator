@@ -4,6 +4,7 @@
     "private": false,
     "scripts": {
         "build-dev-app": "craco build",
+        "lint": "eslint ./src/omsorgsdager-kalkulator --ext .ts,.tsx --fix",
         "build-lib": "npm-run-all clean-lib compile-lib-script copy-files-to-lib",
         "clean-lib": "rimraf ./lib",
         "compile-lib-script": "tsc -p tsconfig-build-lib.json",

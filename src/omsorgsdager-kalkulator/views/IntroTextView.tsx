@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import FormBlock from "../components/form-block/FormBlock";
+import FormBlock from '../components/form-block/FormBlock';
 
 const IntroTextView = ({ nBarn }: { nBarn: number }) => (
     <>

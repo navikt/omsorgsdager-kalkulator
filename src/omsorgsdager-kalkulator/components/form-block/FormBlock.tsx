@@ -6,7 +6,11 @@ interface Props {
     paddingBottom?: BoxMargin;
 }
 
-const FormBlock: React.FunctionComponent<Props> = ({ margin = 'xl', paddingBottom, children }) => (
+const FormBlock: React.FunctionComponent<Props> = ({
+    margin = 'xl',
+    paddingBottom,
+    children,
+}: React.PropsWithChildren<Props>) => (
     <Box margin={margin} padBottom={paddingBottom}>
         {children}
     </Box>

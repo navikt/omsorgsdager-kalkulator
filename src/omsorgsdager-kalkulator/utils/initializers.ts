@@ -1,6 +1,6 @@
 import { BarnInfo, ValueWithId } from './types';
 import { none } from 'fp-ts/lib/Option';
-import {uuidv4} from "./utils";
+import { uuidv4 } from './utils';
 
 export function initializeValue<T>(value: T): ValueWithId<T> {
     const uuid = uuidv4();
@@ -18,4 +18,4 @@ export const createInitialBarnInformasjon = (): BarnInfo => ({
     aleneOmOmsorgen: initializeValue(none),
 });
 
-export const initializeNBarn = (n: number) => Array.from({ length: n }, (_, i) => createInitialBarnInformasjon());
+export const initializeNBarn = (n: number) => Array.from({ length: n }, () => createInitialBarnInformasjon());

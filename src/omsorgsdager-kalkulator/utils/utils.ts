@@ -23,9 +23,9 @@ import {
     validateFodselsdato,
     validateKroniskSykt,
 } from './validationUtils';
-import {AlderType} from "@navikt/kalkuler-omsorgsdager/lib/types/Barn";
-import Omsorgsprinsipper from "@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper";
-import {beregnOmsorgsdager} from "@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager";
+import { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import { beregnOmsorgsdager } from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
 
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
