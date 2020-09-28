@@ -1,6 +1,6 @@
 {
     "name": "@navikt/omsorgsdager-kalkulator",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "private": false,
     "scripts": {
         "build-dev-app": "craco build",
