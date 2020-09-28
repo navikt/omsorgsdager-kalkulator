@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {PropsWithChildren, useEffect} from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import SvgChild from '../svgs/SvgChild';
 import SvgChildSad from '../svgs/SvgChildSad';
 import './ResultBox.less';
@@ -33,15 +33,15 @@ interface Props {
 }
 
 const ResultBox: React.FC<Props> = ({ type, children }: PropsWithChildren<Props>) => {
-
     useEffect(() => {
         const element = document.getElementById('omsorgsdager-kalkulator-result-box-wrapper');
         if (element) {
             element.scrollIntoView({
-                behavior: "smooth"
-            })
+                behavior: 'smooth',
+                block: 'nearest',
+            });
         }
-    }, [])
+    }, []);
 
     return (
         <Box id={'omsorgsdager-kalkulator-result-box-wrapper'} margin={'xl'}>
