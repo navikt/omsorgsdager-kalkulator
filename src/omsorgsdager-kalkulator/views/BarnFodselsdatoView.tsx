@@ -22,7 +22,7 @@ interface Props {
 
 const BarnFodselsdatoView = ({ barnInfo, dispatch, state }: Props) => (
     <>
-        <FormBlock>
+        <FormBlock margin={'none'}>
             <Element>Når er barnet født?</Element>
             <ExpandableInfo title="Hvorfor spør vi om det?">
                 Omsorgsdager gjelder i utgangspunktet ut kalenderåret barnet er 12 år. Hvis barnet ditt er 13 år eller
