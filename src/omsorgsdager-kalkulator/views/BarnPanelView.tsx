@@ -3,21 +3,31 @@ import { PropsWithChildren } from 'react';
 import { isRight } from 'fp-ts/lib/Either';
 import { validateBarnInfo } from '../utils/utils';
 import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { BarnInfo } from '../utils/types';
 import bemUtils from '../utils/bemUtils';
 import FormBlock from '../components/form-block/FormBlock';
+import {EkspanderbartpanelBase} from "nav-frontend-ekspanderbartpanel";
 
 const bem = bemUtils('BarnPanelView');
 
 interface Props {
+    id: string;
     index: number;
     length: number;
     barnInfo: BarnInfo;
     apen: boolean;
+    onClick: () => void;
 }
 
-const BarnPanelView: React.FC<Props> = ({ index, length, barnInfo, children, apen }: PropsWithChildren<Props>) => {
+const BarnPanelView: React.FC<Props> = ({
+    id,
+    index,
+    length,
+    barnInfo,
+    children,
+    apen,
+    onClick,
+}: PropsWithChildren<Props>) => {
     if (length === 1) {
         return (
             <div className={bem.element('border-top')}>
@@ -26,9 +36,9 @@ const BarnPanelView: React.FC<Props> = ({ index, length, barnInfo, children, ape
         );
     }
 
-    const content = (
-        <Ekspanderbartpanel
-            id={`barnEkspanderbartPanel--${index}`}
+    return (
+        <EkspanderbartpanelBase
+            id={id}
             tittel={
                 <div className={bem.element('ekspanderbarnpanel-tittel-wrapper')}>
                     <div>Barn {index + 1}</div>
@@ -40,13 +50,11 @@ const BarnPanelView: React.FC<Props> = ({ index, length, barnInfo, children, ape
                 </div>
             }
             apen={apen}
+            onClick={onClick}
             key={index}>
             {children}
-        </Ekspanderbartpanel>
+        </EkspanderbartpanelBase>
     );
-
-    // Triks for å få ekspanderbart panel til å rerendre, slik at det åpner seg når det skal.
-    return apen ? <div>{content}</div> : content;
 };
 
 export default BarnPanelView;

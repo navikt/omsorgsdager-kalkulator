@@ -10,12 +10,14 @@ export function initializeValue<T>(value: T): ValueWithId<T> {
     };
 }
 
-export const createInitialBarnInformasjon = (): BarnInfo => ({
+export const createInitialBarnInformasjon = (ekspanderbartPanelErÅpent: boolean): BarnInfo => ({
     id: uuidv4(),
+    panelErÅpent: ekspanderbartPanelErÅpent,
     fodselsdato: initializeValue(none),
     kroniskSykt: initializeValue(none),
     borSammen: initializeValue(none),
     aleneOmOmsorgen: initializeValue(none),
 });
 
-export const initializeNBarn = (n: number) => Array.from({ length: n }, () => createInitialBarnInformasjon());
+export const initializeNBarn = (n: number) =>
+    Array.from({ length: n }, (_, index: number) => createInitialBarnInformasjon(index === 0));

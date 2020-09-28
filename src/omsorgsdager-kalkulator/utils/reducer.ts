@@ -10,7 +10,9 @@ import {
     setFodselsdatoAndMaybeWipeValues,
     setKroniskSyktAndMaybeWipeValues,
 } from './reducerUtils';
-import { beregnButton } from '../types/ResultView';
+import { beregnButton, isBeregnButtonAndErrorSummary, ResultView } from '../types/ResultView';
+import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
 
@@ -23,7 +25,6 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 nBarn: { ...state.nBarn, value: action.nBarn },
                 barn: initializedBarnListe,
                 resultViewData: beregnButton,
-                aktivtBarnPanel: initializedBarnListe[0].id,
             };
         }
         case ActionType.SetNBarnInvalid: {
@@ -81,16 +82,32 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
 
         case ActionType.Beregn: {
+            const updatedResultViewData: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> = updateResultView(
+                state.barn,
+                state.resultViewData,
+                true
+            );
+
+            if (isBeregnButtonAndErrorSummary(updatedResultViewData)) {
+                return {
+                    ...state,
+                    barn: state.barn.map((barnInfo: BarnInfo) => ({ ...barnInfo, panelErÅpent: true })),
+                    resultViewData: updatedResultViewData,
+                };
+            }
             return {
                 ...state,
-                resultViewData: updateResultView(state.barn, state.resultViewData, true),
+                resultViewData: updatedResultViewData,
             };
         }
 
-        case ActionType.SetAktivtBarnPanel: {
+        case ActionType.SetPanelErÅpent: {
+            const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barnInfo: BarnInfo) =>
+                barnInfo.id === action.barnId ? { ...barnInfo, panelErÅpent: action.erÅpent } : barnInfo
+            );
             return {
                 ...state,
-                aktivtBarnPanel: action.id,
+                barn: listeAvBarnUpdated,
             };
         }
         default:

@@ -5,7 +5,6 @@ import { createInitialState, State } from './utils/state';
 import { BarnInfo } from './utils/types';
 import KalkulatorLogoAndTitle from './views/KalkulatorLogoAndTitle';
 import ResultatArea from './views/ResultatArea';
-import { panelSkalVæreÅpent } from './utils/viewUtils';
 import BarnPanelView from './views/BarnPanelView';
 import NbarnSelectView from './views/NBarnSelectView';
 import IntroTextView from './views/IntroTextView';
@@ -19,6 +18,7 @@ import FormBlock from './components/form-block/FormBlock';
 import bemUtils from './utils/bemUtils';
 import Box from './components/box/Box';
 import './OmsorgsdagerKalkulator.less';
+import { setPanelErÅpent } from './utils/actions';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -42,10 +42,14 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true }: Prop
                     return (
                         <FormBlock key={index}>
                             <BarnPanelView
+                                id={barnInfo.id}
                                 index={index}
                                 length={state.barn.length}
                                 barnInfo={barnInfo}
-                                apen={panelSkalVæreÅpent(barnInfo, state)}>
+                                apen={barnInfo.panelErÅpent}
+                                onClick={() => {
+                                    dispatch(setPanelErÅpent(barnInfo.id, !barnInfo.panelErÅpent));
+                                }}>
                                 <BarnFodselsdatoView barnInfo={barnInfo} dispatch={dispatch} state={state} />
                                 <BarnKroniskSyktView barnInfo={barnInfo} state={state} dispatch={dispatch} />
                                 <BarnBorSammenView state={state} dispatch={dispatch} barnInfo={barnInfo} />

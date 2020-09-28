@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { PropsWithChildren } from 'react';
+import {PropsWithChildren, useEffect} from 'react';
 import SvgChild from '../svgs/SvgChild';
 import SvgChildSad from '../svgs/SvgChildSad';
 import './ResultBox.less';
 import bemUtils from '../utils/bemUtils';
-import FormBlock from '../components/form-block/FormBlock';
+import Box from '../components/box/Box';
 
 export const bem = bemUtils('OmsCalcResultBox');
 
@@ -33,8 +33,18 @@ interface Props {
 }
 
 const ResultBox: React.FC<Props> = ({ type, children }: PropsWithChildren<Props>) => {
+
+    useEffect(() => {
+        const element = document.getElementById('omsorgsdager-kalkulator-result-box-wrapper');
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth"
+            })
+        }
+    }, [])
+
     return (
-        <FormBlock>
+        <Box id={'omsorgsdager-kalkulator-result-box-wrapper'} margin={'xl'}>
             <div className={resultWrapperClassName(type)}>
                 <div className={bem.element('result-top-arrow-wrapper')}>
                     <div className={resultTopArrowClassName(type)}></div>
@@ -49,7 +59,7 @@ const ResultBox: React.FC<Props> = ({ type, children }: PropsWithChildren<Props>
                     </div>
                 </div>
             </div>
-        </FormBlock>
+        </Box>
     );
 };
 

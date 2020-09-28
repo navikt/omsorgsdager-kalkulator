@@ -43,20 +43,18 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
             </FormBlock>
         ),
         () => (
-            <FormBlock>
-                <ResultBox type={'WARNING'}>
-                    <FormBlock margin={'none'}>
-                        Beregningen baserer seg på svarene du har lagt inn i kalkulatoren. Det betyr at resultatet er
-                        avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du
-                    </FormBlock>
-                    <FormBlock>
-                        <Normaltekst className={bem.element('large-normal-tekst')}>
-                            0 omsorgsdager fra {getStartDate()} {getYear()} – 31. desember {getYear()}
-                        </Normaltekst>
-                    </FormBlock>
-                    <FormBlock>Opplysningene du har gitt om din situasjon gir ikke rett til omsorgsdager.</FormBlock>
-                </ResultBox>
-            </FormBlock>
+            <ResultBox type={'WARNING'}>
+                <FormBlock margin={'none'}>
+                    Beregningen baserer seg på svarene du har lagt inn i kalkulatoren. Det betyr at resultatet er
+                    avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du
+                </FormBlock>
+                <FormBlock>
+                    <Normaltekst className={bem.element('large-normal-tekst')}>
+                        0 omsorgsdager fra {getStartDate()} {getYear()} – 31. desember {getYear()}
+                    </Normaltekst>
+                </FormBlock>
+                <FormBlock>Opplysningene du har gitt om din situasjon gir ikke rett til omsorgsdager.</FormBlock>
+            </ResultBox>
         ),
         (result: Omsorgsprinsipper) => {
             const { grunnrett, kroniskSykt, aleneomsorg, aleneomsorgKroniskSyke } = result;

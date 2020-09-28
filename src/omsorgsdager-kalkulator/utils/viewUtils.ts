@@ -3,16 +3,12 @@ import {
     barnetErOverTolvOgIkkeKroniskSykt,
     borIkkeSammen,
     erOverAtten,
-    excludeChild,
     validateBarnInfo,
 } from './utils';
-import { BarnApi, BarnInfo, YesOrNo } from './types';
-import { Either, isLeft, isRight } from 'fp-ts/lib/Either';
+import { BarnInfo, YesOrNo } from './types';
+import { isRight } from 'fp-ts/lib/Either';
 import { fold as foldOption, isSome, Option } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
-import { State } from './state';
-import { isBeregnButtonAndErrorSummary } from '../types/ResultView';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 
 export const isNotLastChild = (index: number, listLength: number) => index + 1 < listLength;
 
@@ -57,14 +53,3 @@ export const shouldViewAleneOmOmsorgenQuestion = (barnInfo: BarnInfo): boolean =
     !borIkkeSammen(barnInfo) &&
     shouldViewBorSammenQuestion(barnInfo) &&
     isSome(barnInfo.borSammen.value);
-
-export const panelSkalVæreÅpent = (barnInfo: BarnInfo, state: State): boolean => {
-    if (barnInfo.id === state.aktivtBarnPanel) {
-        return true;
-    }
-    if (excludeChild(barnInfo)) {
-        return false;
-    }
-    const validBarnOrError: Either<FeiloppsummeringFeil, BarnApi> = validateBarnInfo(barnInfo);
-    return isLeft(validBarnOrError) && isBeregnButtonAndErrorSummary(state.resultViewData);
-};

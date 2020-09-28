@@ -9,7 +9,7 @@ export enum ActionType {
     SetBorSammen = 'SetBorSammen',
     SetAleneOmOmsorgen = 'SetAleneOmOmsorgen',
     Beregn = 'Beregn',
-    SetAktivtBarnPanel = 'SetAktivtBarnPanel',
+    SetPanelErÅpent = 'SetPanelErÅpent',
 }
 
 export interface SetNBarn {
@@ -85,13 +85,15 @@ export const beregn: Beregn = {
     type: ActionType.Beregn,
 };
 
-export interface SetAktivtBarnPanel {
-    type: ActionType.SetAktivtBarnPanel;
-    id: string;
+export interface SetPanelErÅpent {
+    type: ActionType.SetPanelErÅpent;
+    barnId: string;
+    erÅpent: boolean;
 }
-export const setAktivtBarnPanel = (id: string): SetAktivtBarnPanel => ({
-    type: ActionType.SetAktivtBarnPanel,
-    id,
+export const setPanelErÅpent = (barnId: string, erÅpent: boolean): SetPanelErÅpent => ({
+    type: ActionType.SetPanelErÅpent,
+    barnId,
+    erÅpent,
 });
 
 export type Action =
@@ -103,4 +105,4 @@ export type Action =
     | SetBorSammen
     | SetAleneOmOmsorgen
     | Beregn
-    | SetAktivtBarnPanel;
+    | SetPanelErÅpent;

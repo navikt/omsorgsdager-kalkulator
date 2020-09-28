@@ -1,10 +1,12 @@
 import * as React from 'react';
 import './box.less';
 import bemUtils from '../../utils/bemUtils';
+import { uuidv4 } from '../../utils/utils';
 
 export type BoxMargin = 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl' | 'none';
 
 interface BoxProps {
+    id?: string;
     margin?: BoxMargin;
     padBottom?: BoxMargin;
     textAlignCenter?: boolean;
@@ -14,6 +16,7 @@ interface BoxProps {
 const bem = bemUtils('box');
 
 const Box: React.FunctionComponent<BoxProps> = ({
+    id,
     margin,
     padBottom,
     className,
@@ -29,7 +32,11 @@ const Box: React.FunctionComponent<BoxProps> = ({
             [`${className}`]: className !== undefined,
         }
     );
-    return <div className={classNames}>{children}</div>;
+    return (
+        <div id={id || uuidv4()} className={classNames}>
+            {children}
+        </div>
+    );
 };
 
 export default Box;

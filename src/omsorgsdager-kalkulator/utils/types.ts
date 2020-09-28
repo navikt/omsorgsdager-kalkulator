@@ -14,6 +14,7 @@ export interface ValueWithId<T> {
 
 export interface BarnInfo {
     id: string;
+    panelErÅpent: boolean;
     fodselsdato: ValueWithId<Option<ISODateString>>; // YYYY-MM-DD
     kroniskSykt: ValueWithId<Option<boolean>>;
     borSammen: ValueWithId<Option<boolean>>;
