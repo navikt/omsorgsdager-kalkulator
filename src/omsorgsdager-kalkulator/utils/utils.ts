@@ -2,7 +2,7 @@ import { BarnApi, BarnInfo } from './types';
 import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
 import { separate, sequence } from 'fp-ts/lib/Array';
 import { ISODateString } from 'nav-datovelger';
-import moment from 'moment';
+import moment, {Moment} from 'moment';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { pipe } from 'fp-ts/lib/pipeable';
 import { isSome } from 'fp-ts/lib/Option';
@@ -35,19 +35,54 @@ export function uuidv4() {
     });
 }
 
-export const erOver = (fodselsdato: ISODateString, aar: number): boolean => moment().diff(fodselsdato, 'years') >= aar;
-export const erOverTolv = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 12);
-export const erOverAtten = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 18);
+
+export const erOverTolvOgForbiDetTolvteKalenderår = (fodselsdato: ISODateString, now: Moment): boolean => {
+
+    const alder: number = now.diff(fodselsdato, 'year');
+    if (alder >= 13) {
+        return true;
+    }
+    if (alder < 12) {
+        return false;
+    }
+    // Age is 12
+    const yearBorn = moment(fodselsdato).year();
+    const currentYear = now.year();
+
+    if (currentYear - yearBorn === 12) {
+        return false
+    }
+    return true
+};
+
+export const erOverAttenOgForbiDetAttendeKalenderår = (fodselsdato: ISODateString, now: Moment): boolean => {
+
+    const alder: number = now.diff(fodselsdato, 'year');
+    if (alder >= 19) {
+        return true;
+    }
+    if (alder < 18) {
+        return false;
+    }
+    // Age is 18
+    const yearBorn = moment(fodselsdato).year();
+    const currentYear = now.year();
+
+    if (currentYear - yearBorn === 18) {
+        return false
+    }
+    return true
+};
 
 export const fodselsdatoToAlderType = (isoDateStringFodselsdato: ISODateString): AlderType =>
-    erOverTolv(isoDateStringFodselsdato) ? AlderType.OVER12 : AlderType.UNDER12;
+    erOverTolvOgForbiDetTolvteKalenderår(isoDateStringFodselsdato, moment()) ? AlderType.OVER12 : AlderType.UNDER12;
 
 export const barnetErOverAtten = (barnInfo: BarnInfo): boolean =>
-    isSome(barnInfo.fodselsdato.value) && erOverAtten(barnInfo.fodselsdato.value.value);
+    isSome(barnInfo.fodselsdato.value) && erOverAttenOgForbiDetAttendeKalenderår(barnInfo.fodselsdato.value.value, moment());
 
 export const barnetErOverTolvOgIkkeKroniskSykt = (barnInfo: BarnInfo): boolean =>
     isSome(barnInfo.fodselsdato.value) &&
-    erOverTolv(barnInfo.fodselsdato.value.value) &&
+    erOverTolvOgForbiDetTolvteKalenderår(barnInfo.fodselsdato.value.value, moment()) &&
     isSome(barnInfo.kroniskSykt.value) &&
     !barnInfo.kroniskSykt.value.value;
 
@@ -70,7 +105,7 @@ export const excludeChild = (barnInfo: BarnInfo): boolean =>
 
 export const includeChild = (barnInfo: BarnInfo): boolean => !excludeChild(barnInfo);
 
-export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, BarnApi> => {
+export const validateBarnInfoAndMapToBarnApi = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, BarnApi> => {
     const { id, fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
     const fodselsdatoOrError: Either<FeiloppsummeringFeil, ISODateString> = validateFodselsdato(fodselsdato);
     const kroniskSyktOrError: Either<FeiloppsummeringFeil, boolean> = validateKroniskSykt(kroniskSykt);
@@ -105,7 +140,7 @@ export const updateResultView = (
 ): ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
     const listeAvBarnUtenInvalids: BarnInfo[] = listeAvBarnInfo.filter(includeChild);
     const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil, BarnApi>[] = listeAvBarnUtenInvalids.map(
-        validateBarnInfo
+        validateBarnInfoAndMapToBarnApi
     );
     const validationResult: Either<FeiloppsummeringFeil[], BarnApi[]> = extractEitherFromList(
         listOfEitherErrorOrBarnApi

@@ -1,18 +1,18 @@
 import {
     barnetErOverAtten,
     barnetErOverTolvOgIkkeKroniskSykt,
-    borIkkeSammen,
-    erOverAtten,
-    validateBarnInfo,
+    borIkkeSammen, erOverAttenOgForbiDetAttendeKalenderår,
+    validateBarnInfoAndMapToBarnApi,
 } from './utils';
 import { BarnInfo, YesOrNo } from './types';
 import { isRight } from 'fp-ts/lib/Either';
 import { fold as foldOption, isSome, Option } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
+import moment from "moment";
 
 export const isNotLastChild = (index: number, listLength: number) => index + 1 < listLength;
 
-export const erFerdigUtfylt = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfo(barnInfo));
+export const erFerdigUtfylt = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfoAndMapToBarnApi(barnInfo));
 
 export const skalViseGåTilNesteBarnKnapp = (barnInfo: BarnInfo, index: number, listLength: number): boolean =>
     erFerdigUtfylt(barnInfo) && isNotLastChild(index, listLength);
@@ -39,7 +39,7 @@ export const toRadioValue = (optionValue: Option<boolean>): RadioValue =>
     )(optionValue);
 
 export const shouldViewKroniskSyktQuestion = (barnInfo: BarnInfo): boolean =>
-    isSome(barnInfo.fodselsdato.value) && !erOverAtten(barnInfo.fodselsdato.value.value);
+    isSome(barnInfo.fodselsdato.value) && !erOverAttenOgForbiDetAttendeKalenderår(barnInfo.fodselsdato.value.value, moment());
 
 export const shouldViewBorSammenQuestion = (barnInfo: BarnInfo): boolean =>
     !barnetErOverAtten(barnInfo) &&

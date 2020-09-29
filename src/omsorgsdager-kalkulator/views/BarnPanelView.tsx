@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PropsWithChildren } from 'react';
 import { isRight } from 'fp-ts/lib/Either';
-import { validateBarnInfo } from '../utils/utils';
+import { validateBarnInfoAndMapToBarnApi } from '../utils/utils';
 import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
 import { BarnInfo } from '../utils/types';
 import bemUtils from '../utils/bemUtils';
@@ -42,7 +42,7 @@ const BarnPanelView: React.FC<Props> = ({
             tittel={
                 <div className={bem.element('ekspanderbarnpanel-tittel-wrapper')}>
                     <div>Barn {index + 1}</div>
-                    {isRight(validateBarnInfo(barnInfo)) && (
+                    {isRight(validateBarnInfoAndMapToBarnApi(barnInfo)) && (
                         <div>
                             <SvgSuccessCircle />
                         </div>
