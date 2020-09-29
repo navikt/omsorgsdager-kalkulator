@@ -36,10 +36,8 @@ const ResultBox: React.FC<Props> = ({ type, children }: PropsWithChildren<Props>
     useEffect(() => {
         const element = document.getElementById('omsorgsdager-kalkulator-result-box-wrapper');
         if (element) {
-            element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-            });
+            element.focus({ preventScroll: false });
+            element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }, []);
 
