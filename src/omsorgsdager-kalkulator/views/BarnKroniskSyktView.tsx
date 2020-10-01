@@ -9,7 +9,7 @@ import { Element } from 'nav-frontend-typografi';
 import { valueToFeilProps } from '../utils/componentUtils';
 import { validateKroniskSykt } from '../utils/validationUtils';
 import { isYesOrNo } from '../utils/typeguards';
-import { barnetErOverTolvOgIkkeKroniskSykt } from '../utils/utils';
+import { barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import FormBlock from '../components/form-block/FormBlock';
 import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
@@ -52,7 +52,7 @@ const BarnKroniskSyktView = ({ dispatch, barnInfo, state }: Props) => (
             </FormBlock>
         )}
 
-        {barnetErOverTolvOgIkkeKroniskSykt(barnInfo) && (
+        {barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt(barnInfo) && (
             <FormBlock>
                 <AlertStripeAdvarsel>
                     For å få omsorgsdager for barn som er 13 år eller eldre, må du ha søkt og fått innvilget ekstra

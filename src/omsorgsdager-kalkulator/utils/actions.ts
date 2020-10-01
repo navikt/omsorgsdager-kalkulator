@@ -1,10 +1,9 @@
-import { ISODateString } from 'nav-datovelger/lib/types';
+import { Option } from 'fp-ts/Option';
 
 export enum ActionType {
     SetNBarn = 'SetNBarn',
     SetNBarnInvalid = 'SetNBarnInvalid',
-    SetFodselsdatoForBarnInfo = 'SetFodselsdatoForBarnInfo',
-    FjernFodselsdatoForBarnInfo = 'FjernFodselsdatoForBarnInfo',
+    SetÅrFødtForBarnInfo = 'SetÅrFødtForBarnInfo',
     SetKroniskSykt = 'SetKroniskSykt',
     SetBorSammen = 'SetBorSammen',
     SetAleneOmOmsorgen = 'SetAleneOmOmsorgen',
@@ -27,23 +26,14 @@ export const setNBarnInvalid = (): SetNBarnInvalid => ({
     type: ActionType.SetNBarnInvalid,
 });
 
-export interface SetFodselsdatoForBarnInfo {
-    type: ActionType.SetFodselsdatoForBarnInfo;
+export interface SetÅrFødtForBarnInfo {
+    type: ActionType.SetÅrFødtForBarnInfo;
     barnId: string;
-    fodselsdato: ISODateString;
+    årFødt: Option<number>;
 }
-export const setFodselsdatoForBarnInfo = (fodselsdato: ISODateString, barnId: string): SetFodselsdatoForBarnInfo => ({
-    type: ActionType.SetFodselsdatoForBarnInfo,
-    fodselsdato,
-    barnId,
-});
-
-export interface FjernFodselsdatoForBarnInfo {
-    type: ActionType.FjernFodselsdatoForBarnInfo;
-    barnId: string;
-}
-export const fjernFodselsdatoForBarnInfo = (barnId: string): FjernFodselsdatoForBarnInfo => ({
-    type: ActionType.FjernFodselsdatoForBarnInfo,
+export const setÅrFødtForBarnInfo = (årFødt: Option<number>, barnId: string): SetÅrFødtForBarnInfo => ({
+    type: ActionType.SetÅrFødtForBarnInfo,
+    årFødt,
     barnId,
 });
 
@@ -99,8 +89,7 @@ export const setPanelErÅpent = (barnId: string, erÅpent: boolean): SetPanelEr�
 export type Action =
     | SetNBarn
     | SetNBarnInvalid
-    | SetFodselsdatoForBarnInfo
-    | FjernFodselsdatoForBarnInfo
+    | SetÅrFødtForBarnInfo
     | SetKroniskSykt
     | SetBorSammen
     | SetAleneOmOmsorgen

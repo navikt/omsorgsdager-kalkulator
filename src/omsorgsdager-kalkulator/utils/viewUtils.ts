@@ -1,7 +1,7 @@
 import {
-    barnetErOverAtten,
-    barnetErOverTolvOgIkkeKroniskSykt,
-    borIkkeSammen, erOverAttenOgForbiDetAttendeKalenderår,
+    barnetErForbiDetAttendeKalenderår,
+    barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt,
+    borIkkeSammen, erForbiDetAttendeKalenderår,
     validateBarnInfoAndMapToBarnApi,
 } from './utils';
 import { BarnInfo, YesOrNo } from './types';
@@ -39,17 +39,17 @@ export const toRadioValue = (optionValue: Option<boolean>): RadioValue =>
     )(optionValue);
 
 export const shouldViewKroniskSyktQuestion = (barnInfo: BarnInfo): boolean =>
-    isSome(barnInfo.fodselsdato.value) && !erOverAttenOgForbiDetAttendeKalenderår(barnInfo.fodselsdato.value.value, moment());
+    isSome(barnInfo.årFødt.value) && !erForbiDetAttendeKalenderår(barnInfo.årFødt.value.value, moment());
 
 export const shouldViewBorSammenQuestion = (barnInfo: BarnInfo): boolean =>
-    !barnetErOverAtten(barnInfo) &&
-    !barnetErOverTolvOgIkkeKroniskSykt(barnInfo) &&
+    !barnetErForbiDetAttendeKalenderår(barnInfo) &&
+    !barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt(barnInfo) &&
     shouldViewKroniskSyktQuestion(barnInfo) &&
     isSome(barnInfo.kroniskSykt.value);
 
 export const shouldViewAleneOmOmsorgenQuestion = (barnInfo: BarnInfo): boolean =>
-    !barnetErOverAtten(barnInfo) &&
-    !barnetErOverTolvOgIkkeKroniskSykt(barnInfo) &&
+    !barnetErForbiDetAttendeKalenderår(barnInfo) &&
+    !barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt(barnInfo) &&
     !borIkkeSammen(barnInfo) &&
     shouldViewBorSammenQuestion(barnInfo) &&
     isSome(barnInfo.borSammen.value);

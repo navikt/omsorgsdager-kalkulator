@@ -1,4 +1,3 @@
-import { ISODateString } from 'nav-datovelger';
 import { Option } from 'fp-ts/lib/Option';
 import Barn from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
 
@@ -15,7 +14,7 @@ export interface ValueWithId<T> {
 export interface BarnInfo {
     id: string;
     panelErÅpent: boolean;
-    fodselsdato: ValueWithId<Option<ISODateString>>; // YYYY-MM-DD
+    årFødt: ValueWithId<Option<number>>;
     kroniskSykt: ValueWithId<Option<boolean>>;
     borSammen: ValueWithId<Option<boolean>>;
     aleneOmOmsorgen: ValueWithId<Option<boolean>>;

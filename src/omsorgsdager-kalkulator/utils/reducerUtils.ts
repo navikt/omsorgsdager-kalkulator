@@ -1,6 +1,5 @@
 import { BarnInfo } from './types';
-import { none, some } from 'fp-ts/lib/Option';
-import { ISODateString } from 'nav-datovelger';
+import { none, Option, some } from 'fp-ts/lib/Option';
 import {
     shouldViewAleneOmOmsorgenQuestion,
     shouldViewBorSammenQuestion,
@@ -42,28 +41,16 @@ export const evaluateDependantValues = (barnInfo: BarnInfo, nextValueToCheck: Va
     }
 };
 
-export const setFodselsdatoAndMaybeWipeValues = (newFodselsdato: ISODateString, barnInfo: BarnInfo): BarnInfo => {
-    const { fodselsdato } = barnInfo;
-    const fodselsdatoUpdated = {
+export const setÅrFødtAndMaybeWipeValues = (newÅrFødt: Option<number>, barnInfo: BarnInfo): BarnInfo => {
+    const { årFødt } = barnInfo;
+    const årFødtUpdated: BarnInfo = {
         ...barnInfo,
-        fodselsdato: {
-            ...fodselsdato,
-            value: some(newFodselsdato),
+        årFødt: {
+            ...årFødt,
+            value: newÅrFødt,
         },
     };
-    return evaluateDependantValues(fodselsdatoUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
-};
-
-export const fjernFodselsdatoAndWipeValues = (barnInfo: BarnInfo): BarnInfo => {
-    const { fodselsdato } = barnInfo;
-    const fodselsdatoUpdated = {
-        ...barnInfo,
-        fodselsdato: {
-            ...fodselsdato,
-            value: none,
-        },
-    };
-    return evaluateDependantValues(fodselsdatoUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
+    return evaluateDependantValues(årFødtUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
 };
 
 export const setKroniskSyktAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {

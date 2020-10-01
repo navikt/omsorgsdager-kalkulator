@@ -1,10 +1,9 @@
 import { isSome, Option } from 'fp-ts/lib/Option';
-import { ISODateString } from 'nav-datovelger';
 import { ValueWithId } from './types';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { toFeiloppsummeringsFeil } from './utils';
 import { Either, isRight, left, right } from 'fp-ts/lib/Either';
-import { isISODateString } from 'nav-datovelger/lib/types/typeGuards';
+import { isNumber } from './typeguards';
 
 export const errorNotAnswered = 'Feltet er påkrevd';
 
@@ -14,15 +13,12 @@ export const validateMaybeBooleanValueWithId = ({
 }: ValueWithId<Option<boolean>>): Either<FeiloppsummeringFeil, boolean> =>
     isSome(value) ? right(value.value) : left(toFeiloppsummeringsFeil(id, errorNotAnswered));
 
-export const validateFodselsdato = ({
-    id,
-    value,
-}: ValueWithId<Option<ISODateString>>): Either<FeiloppsummeringFeil, ISODateString> =>
-    isSome(value) && isISODateString(value.value)
+export const isValidYear = (input: any): boolean => input && isNumber(input);
+export const validateÅrFødt = ({ id, value }: ValueWithId<Option<number>>): Either<FeiloppsummeringFeil, number> =>
+    isSome(value) && isValidYear(value.value)
         ? right(value.value)
         : left(toFeiloppsummeringsFeil(id, errorNotAnswered));
-export const fodselsdatoIsValid = (value: ValueWithId<Option<ISODateString>>): boolean =>
-    isRight(validateFodselsdato(value));
+export const årFødtIsValid = (value: ValueWithId<Option<number>>): boolean => isRight(validateÅrFødt(value));
 
 export const validateKroniskSykt = (value: ValueWithId<Option<boolean>>): Either<FeiloppsummeringFeil, boolean> =>
     validateMaybeBooleanValueWithId(value);

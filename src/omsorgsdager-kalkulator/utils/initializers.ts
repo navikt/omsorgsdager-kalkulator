@@ -13,7 +13,7 @@ export function initializeValue<T>(value: T): ValueWithId<T> {
 export const createInitialBarnInformasjon = (ekspanderbartPanelErÅpent: boolean): BarnInfo => ({
     id: uuidv4(),
     panelErÅpent: ekspanderbartPanelErÅpent,
-    fodselsdato: initializeValue(none),
+    årFødt: initializeValue(none),
     kroniskSykt: initializeValue(none),
     borSammen: initializeValue(none),
     aleneOmOmsorgen: initializeValue(none),

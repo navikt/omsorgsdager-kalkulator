@@ -9,7 +9,7 @@ import BarnPanelView from './views/BarnPanelView';
 import NbarnSelectView from './views/NBarnSelectView';
 import IntroTextView from './views/IntroTextView';
 import FlereBarnUtfyllingsInfoView from './views/FlereBarnUtfyllingsInfoView';
-import BarnFodselsdatoView from './views/BarnFodselsdatoView';
+import BarnÅrFødtView from './views/BarnÅrFødtView';
 import BarnKroniskSyktView from './views/BarnKroniskSyktView';
 import BarnBorSammenView from './views/BarnBorSammenView';
 import BarnAleneOmOmsorgenView from './views/BarnAleneOmOmsorgenView';
@@ -50,7 +50,7 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true }: Prop
                                 onClick={() => {
                                     dispatch(setPanelErÅpent(barnInfo.id, !barnInfo.panelErÅpent));
                                 }}>
-                                <BarnFodselsdatoView barnInfo={barnInfo} dispatch={dispatch} state={state} />
+                                <BarnÅrFødtView barnInfo={barnInfo} dispatch={dispatch} state={state} />
                                 <BarnKroniskSyktView barnInfo={barnInfo} state={state} dispatch={dispatch} />
                                 <BarnBorSammenView state={state} dispatch={dispatch} barnInfo={barnInfo} />
                                 <BarnAleneOmOmsorgenView state={state} dispatch={dispatch} barnInfo={barnInfo} />

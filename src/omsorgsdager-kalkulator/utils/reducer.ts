@@ -4,11 +4,10 @@ import { initializeNBarn } from './initializers';
 import { BarnInfo } from './types';
 import { updateResultView } from './utils';
 import {
-    fjernFodselsdatoAndWipeValues,
     setAleneOmOmsorgen,
     setBorSammenAndMaybeWipeValues,
-    setFodselsdatoAndMaybeWipeValues,
     setKroniskSyktAndMaybeWipeValues,
+    setÅrFødtAndMaybeWipeValues,
 } from './reducerUtils';
 import { beregnButton, isBeregnButtonAndErrorSummary, ResultView } from '../types/ResultView';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
@@ -30,19 +29,9 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         case ActionType.SetNBarnInvalid: {
             return createInitialState([]);
         }
-        case ActionType.SetFodselsdatoForBarnInfo: {
+        case ActionType.SetÅrFødtForBarnInfo: {
             const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
-                barn.id === action.barnId ? setFodselsdatoAndMaybeWipeValues(action.fodselsdato, barn) : barn
-            );
-            return {
-                ...state,
-                barn: listeAvBarnUpdated,
-                resultViewData: updateResultView(listeAvBarnUpdated, state.resultViewData, false),
-            };
-        }
-        case ActionType.FjernFodselsdatoForBarnInfo: {
-            const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
-                barn.id === action.barnId ? fjernFodselsdatoAndWipeValues(barn) : barn
+                barn.id === action.barnId ? setÅrFødtAndMaybeWipeValues(action.årFødt, barn) : barn
             );
             return {
                 ...state,
