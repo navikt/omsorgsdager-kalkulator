@@ -13,7 +13,7 @@ interface BoxProps {
     className?: string;
 }
 
-const bem = bemUtils('box');
+const bem = bemUtils('calcBox');
 
 const Box: React.FunctionComponent<BoxProps> = ({
     id,
