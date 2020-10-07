@@ -5,7 +5,7 @@ import { toFeiloppsummeringsFeil } from './utils';
 import { Either, isRight, left, right } from 'fp-ts/lib/Either';
 import { isNumber } from './typeguards';
 
-export const errorNotAnswered = 'Feltet er påkrevd';
+export const errorNotAnswered = 'oms-calc.error.not-answered';
 
 export const validateMaybeBooleanValueWithId = ({
     id,

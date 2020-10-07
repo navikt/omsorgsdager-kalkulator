@@ -55,14 +55,14 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => {
                                 </Box>
                             </ExpandableInfo>
                         }
-                        feil={valueToFeilProps(barnInfo.aleneOmOmsorgen, state.resultViewData, validateAleneOmOmsorgen)}
+                        feil={valueToFeilProps(barnInfo.aleneOmOmsorgen, state.resultViewData, validateAleneOmOmsorgen, intl)}
                         onChange={(evt, value) => {
                             if (isYesOrNo(value)) {
                                 dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
                             }
                         }}
                         checked={toRadioValue(barnInfo.aleneOmOmsorgen.value)}
-                        radios={yesOrNoRadios(barnInfo.aleneOmOmsorgen.id)}
+                        radios={yesOrNoRadios(barnInfo.aleneOmOmsorgen.id, intl)}
                         className={'twoColumnsPanelGroup'}
                     />
                 </FormBlock>

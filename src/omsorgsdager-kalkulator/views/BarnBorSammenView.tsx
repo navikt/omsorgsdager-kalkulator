@@ -40,14 +40,14 @@ const BarnBorSammenView = ({ state, dispatch, barnInfo }: Props) => {
                                 <FormattedMessage id={'oms-calc.bor-sammen.description.content'} />
                             </ExpandableInfo>
                         }
-                        feil={valueToFeilProps(barnInfo.borSammen, state.resultViewData, validateBorSammen)}
+                        feil={valueToFeilProps(barnInfo.borSammen, state.resultViewData, validateBorSammen, intl)}
                         onChange={(evt, value) => {
                             if (isYesOrNo(value)) {
                                 dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
                             }
                         }}
                         checked={toRadioValue(barnInfo.borSammen.value)}
-                        radios={yesOrNoRadios(barnInfo.borSammen.id)}
+                        radios={yesOrNoRadios(barnInfo.borSammen.id, intl)}
                         className={'twoColumnsPanelGroup'}
                     />
                 </FormBlock>

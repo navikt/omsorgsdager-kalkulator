@@ -8,9 +8,10 @@ import Knappelenke from './components/knappelenke/Knappelenke';
 import bemUtils from './utils/bemUtils';
 import { getStartDate, getYear } from './utils/dateUtils';
 import './OmsorgsdagerKalkulator.less';
-import { IntlProvider, useIntl } from 'react-intl';
+import { FormattedMessage, IntlProvider, useIntl } from 'react-intl';
 import { applicationIntlMessages } from './i18n/applicationMessages';
 import { Locale } from './i18n/types';
+import { intlHelper } from './i18n/utils';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -22,34 +23,34 @@ interface Props {
 
 const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader = true }: Props) => {
     const intl = useIntl();
-
     return (
         <Box className={bem.element('wrapper')}>
             {includeHeader && <KalkulatorLogoAndTitle />}
             <FormBlock margin={'l'}>
                 <Undertittel>
-                    Her kan du regne ut hvor mange omsorgsdager du kan ha rett på fra {getStartDate(intl)} {getYear()} –
-                    31. desember {getYear()}
+                    <FormattedMessage id={'oms-calc.infoside.undertittel.1'} /> {getStartDate(intl)} {getYear()} –
+                    <FormattedMessage id={'oms-calc.infoside.undertittel.2'} /> {getYear()}
                 </Undertittel>
             </FormBlock>
             <FormBlock>
-                <strong>NB!</strong> Kalkulatoren tar <strong>ikke</strong> hensyn til midlertidige omsorgsdager du
-                eventuelt har fått på grunn av koronasituasjonen.
+                <strong>
+                    <FormattedMessage id={'oms-calc.infoside.nb.1'} />
+                </strong>{' '}
+                <FormattedMessage id={'oms-calc.infoside.nb.2'} />{' '}
+                <strong>
+                    <FormattedMessage id={'oms-calc.infoside.nb.3'} />
+                </strong>{' '}
+                <FormattedMessage id={'oms-calc.infoside.nb.4'} />
             </FormBlock>
             <FormBlock>
-                Kalkulatoren er for deg som barnet bor fast hos. Det vil si der barnet har folkeregistrert adresse. Hvis
-                foreldrene ikke bor sammen, men har en avtale om delt bosted, bor barnet fast hos begge.
+                <FormattedMessage id={'oms-calc.infoside.paragraph.1'} />
             </FormBlock>
             <FormBlock>
-                <ExpandableInfo title="Er du samværsforelder?">
+                <ExpandableInfo title={intlHelper(intl, 'oms-calc.infoside.expandableinfo.title')}>
                     <Box padBottom={'l'}>
-                        Hvis du er samværsforelder som har fått omsorgsdager fra den andre forelderen og i tillegg har
-                        egne barn som bor fast hos deg, beregner kalkulatoren hvor mange omsorgsdager du har for de egne
-                        barna som bor fast hos deg. Du plusser selv på antall omsorgsdager du har fått fra den andre
-                        forelderen.
+                        <FormattedMessage id={'oms-calc.infoside.expandableinfo.content.1'} />
                     </Box>
-                    Kalkulatoren vil ikke fungere for deg som er samværsforelder og ikke har egne barn som bor fast hos
-                    deg.
+                    <FormattedMessage id={'oms-calc.infoside.expandableinfo.content.2'} />
                 </ExpandableInfo>
             </FormBlock>
             <FormBlock margin={'xxxl'}>

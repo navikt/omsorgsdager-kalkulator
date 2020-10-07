@@ -12,10 +12,16 @@ import FormBlock from '../components/form-block/FormBlock';
 import { getStartDate, getYear } from '../utils/dateUtils';
 import Box from '../components/box/Box';
 import ValidationSummary from '../components/validation-summary/ValidationSummary';
-import { FormattedMessage, useIntl } from 'react-intl';
-import Lenke from "nav-frontend-lenker";
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import Lenke from 'nav-frontend-lenker';
+import { intlHelper } from '../i18n/utils';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
+
+const errorkeyToText = (intl: IntlShape) => (error: FeiloppsummeringFeil): FeiloppsummeringFeil => ({
+    ...error,
+    feilmelding: intlHelper(intl, error.feilmelding),
+});
 
 interface Props {
     resultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>;
@@ -41,7 +47,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                     </Hovedknapp>
                 </Box>
                 <FormBlock>
-                    <ValidationSummary title={'Feil i skjema'} errorMessages={errors} />
+                    <ValidationSummary title={'Feil i skjema'} errorMessages={errors.map(errorkeyToText(intl))} />
                 </FormBlock>
             </FormBlock>
         ),
@@ -52,15 +58,21 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                 </FormBlock>
                 <FormBlock>
                     <Normaltekst className={bem.element('large-normal-tekst')}>
-                        <FormattedMessage id={'oms-calc.resultat-area.orange.2.1'} /> {getStartDate(intl)} {getYear()} –
-                        31. <FormattedMessage id={'oms-calc.resultat-area.orange.2.3'} /> {getYear()}
+                        0 <FormattedMessage id={'oms-calc.resultat-area.orange.2.1.a'} />{' '}
+                    </Normaltekst>
+                    <Normaltekst>
+                        <FormattedMessage id={'oms-calc.resultat-area.orange.2.1.b'} /> {getStartDate(intl)} {getYear()}{' '}
+                        – 31. <FormattedMessage id={'oms-calc.resultat-area.orange.2.3'} /> {getYear()}
                     </Normaltekst>
                 </FormBlock>
                 <FormBlock>
                     <FormattedMessage id={'oms-calc.resultat-area.orange.3'} />
                 </FormBlock>
                 <FormBlock>
-                    <Lenke href={"https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du"}>
+                    <Lenke
+                        href={
+                            'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du'
+                        }>
                         <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
                     </Lenke>
                 </FormBlock>
@@ -81,8 +93,11 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                     </FormBlock>
                     <FormBlock>
                         <Normaltekst className={bem.element('large-normal-tekst')}>
-                            {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1'} /> {getStartDate(intl)}{' '}
-                            2020 – 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
+                            {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1.a'} />
+                        </Normaltekst>
+                        <Normaltekst>
+                            <FormattedMessage id={'oms-calc.resultat-area.green.2.1.b'} /> {getStartDate(intl)} 2020 –
+                            31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
                         </Normaltekst>
                     </FormBlock>
                     <FormBlock>
@@ -90,7 +105,10 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                         <FormattedMessage id={'oms-calc.resultat-area.3.2'} />
                     </FormBlock>
                     <FormBlock>
-                        <Lenke href={"https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du"}>
+                        <Lenke
+                            href={
+                                'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du'
+                            }>
                             <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
                         </Lenke>
                     </FormBlock>

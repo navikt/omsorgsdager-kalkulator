@@ -40,14 +40,14 @@ const BarnKroniskSyktView = ({ dispatch, barnInfo, state }: Props) => {
                                 <FormattedMessage id={'oms-calc.kronisk-sykt.description.content'} />
                             </ExpandableInfo>
                         }
-                        feil={valueToFeilProps(barnInfo.kroniskSykt, state.resultViewData, validateKroniskSykt)}
+                        feil={valueToFeilProps(barnInfo.kroniskSykt, state.resultViewData, validateKroniskSykt, intl)}
                         onChange={(evt, value) => {
                             if (isYesOrNo(value)) {
                                 dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));
                             }
                         }}
                         checked={toRadioValue(barnInfo.kroniskSykt.value)}
-                        radios={yesOrNoRadios(barnInfo.kroniskSykt.id)}
+                        radios={yesOrNoRadios(barnInfo.kroniskSykt.id, intl)}
                         className={'twoColumnsPanelGroup'}
                     />
                 </FormBlock>

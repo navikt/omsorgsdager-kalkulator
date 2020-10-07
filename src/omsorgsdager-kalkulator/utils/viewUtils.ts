@@ -9,6 +9,8 @@ import { isRight } from 'fp-ts/lib/Either';
 import { fold as foldOption, isSome, Option } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
 import moment from "moment";
+import {IntlShape} from "react-intl";
+import {intlHelper} from "../i18n/utils";
 
 export const isNotLastChild = (index: number, listLength: number) => index + 1 < listLength;
 
@@ -22,9 +24,9 @@ export type RadioValue = YesOrNo | undefined;
 export const YesOrNoToBool = (yesOrNo: YesOrNo): boolean => yesOrNo === YesOrNo.Yes;
 
 // TODO: Intl
-export const yesOrNoRadios = (id: string) => [
-    { label: 'Ja', id: `${id}`, name: `radio-name-ja-${id}`, value: YesOrNo.Yes, autoComplete: 'off' },
-    { label: 'Nei', id: `nei-${id}`, name: `radio-name-nei-${id}`, value: YesOrNo.No, autoComplete: 'off' },
+export const yesOrNoRadios = (id: string, intl: IntlShape) => [
+    { label: intlHelper(intl, "oms-calc.yes"), id: `${id}`, name: `radio-name-ja-${id}`, value: YesOrNo.Yes, autoComplete: 'off' },
+    { label: intlHelper(intl, "oms-calc.no"), id: `nei-${id}`, name: `radio-name-nei-${id}`, value: YesOrNo.No, autoComplete: 'off' },
 ];
 
 export const toFodselsdatoOrUndefined = (maybeISODate: Option<ISODateString>): ISODateString | undefined =>

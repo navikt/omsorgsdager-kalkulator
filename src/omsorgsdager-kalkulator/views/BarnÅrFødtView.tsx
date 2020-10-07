@@ -42,7 +42,7 @@ const BarnÅrFødtView = ({ barnInfo, dispatch, state }: Props) => {
                     id={barnInfo.årFødt.id}
                     value={isSome(barnInfo.årFødt.value) ? barnInfo.årFødt.value.value : undefined}
                     bredde={'xs'}
-                    feil={valueToFeilProps(barnInfo.årFødt, state.resultViewData, validateÅrFødt)}
+                    feil={valueToFeilProps(barnInfo.årFødt, state.resultViewData, validateÅrFødt, intl)}
                     autoComplete={'off'}
                     onChange={(event) => {
                         const maybeNumber: number = parseInt(event.target.value, 10);
