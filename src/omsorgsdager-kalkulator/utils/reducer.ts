@@ -1,16 +1,16 @@
-import { createInitialState, State } from './state';
-import { Action, ActionType } from './actions';
-import { initializeNBarn } from './initializers';
-import { BarnInfo } from './types';
-import { updateResultView } from './utils';
+import {createInitialState, State} from './state';
+import {Action, ActionType} from './actions';
+import {initializeNBarn} from './initializers';
+import {BarnInfo} from './types';
+import {updateResultView} from './utils';
 import {
     setAleneOmOmsorgen,
     setBorSammenAndMaybeWipeValues,
     setKroniskSyktAndMaybeWipeValues,
     setÅrFødtAndMaybeWipeValues,
 } from './reducerUtils';
-import { beregnButton, isBeregnButtonAndErrorSummary, ResultView } from '../types/ResultView';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
+import {beregnButton, isBeregnButtonAndErrorSummary, ResultView} from '../types/ResultView';
+import {FeiloppsummeringFeil} from 'nav-frontend-skjema';
 import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
@@ -94,6 +94,20 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barnInfo: BarnInfo) =>
                 barnInfo.id === action.barnId ? { ...barnInfo, panelErÅpent: action.erÅpent } : barnInfo
             );
+            return {
+                ...state,
+                barn: listeAvBarnUpdated,
+            };
+        }
+        case ActionType.SetPanelErÅpentOgGiFokus: {
+            const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barnInfo: BarnInfo) =>
+                barnInfo.id === action.barnId ? { ...barnInfo, panelErÅpent: true } : barnInfo
+            );
+            const element = document.getElementById(action.barnId);
+            if (element) {
+                element.focus({ preventScroll: false });
+                element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
             return {
                 ...state,
                 barn: listeAvBarnUpdated,

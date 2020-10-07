@@ -6,7 +6,7 @@ import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
 import { BarnInfo } from '../utils/types';
 import bemUtils from '../utils/bemUtils';
 import FormBlock from '../components/form-block/FormBlock';
-import {EkspanderbartpanelBase} from "nav-frontend-ekspanderbartpanel";
+import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
 const bem = bemUtils('BarnPanelView');
 
