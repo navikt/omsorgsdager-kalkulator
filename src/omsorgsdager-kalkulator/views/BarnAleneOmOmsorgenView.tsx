@@ -55,7 +55,12 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => {
                                 </Box>
                             </ExpandableInfo>
                         }
-                        feil={valueToFeilProps(barnInfo.aleneOmOmsorgen, state.resultViewData, validateAleneOmOmsorgen, intl)}
+                        feil={valueToFeilProps(
+                            barnInfo.aleneOmOmsorgen,
+                            state.resultViewData,
+                            validateAleneOmOmsorgen,
+                            intl
+                        )}
                         onChange={(evt, value) => {
                             if (isYesOrNo(value)) {
                                 dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));

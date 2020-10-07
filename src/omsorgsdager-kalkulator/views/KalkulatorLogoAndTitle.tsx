@@ -4,7 +4,7 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import SvgHeaderUnderline from '../svgs/SvgHeaderUnderline';
 import bemUtils from '../utils/bemUtils';
 import FormBlock from '../components/form-block/FormBlock';
-import {FormattedMessage} from "react-intl";
+import { FormattedMessage } from 'react-intl';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -13,7 +13,9 @@ const KalkulatorLogoAndTitle = () => {
         <div className={bem.element('align-content-centre')}>
             <SvgCalculatorLogo />
             <FormBlock paddingBottom={'l'}>
-                <Sidetittel><FormattedMessage id={"oms-calc.tittel"}/></Sidetittel>
+                <Sidetittel>
+                    <FormattedMessage id={'oms-calc.tittel'} />
+                </Sidetittel>
                 <SvgHeaderUnderline />
             </FormBlock>
         </div>

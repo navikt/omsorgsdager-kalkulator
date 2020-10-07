@@ -1,4 +1,4 @@
-import {IntlShape} from "react-intl";
+import { IntlShape } from 'react-intl';
 
 export const intlHelper = (
     intl: IntlShape,

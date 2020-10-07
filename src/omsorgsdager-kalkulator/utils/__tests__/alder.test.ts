@@ -1,6 +1,5 @@
-import {erForbiDetAttendeKalenderår, erForbiDetTolvteKalenderår} from '../utils';
+import { erForbiDetAttendeKalenderår, erForbiDetTolvteKalenderår } from '../utils';
 import moment from 'moment';
-
 
 describe('erForbiDetTolvteKalenderår', () => {
     const currentDay = moment('2020-10-03');
