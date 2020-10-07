@@ -14,6 +14,8 @@ import { Select } from 'nav-frontend-skjema';
 import { valueToFeilProps } from '../utils/componentUtils';
 import { validateÅrFødt } from '../utils/validationUtils';
 import moment from 'moment';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { intlHelper } from '../i18n/utils';
 
 interface Props {
     barnInfo: BarnInfo;
@@ -21,57 +23,60 @@ interface Props {
     state: State;
 }
 
-const BarnÅrFødtView = ({ barnInfo, dispatch, state }: Props) => (
-    <>
-        <FormBlock margin={'none'}>
-            <Select
-                label={<Element>Hvilket årstall er barnet født?</Element>}
-                description={
-                    <ExpandableInfo title="Hvorfor spør vi om det?">
-                        Omsorgsdager gjelder i utgangspunktet ut kalenderåret barnet er 12 år. Hvis barnet ditt er 13 år
-                        eller eldre har du ikke rett til omsorgsdager for dette barnet med mindre du har søkt om og fått
-                        ekstra omsorgsdager fordi barnet har en kronisk sykdom eller funksjonshemning.
-                    </ExpandableInfo>
-                }
-                id={barnInfo.årFødt.id}
-                value={isSome(barnInfo.årFødt.value) ? barnInfo.årFødt.value.value : undefined}
-                bredde={'xs'}
-                feil={valueToFeilProps(barnInfo.årFødt, state.resultViewData, validateÅrFødt)}
-                autoComplete={'off'}
-                onChange={(event) => {
-                    const maybeNumber: number = parseInt(event.target.value, 10);
-                    if (isNumber(maybeNumber)) {
-                        dispatch(setÅrFødtForBarnInfo(some(maybeNumber), barnInfo.id));
-                    } else {
-                        dispatch(setÅrFødtForBarnInfo(none, barnInfo.id));
+const BarnÅrFødtView = ({ barnInfo, dispatch, state }: Props) => {
+    const intl = useIntl();
+    return (
+        <>
+            <FormBlock margin={'none'}>
+                <Select
+                    label={
+                        <Element>
+                            <FormattedMessage id={'oms-calc.aar-fodt.label'} />
+                        </Element>
                     }
-                }}>
-                {[
-                    <option id={`aar-fodt-ikke-valgt`} value={undefined} key={0}>
-                        {' '}
-                    </option>,
-                    ...Array.from({ length: 21 }, (_, i) => i).map((value: number) => {
-                        const currentYear = moment().year();
-                        const year = currentYear - value;
-                        return (
-                            <option id={`aar-fodt-${year}`} value={year} key={year}>
-                                {year}
-                            </option>
-                        );
-                    }),
-                ]}
-            </Select>
-        </FormBlock>
-        {barnetErForbiDetAttendeKalenderår(barnInfo) && (
-            <FormBlock>
-                <AlertStripeAdvarsel>
-                    Du har ikke rett på omsorgsdager for barn som er 19 år eller eldre. Omsorgsdager gjelder i
-                    utgangspunktet ut kalenderåret barnet er 12 år. I noen tilfeller kan du få omsorgsdager ut
-                    kalenderåret barnet er 18 år.
-                </AlertStripeAdvarsel>
+                    description={
+                        <ExpandableInfo title={intlHelper(intl, 'oms-calc.aar-fodt.description.title')}>
+                            <FormattedMessage id={'oms-calc.aar-fodt.description.content'} />
+                        </ExpandableInfo>
+                    }
+                    id={barnInfo.årFødt.id}
+                    value={isSome(barnInfo.årFødt.value) ? barnInfo.årFødt.value.value : undefined}
+                    bredde={'xs'}
+                    feil={valueToFeilProps(barnInfo.årFødt, state.resultViewData, validateÅrFødt)}
+                    autoComplete={'off'}
+                    onChange={(event) => {
+                        const maybeNumber: number = parseInt(event.target.value, 10);
+                        if (isNumber(maybeNumber)) {
+                            dispatch(setÅrFødtForBarnInfo(some(maybeNumber), barnInfo.id));
+                        } else {
+                            dispatch(setÅrFødtForBarnInfo(none, barnInfo.id));
+                        }
+                    }}>
+                    {[
+                        <option id={`aar-fodt-ikke-valgt`} value={undefined} key={0}>
+                            {' '}
+                        </option>,
+                        ...Array.from({ length: 21 }, (_, i) => i).map((value: number) => {
+                            const currentYear = moment().year();
+                            const year = currentYear - value;
+                            return (
+                                <option id={`aar-fodt-${year}`} value={year} key={year}>
+                                    {year}
+                                </option>
+                            );
+                        }),
+                    ]}
+                </Select>
             </FormBlock>
-        )}
-    </>
-);
+            {barnetErForbiDetAttendeKalenderår(barnInfo) && (
+                <FormBlock>
+                    <AlertStripeAdvarsel>
+                        <FormattedMessage id={'oms-calc.aar-fodt.advarsel'} />
+                    </AlertStripeAdvarsel>
+                </FormBlock>
+            )}
+        </>
+    );
+};
 
 export default BarnÅrFødtView;

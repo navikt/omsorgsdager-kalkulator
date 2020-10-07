@@ -1,10 +1,10 @@
-import { BarnApi, BarnInfo } from './types';
+import { BarnInfo, BarnInput } from './types';
 import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
 import { separate, sequence } from 'fp-ts/lib/Array';
 import moment, { Moment } from 'moment';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { pipe } from 'fp-ts/lib/pipeable';
-import { isSome } from 'fp-ts/lib/Option';
+import { isSome, some } from 'fp-ts/lib/Option';
 import {
     beregnButton,
     beregnButtonAndErrorSummary,
@@ -22,9 +22,11 @@ import {
     validateÅrFødt,
     årFødtIsValid,
 } from './validationUtils';
-import { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
+import Barn, { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
 import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 import { beregnOmsorgsdager } from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
+import { none } from 'fp-ts/Option';
+import { initializeValue } from './initializers';
 
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -33,6 +35,18 @@ export function uuidv4() {
         return v.toString(16);
     });
 }
+
+export const toBarnInfo = (barnInput: BarnInput, index: number): BarnInfo => ({
+    id: uuidv4(),
+    panelErÅpent: index === 0,
+    årFødt: initializeValue(barnInput.årFødt ? some(barnInput.årFødt) : none),
+    kroniskSykt: initializeValue(barnInput.kroniskSykt !== undefined ? some(barnInput.kroniskSykt) : none),
+    borSammen: initializeValue(barnInput.borSammen !== undefined ? some(barnInput.borSammen) : none),
+    aleneOmOmsorgen: initializeValue(barnInput.aleneOmOmsorgen !== undefined ? some(barnInput.aleneOmOmsorgen) : none),
+});
+
+export const maybeBarnInputListToBarnInfoList = (maybeBarnInputListe?: BarnInput[]): BarnInfo[] =>
+    maybeBarnInputListe ? maybeBarnInputListe.map(toBarnInfo) : [];
 
 export const erForbiDetTolvteKalenderår = (årFødt: number, now: Moment): boolean => now.year() - årFødt > 12;
 
@@ -71,7 +85,7 @@ export const excludeChild = (barnInfo: BarnInfo): boolean =>
 
 export const includeChild = (barnInfo: BarnInfo): boolean => !excludeChild(barnInfo);
 
-export const validateBarnInfoAndMapToBarnApi = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, BarnApi> => {
+export const validateBarnInfoAndMapToBarn = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, Barn> => {
     const { id, årFødt, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
     const årFødtOrError: Either<FeiloppsummeringFeil, number> = validateÅrFødt(årFødt);
     const kroniskSyktOrError: Either<FeiloppsummeringFeil, boolean> = validateKroniskSykt(kroniskSykt);
@@ -90,8 +104,8 @@ export const validateBarnInfoAndMapToBarnApi = (barnInfo: BarnInfo): Either<Feil
 };
 
 export const extractEitherFromList = (
-    list: Either<FeiloppsummeringFeil, BarnApi>[]
-): Either<FeiloppsummeringFeil[], BarnApi[]> =>
+    list: Either<FeiloppsummeringFeil, Barn>[]
+): Either<FeiloppsummeringFeil[], Barn[]> =>
     pipe(
         sequence(either)(list),
         fold(
@@ -106,24 +120,22 @@ export const updateResultView = (
     didClickBeregn: boolean
 ): ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
     const listeAvBarnUtenInvalids: BarnInfo[] = listeAvBarnInfo.filter(includeChild);
-    const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil, BarnApi>[] = listeAvBarnUtenInvalids.map(
-        validateBarnInfoAndMapToBarnApi
+    const listOfEitherErrorOrBarn: Either<FeiloppsummeringFeil, Barn>[] = listeAvBarnUtenInvalids.map(
+        validateBarnInfoAndMapToBarn
     );
-    const validationResult: Either<FeiloppsummeringFeil[], BarnApi[]> = extractEitherFromList(
-        listOfEitherErrorOrBarnApi
-    );
+    const validationResult: Either<FeiloppsummeringFeil[], Barn[]> = extractEitherFromList(listOfEitherErrorOrBarn);
 
     const updatedResultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> = fold<
         FeiloppsummeringFeil[],
-        BarnApi[],
+        Barn[],
         ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>
     >(
         (errors: FeiloppsummeringFeil[]) => beregnButtonAndErrorSummary<FeiloppsummeringFeil[]>(errors),
-        (barnApiListe: BarnApi[]) => {
-            if (barnApiListe.length === 0) {
+        (barnListe: Barn[]) => {
+            if (barnListe.length === 0) {
                 return noValidChildrenOrange;
             }
-            const omsorgsprinsipper: Omsorgsprinsipper = beregnOmsorgsdager(barnApiListe, false);
+            const omsorgsprinsipper: Omsorgsprinsipper = beregnOmsorgsdager(barnListe, false);
             return resultBox<Omsorgsprinsipper>(omsorgsprinsipper);
         }
     )(validationResult);

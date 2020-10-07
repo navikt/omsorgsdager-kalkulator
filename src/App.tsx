@@ -3,6 +3,16 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import OmsorgsdagerKalkulator from './omsorgsdager-kalkulator/OmsorgsdagerKalkulator';
 import OmsorgsdagerKalkulatorInfo from './omsorgsdager-kalkulator/OmsorgsdagerKalkulatorInfo';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {BarnInput} from "./omsorgsdager-kalkulator/utils/types";
+
+const a: BarnInput[] = [
+    {
+        årFødt: 2012,
+        kroniskSykt: true,
+        aleneOmOmsorgen: false,
+        borSammen: false
+    }
+]
 
 const App: React.FC = () => {
     return (
@@ -13,7 +23,8 @@ const App: React.FC = () => {
                         <OmsorgsdagerKalkulatorInfo kalkulatorHref={'/kalkulator'} includeHeader={true} />
                     </Route>
                     <Route path="/kalkulator">
-                        <OmsorgsdagerKalkulator initialBarnListe={[]} />
+                        {/* TODO: Test at BarnInput virker */}
+                        <OmsorgsdagerKalkulator initialBarnListe={a}/>
                     </Route>
                     <Redirect to="/kalkulator-info" />
                 </Switch>

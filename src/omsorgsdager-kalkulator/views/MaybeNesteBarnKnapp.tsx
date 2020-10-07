@@ -3,9 +3,10 @@ import { Dispatch } from 'react';
 import { BarnInfo } from '../utils/types';
 import { skalViseGåTilNesteBarnKnapp } from '../utils/viewUtils';
 import { Knapp } from 'nav-frontend-knapper';
-import {Action, setPanelErÅpentOgGiFokus, setPanelErÅpent} from '../utils/actions';
+import { Action, setPanelErÅpent } from '../utils/actions';
 import Box from '../components/box/Box';
 import bemUtils from '../utils/bemUtils';
+import { FormattedMessage } from 'react-intl';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -24,11 +25,16 @@ const MaybeNesteBarnKnapp = ({ dispatch, index, listeAvBarn, barnInfo }: Props) 
                     onClick={() => {
                         const maybeNesteBarnInfo: BarnInfo | undefined = listeAvBarn[index + 1];
                         if (maybeNesteBarnInfo) {
-                            dispatch(setPanelErÅpent(barnInfo.id, false))
-                            dispatch(setPanelErÅpentOgGiFokus(maybeNesteBarnInfo.id))
+                            dispatch(setPanelErÅpent(barnInfo.id, false));
+                            dispatch(setPanelErÅpent(maybeNesteBarnInfo.id, true));
+                            const element = document.getElementById(maybeNesteBarnInfo.id);
+                            if (element) {
+                                element.focus({ preventScroll: false });
+                                element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }
                         }
                     }}>
-                    Neste barn
+                    <FormattedMessage id={'oms-calc.neste-barn-knapp'} />
                 </Knapp>
             </Box>
         )}

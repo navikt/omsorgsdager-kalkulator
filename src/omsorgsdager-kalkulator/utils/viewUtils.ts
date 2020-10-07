@@ -2,7 +2,7 @@ import {
     barnetErForbiDetAttendeKalenderår,
     barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt,
     borIkkeSammen, erForbiDetAttendeKalenderår,
-    validateBarnInfoAndMapToBarnApi,
+    validateBarnInfoAndMapToBarn,
 } from './utils';
 import { BarnInfo, YesOrNo } from './types';
 import { isRight } from 'fp-ts/lib/Either';
@@ -12,7 +12,7 @@ import moment from "moment";
 
 export const isNotLastChild = (index: number, listLength: number) => index + 1 < listLength;
 
-export const erFerdigUtfylt = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfoAndMapToBarnApi(barnInfo));
+export const erFerdigUtfylt = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfoAndMapToBarn(barnInfo));
 
 export const skalViseGåTilNesteBarnKnapp = (barnInfo: BarnInfo, index: number, listLength: number): boolean =>
     erFerdigUtfylt(barnInfo) && isNotLastChild(index, listLength);
@@ -21,6 +21,7 @@ export type RadioValue = YesOrNo | undefined;
 
 export const YesOrNoToBool = (yesOrNo: YesOrNo): boolean => yesOrNo === YesOrNo.Yes;
 
+// TODO: Intl
 export const yesOrNoRadios = (id: string) => [
     { label: 'Ja', id: `${id}`, name: `radio-name-ja-${id}`, value: YesOrNo.Yes, autoComplete: 'off' },
     { label: 'Nei', id: `nei-${id}`, name: `radio-name-nei-${id}`, value: YesOrNo.No, autoComplete: 'off' },

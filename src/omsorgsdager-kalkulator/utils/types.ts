@@ -1,5 +1,4 @@
 import { Option } from 'fp-ts/lib/Option';
-import Barn from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
 
 export enum YesOrNo {
     Yes = 'Yes',
@@ -20,4 +19,9 @@ export interface BarnInfo {
     aleneOmOmsorgen: ValueWithId<Option<boolean>>;
 }
 
-export type BarnApi = Barn;
+export interface BarnInput {
+    årFødt?: number;
+    kroniskSykt?: boolean;
+    borSammen?: boolean;
+    aleneOmOmsorgen?: boolean;
+}

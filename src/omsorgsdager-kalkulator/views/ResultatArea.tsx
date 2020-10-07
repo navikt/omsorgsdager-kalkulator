@@ -12,6 +12,8 @@ import FormBlock from '../components/form-block/FormBlock';
 import { getStartDate, getYear } from '../utils/dateUtils';
 import Box from '../components/box/Box';
 import ValidationSummary from '../components/validation-summary/ValidationSummary';
+import { FormattedMessage, useIntl } from 'react-intl';
+import Lenke from "nav-frontend-lenker";
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -20,13 +22,14 @@ interface Props {
     dispatch: Dispatch<Action>;
 }
 
-const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
-    caseResultViewOf(
+const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
+    const intl = useIntl();
+    return caseResultViewOf(
         () => null,
         () => (
             <Box margin={'xxl'} className={bem.element('flex-center')}>
                 <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
-                    Beregn
+                    <FormattedMessage id={'oms-calc.resultat-area.beregn-knapp'} />
                 </Hovedknapp>
             </Box>
         ),
@@ -34,7 +37,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
             <FormBlock margin={'xxl'}>
                 <Box margin={'xl'} className={bem.element('flex-center')}>
                     <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
-                        Beregn
+                        <FormattedMessage id={'oms-calc.resultat-area.beregn-knapp'} />
                     </Hovedknapp>
                 </Box>
                 <FormBlock>
@@ -45,15 +48,22 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
         () => (
             <ResultBox type={'WARNING'}>
                 <FormBlock margin={'none'}>
-                    Beregningen baserer seg på svarene du har lagt inn i kalkulatoren. Det betyr at resultatet er
-                    avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du
+                    <FormattedMessage id={'oms-calc.resultat-area.orange.1'} />
                 </FormBlock>
                 <FormBlock>
                     <Normaltekst className={bem.element('large-normal-tekst')}>
-                        0 omsorgsdager fra {getStartDate()} {getYear()} – 31. desember {getYear()}
+                        <FormattedMessage id={'oms-calc.resultat-area.orange.2.1'} /> {getStartDate(intl)} {getYear()} –
+                        31. <FormattedMessage id={'oms-calc.resultat-area.orange.2.3'} /> {getYear()}
                     </Normaltekst>
                 </FormBlock>
-                <FormBlock>Opplysningene du har gitt om din situasjon gir ikke rett til omsorgsdager.</FormBlock>
+                <FormBlock>
+                    <FormattedMessage id={'oms-calc.resultat-area.orange.3'} />
+                </FormBlock>
+                <FormBlock>
+                    <Lenke href={"https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du"}>
+                        <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
+                    </Lenke>
+                </FormBlock>
             </ResultBox>
         ),
         (result: Omsorgsprinsipper) => {
@@ -67,21 +77,27 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
             return (
                 <ResultBox type={'SUCCESS'}>
                     <FormBlock margin={'none'}>
-                        Beregningen baserer seg på svarene du har lagt inn i kalkulatoren. Det betyr at resultatet er
-                        avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du
+                        <FormattedMessage id={'oms-calc.resultat-area.green.1'} />
                     </FormBlock>
                     <FormBlock>
                         <Normaltekst className={bem.element('large-normal-tekst')}>
-                            {sumDager} omsorgsdager fra {getStartDate()} 2020 – 31. desember {getYear()}
+                            {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1'} /> {getStartDate(intl)}{' '}
+                            2020 – 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
                         </Normaltekst>
                     </FormBlock>
                     <FormBlock>
-                        Hvis du etter {getStartDate()} {getYear()} har brukt omsorgsdager, eller delt dager med en
-                        annen, må du trekke fra disse dagene selv.
+                        <FormattedMessage id={'oms-calc.resultat-area.3.1'} /> {getStartDate(intl)} {getYear()}{' '}
+                        <FormattedMessage id={'oms-calc.resultat-area.3.2'} />
+                    </FormBlock>
+                    <FormBlock>
+                        <Lenke href={"https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du"}>
+                            <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
+                        </Lenke>
                     </FormBlock>
                 </ResultBox>
             );
         }
     )(resultView);
+};
 
 export default ResultatArea;

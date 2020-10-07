@@ -9,7 +9,6 @@ export enum ActionType {
     SetAleneOmOmsorgen = 'SetAleneOmOmsorgen',
     Beregn = 'Beregn',
     SetPanelErÅpent = 'SetPanelErÅpent',
-    SetPanelErÅpentOgGiFokus = 'SetPanelErÅpentOgGiFokus',
 }
 
 export interface SetNBarn {
@@ -87,15 +86,6 @@ export const setPanelErÅpent = (barnId: string, erÅpent: boolean): SetPanelEr�
     erÅpent,
 });
 
-export interface SetPanelErÅpentOgGiFokus {
-    type: ActionType.SetPanelErÅpentOgGiFokus;
-    barnId: string;
-}
-export const setPanelErÅpentOgGiFokus = (barnId: string): SetPanelErÅpentOgGiFokus => ({
-    type: ActionType.SetPanelErÅpentOgGiFokus,
-    barnId,
-});
-
 export type Action =
     | SetNBarn
     | SetNBarnInvalid
@@ -104,5 +94,4 @@ export type Action =
     | SetBorSammen
     | SetAleneOmOmsorgen
     | Beregn
-    | SetPanelErÅpent
-    | SetPanelErÅpentOgGiFokus;
+    | SetPanelErÅpent;

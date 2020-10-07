@@ -1,4 +1,3 @@
-import { State } from '../utils/state';
 import * as React from 'react';
 import { Dispatch } from 'react';
 import { Action, setNBarn, setNBarnInvalid } from '../utils/actions';
@@ -8,29 +7,35 @@ import bemUtils from '../utils/bemUtils';
 import FormBlock from '../components/form-block/FormBlock';
 import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
 import { Element } from 'nav-frontend-typografi';
+import { ValueWithId } from '../utils/types';
+import { FormattedMessage } from 'react-intl';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
 interface Props {
-    state: State;
+    nBarn: ValueWithId<number>;
     dispatch: Dispatch<Action>;
     nBarnMaks: number;
 }
 
-const NbarnSelectView = ({ state, dispatch, nBarnMaks }: Props) => (
+const NbarnSelectView = ({ nBarn, dispatch, nBarnMaks }: Props) => (
     <div className={bem.element('align-content-centre')}>
         <FormBlock paddingBottom={'l'}>
             <Select
-                label={<Element>Hvor mange egne barn har du i husstanden?</Element>}
+                label={
+                    <Element>
+                        <FormattedMessage id={'oms-calc.n-barn-select-label'} />
+                    </Element>
+                }
                 description={
                     <ExpandableInfo title="Hva menes med egne barn?">
                         <div className={bem.element('text-align-left')}>
-                            Med egne barn menes biologiske barn, adoptivbarn og fosterbarn.
+                            <FormattedMessage id={'oms-calc.n-barn-select-description'} />
                         </div>
                     </ExpandableInfo>
                 }
-                id={state.nBarn.id}
-                value={state.nBarn.value}
+                id={nBarn.id}
+                value={nBarn.value}
                 bredde={'xs'}
                 feil={undefined}
                 autoComplete={'off'}
