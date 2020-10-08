@@ -8,7 +8,7 @@
         "build-lib": "npm-run-all clean-lib compile-lib-script copy-files-to-lib",
         "clean-lib": "rimraf ./lib",
         "compile-lib-script": "tsc -p tsconfig-build-lib.json",
-        "copy-files-to-lib": "copyfiles -u 2 \"src/omsorgsdager-kalkulator/**/*.less\" lib/ && copyfiles",
+        "copy-files-to-lib": "copyfiles -u 2 \"src/omsorgsdager-kalkulator/**/*.less\" lib/ && copyfiles -u 2 \"src/omsorgsdager-kalkulator/**/*.json\" lib/",
         "deploy": "gh-pages -d build",
         "dev": "craco start",
         "eject": "react-scripts eject",
