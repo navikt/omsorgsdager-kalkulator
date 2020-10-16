@@ -27,11 +27,16 @@ const MaybeNesteBarnKnapp = ({ dispatch, index, listeAvBarn, barnInfo }: Props) 
                         if (maybeNesteBarnInfo) {
                             dispatch(setPanelErÅpent(barnInfo.id, false));
                             dispatch(setPanelErÅpent(maybeNesteBarnInfo.id, true));
-                            const element = document.getElementById(maybeNesteBarnInfo.id);
-                            if (element) {
-                                element.focus({ preventScroll: false });
-                                element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                            }
+                            setTimeout(() => {
+                                const element = document.getElementById(maybeNesteBarnInfo.id);
+                                const panel = document.getElementById(`barnPanel_${maybeNesteBarnInfo.id}`);
+                                if (element) {
+                                    element.focus();
+                                    if (panel) {
+                                        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                    }
+                                }
+                            }, 600);
                         }
                     }}>
                     <FormattedMessage id={'oms-calc.neste-barn-knapp'} />

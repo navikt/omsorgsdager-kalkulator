@@ -53,7 +53,7 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true, locale
                 <FormBlock>
                     {barn.map((barnInfo: BarnInfo, index: number, listeAvBarn: BarnInfo[]) => {
                         return (
-                            <FormBlock key={index}>
+                            <div style={{ paddingTop: '1rem' }} key={index} id={`barnPanel_${barnInfo.id}`}>
                                 <BarnPanelView
                                     id={barnInfo.id}
                                     index={index}
@@ -74,7 +74,7 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true, locale
                                         dispatch={dispatch}
                                     />
                                 </BarnPanelView>
-                            </FormBlock>
+                            </div>
                         );
                     })}
                 </FormBlock>

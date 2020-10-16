@@ -33,31 +33,34 @@ interface Props {
 }
 
 const ResultBox: React.FC<Props> = ({ type, children }: PropsWithChildren<Props>) => {
+    const box = React.useRef<HTMLDivElement | null>(null);
+
     useEffect(() => {
-        const element = document.getElementById('omsorgsdager-kalkulator-result-box-wrapper');
-        if (element) {
-            element.focus({ preventScroll: false });
-            element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (box && box.current) {
+            box.current.focus({ preventScroll: false });
+            box.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }, []);
 
     return (
-        <Box id={'omsorgsdager-kalkulator-result-box-wrapper'} margin={'xl'}>
-            <div className={resultWrapperClassName(type)}>
-                <div className={bem.element('result-top-arrow-wrapper')}>
-                    <div className={resultTopArrowClassName(type)}></div>
-                </div>
-                <div className={bem.element('result-content')}>
-                    <div className={bem.element('result-child-wrapper')}>
-                        {type === 'SUCCESS' && <SvgChild />}
-                        {type === 'WARNING' && <SvgChildSad />}
+        <div ref={box}>
+            <Box margin={'xl'}>
+                <div className={resultWrapperClassName(type)}>
+                    <div className={bem.element('result-top-arrow-wrapper')}>
+                        <div className={resultTopArrowClassName(type)}></div>
                     </div>
-                    <div className={bem.element('result-content-wrapper')}>
-                        <div>{children}</div>
+                    <div className={bem.element('result-content')}>
+                        <div className={bem.element('result-child-wrapper')}>
+                            {type === 'SUCCESS' && <SvgChild />}
+                            {type === 'WARNING' && <SvgChildSad />}
+                        </div>
+                        <div className={bem.element('result-content-wrapper')}>
+                            <div>{children}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Box>
+            </Box>
+        </div>
     );
 };
 
