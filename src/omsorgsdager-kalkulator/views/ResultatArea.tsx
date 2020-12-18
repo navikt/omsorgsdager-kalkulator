@@ -54,59 +54,59 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
         ),
         () => (
             <ResultBox type={'WARNING'}>
-                <FormBlock margin={'none'}>
+                <p style={{ marginTop: 0 }}>
                     <FormattedMessage id={'oms-calc.resultat-area.orange.1'} />
-                </FormBlock>
-                <FormBlock>
+                </p>
+                <p>
                     <Normaltekst className={bem.element('large-normal-tekst')}>
                         0 <FormattedMessage id={'oms-calc.resultat-area.orange.2.1.a'} />{' '}
                     </Normaltekst>
                     <Normaltekst>
                         <FormattedMessage id={'oms-calc.resultat-area.orange.2.1.b'} /> {getStartDate(intl)} {getYear()}{' '}
-                        – 31. <FormattedMessage id={'oms-calc.resultat-area.orange.2.3'} /> {getYear()}
+                        til 31. <FormattedMessage id={'oms-calc.resultat-area.orange.2.3'} /> {getYear()}
                     </Normaltekst>
-                </FormBlock>
-                <FormBlock>
+                </p>
+                <p>
                     <FormattedMessage id={'oms-calc.resultat-area.orange.3'} />
-                </FormBlock>
-                <FormBlock>
+                </p>
+                <p>
                     <Lenke
                         href={
                             'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du'
                         }>
                         <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
                     </Lenke>
-                </FormBlock>
+                </p>
             </ResultBox>
         ),
         (result: Omsorgsprinsipper) => {
             const sumDager: number = summerAntallOmsorgsdager(result);
             return (
                 <ResultBox type={'SUCCESS'}>
-                    <FormBlock margin={'none'}>
+                    <p style={{ marginTop: 0 }}>
                         <FormattedMessage id={'oms-calc.resultat-area.green.1'} />
-                    </FormBlock>
-                    <FormBlock>
+                    </p>
+                    <p>
                         <Normaltekst className={bem.element('large-normal-tekst')}>
                             {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1.a'} />
                         </Normaltekst>
                         <Normaltekst>
                             <FormattedMessage id={'oms-calc.resultat-area.green.2.1.b'} /> {getStartDate(intl)}{' '}
-                            {getYear()} – 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
+                            {getYear()} til 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
                         </Normaltekst>
-                    </FormBlock>
-                    <FormBlock>
+                    </p>
+                    <p>
                         <FormattedMessage id={'oms-calc.resultat-area.3.1'} /> {getStartDate(intl)} {getYear()}{' '}
                         <FormattedMessage id={'oms-calc.resultat-area.3.2'} />
-                    </FormBlock>
-                    <FormBlock>
+                    </p>
+                    <p>
                         <Lenke
                             href={
                                 'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du'
                             }>
                             <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
                         </Lenke>
-                    </FormBlock>
+                    </p>
                 </ResultBox>
             );
         }

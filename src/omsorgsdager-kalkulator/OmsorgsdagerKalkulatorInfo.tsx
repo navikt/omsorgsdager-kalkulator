@@ -28,7 +28,7 @@ const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader
             {includeHeader && <KalkulatorLogoAndTitle />}
             <p>
                 <Undertittel>
-                    <FormattedMessage id={'oms-calc.infoside.undertittel.1'} /> {getStartDate(intl)} {getYear()} –
+                    <FormattedMessage id={'oms-calc.infoside.undertittel.1'} /> {getStartDate(intl)} {getYear()} til{' '}
                     <FormattedMessage id={'oms-calc.infoside.undertittel.2'} /> {getYear()}
                 </Undertittel>
             </p>
