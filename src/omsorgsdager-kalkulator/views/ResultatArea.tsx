@@ -15,6 +15,7 @@ import ValidationSummary from '../components/validation-summary/ValidationSummar
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import { intlHelper } from '../i18n/utils';
+import { summerAntallOmsorgsdager } from '../utils/utils';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -79,13 +80,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
             </ResultBox>
         ),
         (result: Omsorgsprinsipper) => {
-            const { grunnrett, kroniskSykt, aleneomsorg, aleneomsorgKroniskSyke } = result;
-            const sumDager: number =
-                grunnrett.normaldager +
-                kroniskSykt.normaldager +
-                aleneomsorg.normaldager +
-                aleneomsorgKroniskSyke.normaldager;
-
+            const sumDager: number = summerAntallOmsorgsdager(result);
             return (
                 <ResultBox type={'SUCCESS'}>
                     <FormBlock margin={'none'}>
@@ -96,8 +91,8 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                             {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1.a'} />
                         </Normaltekst>
                         <Normaltekst>
-                            <FormattedMessage id={'oms-calc.resultat-area.green.2.1.b'} /> {getStartDate(intl)} 2020 –
-                            31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
+                            <FormattedMessage id={'oms-calc.resultat-area.green.2.1.b'} /> {getStartDate(intl)}{' '}
+                            {getYear()} – 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
                         </Normaltekst>
                     </FormBlock>
                     <FormBlock>
