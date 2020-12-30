@@ -30,6 +30,7 @@ export const yesOrNoRadios = (id: string, intl: IntlShape) => [
         name: `radio-name-ja-${id}`,
         value: YesOrNo.Yes,
         autoComplete: 'off',
+        'aria-invalid': false,
     },
     {
         label: intlHelper(intl, 'oms-calc.no'),
@@ -37,6 +38,7 @@ export const yesOrNoRadios = (id: string, intl: IntlShape) => [
         name: `radio-name-nei-${id}`,
         value: YesOrNo.No,
         autoComplete: 'off',
+        'aria-invalid': false,
     },
 ];
 
