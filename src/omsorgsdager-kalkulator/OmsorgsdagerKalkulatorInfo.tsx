@@ -26,26 +26,28 @@ const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader
     return (
         <Box className={bem.element('wrapper')}>
             {includeHeader && <KalkulatorLogoAndTitle />}
-            <FormBlock margin={'l'}>
+            <p>
                 <Undertittel>
-                    <FormattedMessage id={'oms-calc.infoside.undertittel.1'} /> {getStartDate(intl)} {getYear()} –
+                    <FormattedMessage id={'oms-calc.infoside.undertittel.1'} /> {getStartDate(intl)} {getYear()} til{' '}
                     <FormattedMessage id={'oms-calc.infoside.undertittel.2'} /> {getYear()}
                 </Undertittel>
-            </FormBlock>
-            <FormBlock>
-                <strong>
-                    <FormattedMessage id={'oms-calc.infoside.nb.1'} />
-                </strong>{' '}
-                <FormattedMessage id={'oms-calc.infoside.nb.2'} />{' '}
-                <strong>
-                    <FormattedMessage id={'oms-calc.infoside.nb.3'} />
-                </strong>{' '}
-                <FormattedMessage id={'oms-calc.infoside.nb.4'} />
-            </FormBlock>
-            <FormBlock>
+            </p>
+            {getYear() === 2020 && (
+                <p>
+                    <strong>
+                        <FormattedMessage id={'oms-calc.infoside.nb.1'} />
+                    </strong>{' '}
+                    <FormattedMessage id={'oms-calc.infoside.nb.2'} />{' '}
+                    <strong>
+                        <FormattedMessage id={'oms-calc.infoside.nb.3'} />
+                    </strong>{' '}
+                    <FormattedMessage id={'oms-calc.infoside.nb.4'} />
+                </p>
+            )}
+            <p>
                 <FormattedMessage id={'oms-calc.infoside.paragraph.1'} />
-            </FormBlock>
-            <FormBlock>
+            </p>
+            <FormBlock margin="m">
                 <ExpandableInfo title={intlHelper(intl, 'oms-calc.infoside.expandableinfo.title')}>
                     <Box padBottom={'l'}>
                         <FormattedMessage id={'oms-calc.infoside.expandableinfo.content.1'} />
@@ -53,7 +55,7 @@ const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader
                     <FormattedMessage id={'oms-calc.infoside.expandableinfo.content.2'} />
                 </ExpandableInfo>
             </FormBlock>
-            <FormBlock margin={'xxxl'}>
+            <FormBlock margin={'xxl'}>
                 <div className={bem.element('flex-center')}>
                     <Knappelenke type={'hoved'} href={kalkulatorHref}>
                         Start kalkulator

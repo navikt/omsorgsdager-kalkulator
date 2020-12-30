@@ -27,6 +27,7 @@ import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgspr
 import { beregnOmsorgsdager } from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
 import { none } from 'fp-ts/Option';
 import { initializeValue } from './initializers';
+import { getYear } from './dateUtils';
 
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -78,12 +79,28 @@ export const toFeiloppsummeringsFeil = (id: string, error: string): Feiloppsumme
     feilmelding: error,
 });
 
+export const skalKoronadagerInkluderes = () => getYear() === 2021;
+
 export const excludeChild = (barnInfo: BarnInfo): boolean =>
     barnetErForbiDetAttendeKalenderår(barnInfo) ||
     barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt(barnInfo) ||
     isVisibleAndBorIkkeSammen(barnInfo);
 
 export const includeChild = (barnInfo: BarnInfo): boolean => !excludeChild(barnInfo);
+
+export const summerAntallOmsorgsdager = (result: Omsorgsprinsipper): number => {
+    const { grunnrett, kroniskSykt, aleneomsorg, aleneomsorgKroniskSyke } = result;
+    return (
+        grunnrett.normaldager +
+        kroniskSykt.normaldager +
+        aleneomsorg.normaldager +
+        aleneomsorgKroniskSyke.normaldager +
+        grunnrett.koronadager +
+        kroniskSykt.koronadager +
+        aleneomsorg.koronadager +
+        aleneomsorgKroniskSyke.koronadager
+    );
+};
 
 export const validateBarnInfoAndMapToBarn = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, Barn> => {
     const { id, årFødt, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
@@ -135,7 +152,8 @@ export const updateResultView = (
             if (barnListe.length === 0) {
                 return noValidChildrenOrange;
             }
-            const omsorgsprinsipper: Omsorgsprinsipper = beregnOmsorgsdager(barnListe, false);
+            const inkluderKoronadager = skalKoronadagerInkluderes();
+            const omsorgsprinsipper: Omsorgsprinsipper = beregnOmsorgsdager(barnListe, inkluderKoronadager);
             return resultBox<Omsorgsprinsipper>(omsorgsprinsipper);
         }
     )(validationResult);

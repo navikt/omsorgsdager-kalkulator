@@ -1,18 +1,18 @@
 import * as React from 'react';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
 import OmsorgsdagerKalkulator from './omsorgsdager-kalkulator/OmsorgsdagerKalkulator';
 import OmsorgsdagerKalkulatorInfo from './omsorgsdager-kalkulator/OmsorgsdagerKalkulatorInfo';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import {BarnInput} from "./omsorgsdager-kalkulator/utils/types";
+import { BarnInput } from './omsorgsdager-kalkulator/utils/types';
 
 const a: BarnInput[] = [
-    {
-        årFødt: 2012,
-        kroniskSykt: true,
-        aleneOmOmsorgen: false,
-        borSammen: false
-    }
-]
+    // {
+    //     årFødt: 2012,
+    //     kroniskSykt: true,
+    //     aleneOmOmsorgen: false,
+    //     borSammen: false,
+    // },
+];
 
 const App: React.FC = () => {
     return (
@@ -24,7 +24,7 @@ const App: React.FC = () => {
                     </Route>
                     <Route path="/kalkulator">
                         {/* TODO: Test at BarnInput virker */}
-                        <OmsorgsdagerKalkulator initialBarnListe={a}/>
+                        <OmsorgsdagerKalkulator initialBarnListe={a} />
                     </Route>
                     <Redirect to="/kalkulator-info" />
                 </Switch>

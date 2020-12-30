@@ -13,9 +13,9 @@ import { isNumber } from '../utils/typeguards';
 import { Select } from 'nav-frontend-skjema';
 import { valueToFeilProps } from '../utils/componentUtils';
 import { validateÅrFødt } from '../utils/validationUtils';
-import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { intlHelper } from '../i18n/utils';
+import { getYear } from '../utils/dateUtils';
 
 interface Props {
     barnInfo: BarnInfo;
@@ -57,7 +57,7 @@ const BarnÅrFødtView = ({ barnInfo, dispatch, state }: Props) => {
                             {' '}
                         </option>,
                         ...Array.from({ length: 21 }, (_, i) => i).map((value: number) => {
-                            const currentYear = moment().year();
+                            const currentYear = getYear();
                             const year = currentYear - value;
                             return (
                                 <option id={`aar-fodt-${year}`} value={year} key={year}>

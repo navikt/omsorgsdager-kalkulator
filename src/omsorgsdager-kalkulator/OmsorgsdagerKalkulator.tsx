@@ -1,28 +1,27 @@
-import * as React from 'react';
-import { useReducer } from 'react';
+import React, { useReducer } from 'react';
+import { IntlProvider } from 'react-intl';
+import Box from './components/box/Box';
+import FormBlock from './components/form-block/FormBlock';
+import { applicationIntlMessages } from './i18n/applicationMessages';
+import { Locale } from './i18n/types';
+import { setPanelErÅpent } from './utils/actions';
+import bemUtils from './utils/bemUtils';
 import { KalkulatorReducer, reducer } from './utils/reducer';
 import { createInitialState, State } from './utils/state';
 import { BarnInfo, BarnInput } from './utils/types';
-import KalkulatorLogoAndTitle from './views/KalkulatorLogoAndTitle';
-import ResultatArea from './views/ResultatArea';
-import BarnPanelView from './views/BarnPanelView';
-import NbarnSelectView from './views/NBarnSelectView';
-import IntroTextView from './views/IntroTextView';
-import FlereBarnUtfyllingsInfoView from './views/FlereBarnUtfyllingsInfoView';
-import BarnÅrFødtView from './views/BarnÅrFødtView';
-import BarnKroniskSyktView from './views/BarnKroniskSyktView';
-import BarnBorSammenView from './views/BarnBorSammenView';
-import BarnAleneOmOmsorgenView from './views/BarnAleneOmOmsorgenView';
-import MaybeNesteBarnKnapp from './views/MaybeNesteBarnKnapp';
-import FormBlock from './components/form-block/FormBlock';
-import bemUtils from './utils/bemUtils';
-import Box from './components/box/Box';
-import { setPanelErÅpent } from './utils/actions';
 import { maybeBarnInputListToBarnInfoList } from './utils/utils';
-import { Locale } from './i18n/types';
-import { applicationIntlMessages } from './i18n/applicationMessages';
+import BarnAleneOmOmsorgenView from './views/BarnAleneOmOmsorgenView';
+import BarnBorSammenView from './views/BarnBorSammenView';
+import BarnKroniskSyktView from './views/BarnKroniskSyktView';
+import BarnPanelView from './views/BarnPanelView';
+import BarnÅrFødtView from './views/BarnÅrFødtView';
+import FlereBarnUtfyllingsInfoView from './views/FlereBarnUtfyllingsInfoView';
+import IntroTextView from './views/IntroTextView';
+import KalkulatorLogoAndTitle from './views/KalkulatorLogoAndTitle';
+import MaybeNesteBarnKnapp from './views/MaybeNesteBarnKnapp';
+import NbarnSelectView from './views/NBarnSelectView';
+import ResultatArea from './views/ResultatArea';
 import './OmsorgsdagerKalkulator.less';
-import { IntlProvider } from 'react-intl';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -50,7 +49,7 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true, locale
                 <IntroTextView nBarn={barn.length} />
                 <NbarnSelectView nBarn={nBarn} dispatch={dispatch} nBarnMaks={nBarnMaks} />
                 <FlereBarnUtfyllingsInfoView nBarn={barn.length} />
-                <FormBlock>
+                <FormBlock margin="m">
                     {barn.map((barnInfo: BarnInfo, index: number, listeAvBarn: BarnInfo[]) => {
                         return (
                             <div style={{ paddingTop: '1rem' }} key={index} id={`barnPanel_${barnInfo.id}`}>
