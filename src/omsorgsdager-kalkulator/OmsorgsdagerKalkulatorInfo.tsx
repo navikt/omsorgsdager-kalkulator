@@ -1,17 +1,18 @@
-import KalkulatorLogoAndTitle from './views/KalkulatorLogoAndTitle';
-import { Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
-import FormBlock from './components/form-block/FormBlock';
-import ExpandableInfo from './components/expandable-content/ExpandableInfo';
-import Box from './components/box/Box';
-import Knappelenke from './components/knappelenke/Knappelenke';
-import bemUtils from './utils/bemUtils';
-import { getStartDate, getYear } from './utils/dateUtils';
-import './OmsorgsdagerKalkulator.less';
 import { FormattedMessage, IntlProvider, useIntl } from 'react-intl';
+import { Undertittel } from 'nav-frontend-typografi';
+import Box from './components/box/Box';
+import ExpandableInfo from './components/expandable-content/ExpandableInfo';
+import FormBlock from './components/form-block/FormBlock';
+import Knappelenke from './components/knappelenke/Knappelenke';
 import { applicationIntlMessages } from './i18n/applicationMessages';
 import { Locale } from './i18n/types';
 import { intlHelper } from './i18n/utils';
+import bemUtils from './utils/bemUtils';
+import { getStartDate, getYear } from './utils/dateUtils';
+import KalkulatorLogoAndTitle from './views/KalkulatorLogoAndTitle';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import './OmsorgsdagerKalkulator.less';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -26,6 +27,11 @@ const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader
     return (
         <Box className={bem.element('wrapper')}>
             {includeHeader && <KalkulatorLogoAndTitle />}
+            <Box margin="m" padBottom="m">
+                <AlertStripeInfo>
+                    <FormattedMessage id={'oms-calc.infoside.2022-tekst'} />
+                </AlertStripeInfo>
+            </Box>
             <p>
                 <Undertittel>
                     <FormattedMessage id={'oms-calc.infoside.undertittel.1'} /> {getStartDate(intl)} {getYear()} til{' '}
