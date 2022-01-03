@@ -8,7 +8,12 @@ const IntroTextView = ({ nBarn }: { nBarn: number }) => (
         {nBarn === 0 && (
             <FormBlock>
                 <Normaltekst>
-                    <FormattedMessage id={'oms-calc.intro-tekst'} />
+                    <p>
+                        <FormattedMessage id={'oms-calc.intro-2022-tekst'} />
+                    </p>
+                    <p>
+                        <FormattedMessage id={'oms-calc.intro-tekst'} />
+                    </p>
                 </Normaltekst>
             </FormBlock>
         )}
