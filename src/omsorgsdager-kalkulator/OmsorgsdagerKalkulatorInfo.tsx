@@ -27,7 +27,7 @@ const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader
     return (
         <Box className={bem.element('wrapper')}>
             {includeHeader && <KalkulatorLogoAndTitle />}
-            <Box margin="m" padBottom="m">
+            <Box margin="m" padBottom="xl">
                 <AlertStripeInfo>
                     <FormattedMessage id={'oms-calc.infoside.2022-tekst'} />
                 </AlertStripeInfo>
