@@ -79,7 +79,7 @@ export const toFeiloppsummeringsFeil = (id: string, error: string): Feiloppsumme
     feilmelding: error,
 });
 
-export const skalKoronadagerInkluderes = () => getYear() === 2021;
+export const skalKoronadagerInkluderes = () => getYear() === 2022;
 
 export const excludeChild = (barnInfo: BarnInfo): boolean =>
     barnetErForbiDetAttendeKalenderår(barnInfo) ||
