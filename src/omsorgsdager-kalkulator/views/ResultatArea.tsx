@@ -16,6 +16,7 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import { intlHelper } from '../i18n/utils';
 import { summerAntallOmsorgsdager } from '../utils/utils';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -82,32 +83,40 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
         (result: Omsorgsprinsipper) => {
             const sumDager: number = summerAntallOmsorgsdager(result);
             return (
-                <ResultBox type={'SUCCESS'}>
-                    <p style={{ marginTop: 0 }}>
-                        <FormattedMessage id={'oms-calc.resultat-area.green.1'} />
-                    </p>
-                    <p>
-                        <Normaltekst className={bem.element('large-normal-tekst')}>
-                            {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1.a'} />
-                        </Normaltekst>
-                        <Normaltekst>
-                            <FormattedMessage id={'oms-calc.resultat-area.green.2.1.b'} /> {getStartDate(intl)}{' '}
-                            {getYear()} til 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
-                        </Normaltekst>
-                    </p>
-                    <p>
-                        <FormattedMessage id={'oms-calc.resultat-area.3.1'} /> {getStartDate(intl)} {getYear()}{' '}
-                        <FormattedMessage id={'oms-calc.resultat-area.3.2'} />
-                    </p>
-                    <p>
-                        <Lenke
-                            href={
-                                'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du'
-                            }>
-                            <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
-                        </Lenke>
-                    </p>
-                </ResultBox>
+                <>
+                    <ResultBox type={'SUCCESS'}>
+                        <p style={{ marginTop: 0 }}>
+                            <FormattedMessage id={'oms-calc.resultat-area.green.1'} />
+                        </p>
+                        <p>
+                            <Normaltekst className={bem.element('large-normal-tekst')}>
+                                {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1.a'} />
+                            </Normaltekst>
+                            <Normaltekst>
+                                <FormattedMessage id={'oms-calc.resultat-area.green.2.1.b'} /> {getStartDate(intl)}{' '}
+                                {getYear()} til 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} />{' '}
+                                {getYear()}
+                            </Normaltekst>
+                        </p>
+                        <p>
+                            <FormattedMessage id={'oms-calc.resultat-area.3.1'} /> {getStartDate(intl)} {getYear()}{' '}
+                            <FormattedMessage id={'oms-calc.resultat-area.3.2'} />
+                        </p>
+                        <p>
+                            <Lenke
+                                href={
+                                    'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du'
+                                }>
+                                <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
+                            </Lenke>
+                        </p>
+                        <Box margin="xl">
+                            <AlertStripeInfo>
+                                <FormattedMessage id={'oms-calc.infoside.2022-tekst.resultatside'} />
+                            </AlertStripeInfo>
+                        </Box>
+                    </ResultBox>
+                </>
             );
         }
     )(resultView);
