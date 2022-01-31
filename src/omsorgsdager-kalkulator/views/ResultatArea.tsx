@@ -16,7 +16,6 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import { intlHelper } from '../i18n/utils';
 import { summerAntallOmsorgsdager } from '../utils/utils';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -110,11 +109,6 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                                 <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
                             </Lenke>
                         </p>
-                        <Box margin="xl">
-                            <AlertStripeInfo>
-                                <FormattedMessage id={'oms-calc.infoside.2022-tekst.resultatside'} />
-                            </AlertStripeInfo>
-                        </Box>
                     </ResultBox>
                 </>
             );

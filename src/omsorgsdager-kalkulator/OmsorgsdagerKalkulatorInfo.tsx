@@ -11,7 +11,6 @@ import { intlHelper } from './i18n/utils';
 import bemUtils from './utils/bemUtils';
 import { getStartDate, getYear } from './utils/dateUtils';
 import KalkulatorLogoAndTitle from './views/KalkulatorLogoAndTitle';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import './OmsorgsdagerKalkulator.less';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
@@ -27,11 +26,6 @@ const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader
     return (
         <Box className={bem.element('wrapper')}>
             {includeHeader && <KalkulatorLogoAndTitle />}
-            <Box margin="m" padBottom="xl">
-                <AlertStripeInfo>
-                    <FormattedMessage id={'oms-calc.infoside.2022-tekst'} />
-                </AlertStripeInfo>
-            </Box>
             <p>
                 <Undertittel>
                     <FormattedMessage id={'oms-calc.infoside.undertittel.1'} /> {getStartDate(intl)} {getYear()} til{' '}
