@@ -1,32 +1,33 @@
 import * as React from 'react';
-import { Dispatch } from 'react';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import ResultBox from './ResultBox';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Action, beregn } from '../utils/actions';
-import { caseResultViewOf, ResultView } from '../types/ResultView';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
-import bemUtils from '../utils/bemUtils';
-import FormBlock from '../components/form-block/FormBlock';
-import { getStartDate, getYear } from '../utils/dateUtils';
-import Box from '../components/box/Box';
-import ValidationSummary from '../components/validation-summary/ValidationSummary';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
+import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
+import { Normaltekst } from 'nav-frontend-typografi';
+import Box from '../components/box/Box';
+import FormBlock from '../components/form-block/FormBlock';
+import ValidationSummary from '../components/validation-summary/ValidationSummary';
 import { intlHelper } from '../i18n/utils';
+import { caseResultViewOf, ResultView } from '../types/ResultView';
+import { Action, beregn } from '../utils/actions';
+import bemUtils from '../utils/bemUtils';
+import { getStartDate, getYear } from '../utils/dateUtils';
 import { summerAntallOmsorgsdager } from '../utils/utils';
+import ResultBox from './ResultBox';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
-const errorkeyToText = (intl: IntlShape) => (error: FeiloppsummeringFeil): FeiloppsummeringFeil => ({
-    ...error,
-    feilmelding: intlHelper(intl, error.feilmelding),
-});
+const errorkeyToText =
+    (intl: IntlShape) =>
+    (error: FeiloppsummeringFeil): FeiloppsummeringFeil => ({
+        ...error,
+        feilmelding: intlHelper(intl, error.feilmelding),
+    });
 
 interface Props {
     resultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>;
-    dispatch: Dispatch<Action>;
+    dispatch: React.Dispatch<Action>;
 }
 
 const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
