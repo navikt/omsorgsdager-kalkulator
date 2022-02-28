@@ -137,9 +137,8 @@ export const updateResultView = (
     didClickBeregn: boolean
 ): ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
     const listeAvBarnUtenInvalids: BarnInfo[] = listeAvBarnInfo.filter(includeChild);
-    const listOfEitherErrorOrBarn: Either<FeiloppsummeringFeil, Barn>[] = listeAvBarnUtenInvalids.map(
-        validateBarnInfoAndMapToBarn
-    );
+    const listOfEitherErrorOrBarn: Either<FeiloppsummeringFeil, Barn>[] =
+        listeAvBarnUtenInvalids.map(validateBarnInfoAndMapToBarn);
     const validationResult: Either<FeiloppsummeringFeil[], Barn[]> = extractEitherFromList(listOfEitherErrorOrBarn);
 
     const updatedResultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> = fold<

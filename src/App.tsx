@@ -5,14 +5,7 @@ import OmsorgsdagerKalkulator from './omsorgsdager-kalkulator/OmsorgsdagerKalkul
 import OmsorgsdagerKalkulatorInfo from './omsorgsdager-kalkulator/OmsorgsdagerKalkulatorInfo';
 import { BarnInput } from './omsorgsdager-kalkulator/utils/types';
 
-const a: BarnInput[] = [
-    // {
-    //     årFødt: 2012,
-    //     kroniskSykt: true,
-    //     aleneOmOmsorgen: false,
-    //     borSammen: false,
-    // },
-];
+const a: BarnInput[] = [];
 
 const App: React.FC = () => {
     return (

@@ -53,28 +53,30 @@ export const isNoValidChildrenOrange = (data: ResultView<unknown, unknown>): dat
 export const isResultBox = <A>(data: ResultView<unknown, A>): data is ResultBox<A> => data._tag === 'ResultBox';
 
 // fold
-export const caseResultViewOf = <E, A, B>(
-    empty: () => B,
-    beregnButton: () => B,
-    beregnButtonAndErrorSummary: (errors: E) => B,
-    noValidChildrenOrange: () => B,
-    resultBox: (result: A) => B
-) => (resultView: ResultView<E, A>): B => {
-    switch (resultView._tag) {
-        case 'Empty': {
-            return empty();
+export const caseResultViewOf =
+    <E, A, B>(
+        empty: () => B,
+        beregnButton: () => B,
+        beregnButtonAndErrorSummary: (errors: E) => B,
+        noValidChildrenOrange: () => B,
+        resultBox: (result: A) => B
+    ) =>
+    (resultView: ResultView<E, A>): B => {
+        switch (resultView._tag) {
+            case 'Empty': {
+                return empty();
+            }
+            case 'BeregnButton': {
+                return beregnButton();
+            }
+            case 'BeregnButtonAndErrorSummary': {
+                return beregnButtonAndErrorSummary(resultView.errors);
+            }
+            case 'NoValidChildrenOrange': {
+                return noValidChildrenOrange();
+            }
+            case 'ResultBox': {
+                return resultBox(resultView.result);
+            }
         }
-        case 'BeregnButton': {
-            return beregnButton();
-        }
-        case 'BeregnButtonAndErrorSummary': {
-            return beregnButtonAndErrorSummary(resultView.errors);
-        }
-        case 'NoValidChildrenOrange': {
-            return noValidChildrenOrange();
-        }
-        case 'ResultBox': {
-            return resultBox(resultView.result);
-        }
-    }
-};
+    };
