@@ -16,6 +16,7 @@
         "rm:dist": "rimraf dist/",
         "start-no-decorator": "node ./src/build/scripts/start-dev-no-decorator.js",
         "start": "node ./src/build/scripts/start-dev.js",
+        "start-express": "node ./server.js",
         "eject": "react-scripts eject",
         "do-publish": "npm publish",
         "patch": "npm version patch",
