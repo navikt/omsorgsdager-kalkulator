@@ -1,0 +1,16 @@
+{
+    "app": "omsorgsdager-kalkulator",
+    "cluster": "dev-gcp",
+    "namespace": "dusseldorf",
+    "team": "dusseldorf",
+    "minReplicas": "1",
+    "maxReplicas": "1",
+    "ingresses": ["https://omsorgsdager-kalkulator.dev.nav.no"],
+    "externalHosts": ["www.nav.no", "dekoratoren.dev.nav.no", "dekoratoren.ekstern.dev.nav.no"],
+    "livenessPath": "/omsorgsdager-kalkulator/health/isAlive",
+    "readinessPath": "/omsorgsdager-kalkulator/health/isReady",
+    "env": {
+        "DEKORATOR_URL": "https://dekoratoren.dev.nav.no",
+        "PUBLIC_PATH": "/omsorgsdager-kalkulator/"
+    }
+}

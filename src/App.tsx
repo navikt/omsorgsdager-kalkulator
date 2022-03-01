@@ -12,14 +12,15 @@ const App: React.FC = () => {
         <Normaltekst tag="div">
             <Router>
                 <Switch>
-                    <Route path="/kalkulator-info">
-                        <OmsorgsdagerKalkulatorInfo kalkulatorHref={'/kalkulator'} includeHeader={true} />
-                    </Route>
-                    <Route path="/kalkulator">
+                    <Route path="/beregne">
                         {/* TODO: Test at BarnInput virker */}
                         <OmsorgsdagerKalkulator initialBarnListe={a} />
                     </Route>
-                    <Redirect to="/kalkulator-info" />
+                    <Route path="/">
+                        <OmsorgsdagerKalkulatorInfo kalkulatorHref={'/beregne'} includeHeader={true} />
+                    </Route>
+
+                    <Redirect to="/" />
                 </Switch>
             </Router>
         </Normaltekst>
