@@ -70,3 +70,17 @@ jobs:
                   CLUSTER: dev-gcp
                   RESOURCE: nais/naiserator.yml
                   VARS: nais/dev-gcp.json
+
+    deploy-prod:
+        name: Deploy to prod
+        if: startsWith(github.ref, 'refs/heads/master')
+        needs: build-code-and-push-docker
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: nais/deploy/actions/deploy@v1
+              env:
+                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+                  CLUSTER: dev-gcp
+                  RESOURCE: nais/naiserator.yml
+                  VARS: nais/prod-gcp.json
