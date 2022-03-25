@@ -22,5 +22,16 @@
         "baseUrl": "./src/omsorgsdager-kalkulator"
     },
     "include": ["src/omsorgsdager-kalkulator"],
-    "exclude": ["node_modules", "src/dev", "*/**/**__tests__**"]
+    "exclude": [
+        "node_modules",
+        "src/dev",
+        "*/**/**__tests__**",
+        "src/build",
+        "nais",
+        "src/index.html",
+        "server.js",
+        "Dockerfile",
+        "envSettings.js",
+        "dist"
+    ]
 }

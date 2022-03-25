@@ -5,28 +5,25 @@ import OmsorgsdagerKalkulator from './omsorgsdager-kalkulator/OmsorgsdagerKalkul
 import OmsorgsdagerKalkulatorInfo from './omsorgsdager-kalkulator/OmsorgsdagerKalkulatorInfo';
 import { BarnInput } from './omsorgsdager-kalkulator/utils/types';
 
-const a: BarnInput[] = [
-    // {
-    //     årFødt: 2012,
-    //     kroniskSykt: true,
-    //     aleneOmOmsorgen: false,
-    //     borSammen: false,
-    // },
-];
+const a: BarnInput[] = [];
 
 const App: React.FC = () => {
     return (
         <Normaltekst tag="div">
             <Router>
                 <Switch>
-                    <Route path="/kalkulator-info">
-                        <OmsorgsdagerKalkulatorInfo kalkulatorHref={'/kalkulator'} includeHeader={true} />
-                    </Route>
-                    <Route path="/kalkulator">
+                    <Route path="/omsorgspenger/kalkulator-antall-omsorgsdager/beregne">
                         {/* TODO: Test at BarnInput virker */}
                         <OmsorgsdagerKalkulator initialBarnListe={a} />
                     </Route>
-                    <Redirect to="/kalkulator-info" />
+                    <Route path="/omsorgspenger/kalkulator-antall-omsorgsdager">
+                        <OmsorgsdagerKalkulatorInfo
+                            kalkulatorHref={'/omsorgspenger/kalkulator-antall-omsorgsdager/beregne'}
+                            includeHeader={true}
+                        />
+                    </Route>
+
+                    <Redirect to="/omsorgspenger/kalkulator-antall-omsorgsdager" />
                 </Switch>
             </Router>
         </Normaltekst>
