@@ -9,7 +9,7 @@ const webpackConfig = {
     output: {
         path: path.resolve(__dirname, './../../../dist'),
         filename: 'js/[name].js',
-        publicPath: '/omsorgsdager-kalkulator/dist/',
+        publicPath: '/omsorgspenger/kalkulator-antall-omsorgsdager/dist/',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],

@@ -5,12 +5,12 @@
     "team": "dusseldorf",
     "minReplicas": "1",
     "maxReplicas": "1",
-    "ingresses": ["https://www.nav.no/omsorgsdager-kalkulator"],
+    "ingresses": ["https://www.nav.no/omsorgspenger/kalkulator-antall-omsorgsdager"],
     "externalHosts": ["www.nav.no"],
-    "livenessPath": "/omsorgsdager-kalkulator/health/isAlive",
-    "readinessPath": "/omsorgsdager-kalkulator/health/isReady",
+    "livenessPath": "/omsorgspenger/kalkulator-antall-omsorgsdager/health/isAlive",
+    "readinessPath": "/omsorgspenger/kalkulator-antall-omsorgsdager/health/isReady",
     "env": {
         "DEKORATOR_URL": "https://www.nav.no/dekoratoren",
-        "PUBLIC_PATH": "/omsorgsdager-kalkulator"
+        "PUBLIC_PATH": "/omsorgspenger/kalkulator-antall-omsorgsdager"
     }
 }

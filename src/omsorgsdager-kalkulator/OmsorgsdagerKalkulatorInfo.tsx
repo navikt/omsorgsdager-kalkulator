@@ -26,14 +26,14 @@ const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader
     return (
         <Box className={bem.element('wrapper')}>
             {includeHeader && <KalkulatorLogoAndTitle />}
-            <p>
+            <Box margin="l">
                 <Undertittel>
                     <FormattedMessage id={'oms-calc.infoside.undertittel.1'} /> {getStartDate(intl)} {getYear()} til{' '}
                     <FormattedMessage id={'oms-calc.infoside.undertittel.2'} /> {getYear()}
                 </Undertittel>
-            </p>
+            </Box>
             {getYear() === 2020 && (
-                <p>
+                <Box margin="m">
                     <strong>
                         <FormattedMessage id={'oms-calc.infoside.nb.1'} />
                     </strong>{' '}
@@ -42,12 +42,12 @@ const Content: React.FunctionComponent<Props> = ({ kalkulatorHref, includeHeader
                         <FormattedMessage id={'oms-calc.infoside.nb.3'} />
                     </strong>{' '}
                     <FormattedMessage id={'oms-calc.infoside.nb.4'} />
-                </p>
+                </Box>
             )}
-            <p>
+            <Box margin="m">
                 <FormattedMessage id={'oms-calc.infoside.paragraph.1'} />
-            </p>
-            <FormBlock margin="m">
+            </Box>
+            <FormBlock margin="l">
                 <ExpandableInfo title={intlHelper(intl, 'oms-calc.infoside.expandableinfo.title')}>
                     <Box padBottom={'l'}>
                         <FormattedMessage id={'oms-calc.infoside.expandableinfo.content.1'} />
