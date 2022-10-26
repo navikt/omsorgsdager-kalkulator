@@ -11,6 +11,7 @@
     "readinessPath": "/omsorgspenger/kalkulator-antall-omsorgsdager/health/isReady",
     "env": {
         "DEKORATOR_URL": "https://dekoratoren.dev.nav.no",
-        "PUBLIC_PATH": "/omsorgspenger/kalkulator-antall-omsorgsdager"
+        "PUBLIC_PATH": "/omsorgspenger/kalkulator-antall-omsorgsdager",
+        "NPM_CONFIG_CACHE": "/tmp"
     }
 }

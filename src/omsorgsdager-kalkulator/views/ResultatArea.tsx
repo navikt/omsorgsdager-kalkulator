@@ -88,16 +88,15 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                         <p style={{ marginTop: 0 }}>
                             <FormattedMessage id={'oms-calc.resultat-area.green.1'} />
                         </p>
-                        <p>
-                            <Normaltekst className={bem.element('large-normal-tekst')}>
-                                {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1.a'} />
-                            </Normaltekst>
-                            <Normaltekst>
-                                <FormattedMessage id={'oms-calc.resultat-area.green.2.1.b'} /> {getStartDate(intl)}{' '}
-                                {getYear()} til 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} />{' '}
-                                {getYear()}
-                            </Normaltekst>
-                        </p>
+
+                        <Normaltekst className={bem.element('large-normal-tekst')}>
+                            {sumDager} <FormattedMessage id={'oms-calc.resultat-area.green.2.1.a'} />
+                        </Normaltekst>
+                        <Normaltekst>
+                            <FormattedMessage id={'oms-calc.resultat-area.green.2.1.b'} /> {getStartDate(intl)}{' '}
+                            {getYear()} til 31. <FormattedMessage id={'oms-calc.resultat-area.green.2.2'} /> {getYear()}
+                        </Normaltekst>
+
                         <p>
                             <FormattedMessage id={'oms-calc.resultat-area.3.1'} /> {getStartDate(intl)} {getYear()}{' '}
                             <FormattedMessage id={'oms-calc.resultat-area.3.2'} />
