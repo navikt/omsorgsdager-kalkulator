@@ -12,6 +12,7 @@ export interface ValueWithId<T> {
 
 export interface BarnInfo {
     id: string;
+    index: number;
     panelErÅpent: boolean;
     årFødt: ValueWithId<Option<number>>;
     kroniskSykt: ValueWithId<Option<boolean>>;

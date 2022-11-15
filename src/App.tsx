@@ -9,11 +9,10 @@ const a: BarnInput[] = [];
 
 const App: React.FC = () => {
     return (
-        <Normaltekst tag="div">
+        <Normaltekst tag="div" role="main">
             <Router>
                 <Switch>
                     <Route path="/omsorgspenger/kalkulator-antall-omsorgsdager/beregne">
-                        {/* TODO: Test at BarnInput virker */}
                         <OmsorgsdagerKalkulator initialBarnListe={a} />
                     </Route>
                     <Route path="/omsorgspenger/kalkulator-antall-omsorgsdager">
@@ -22,7 +21,6 @@ const App: React.FC = () => {
                             includeHeader={true}
                         />
                     </Route>
-
                     <Redirect to="/omsorgspenger/kalkulator-antall-omsorgsdager" />
                 </Switch>
             </Router>

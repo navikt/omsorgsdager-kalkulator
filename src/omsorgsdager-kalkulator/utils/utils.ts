@@ -39,6 +39,7 @@ export function uuidv4() {
 
 export const toBarnInfo = (barnInput: BarnInput, index: number): BarnInfo => ({
     id: uuidv4(),
+    index,
     panelErÅpent: index === 0,
     årFødt: initializeValue(barnInput.årFødt ? some(barnInput.årFødt) : none),
     kroniskSykt: initializeValue(barnInput.kroniskSykt !== undefined ? some(barnInput.kroniskSykt) : none),
@@ -46,8 +47,9 @@ export const toBarnInfo = (barnInput: BarnInput, index: number): BarnInfo => ({
     aleneOmOmsorgen: initializeValue(barnInput.aleneOmOmsorgen !== undefined ? some(barnInput.aleneOmOmsorgen) : none),
 });
 
-export const maybeBarnInputListToBarnInfoList = (maybeBarnInputListe?: BarnInput[]): BarnInfo[] =>
-    maybeBarnInputListe ? maybeBarnInputListe.map(toBarnInfo) : [];
+export const maybeBarnInputListToBarnInfoList = (maybeBarnInputListe?: BarnInput[]): BarnInfo[] => {
+    return maybeBarnInputListe ? maybeBarnInputListe.map((barn, index) => toBarnInfo(barn, index)) : [];
+};
 
 export const erForbiDetTolvteKalenderår = (årFødt: number, now: Moment): boolean => now.year() - årFødt > 12;
 

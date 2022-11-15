@@ -53,14 +53,14 @@ const BarnÅrFødtView = ({ barnInfo, dispatch, state }: Props) => {
                         }
                     }}>
                     {[
-                        <option id={`aar-fodt-ikke-valgt`} value={undefined} key={0}>
+                        <option id={`${barnInfo.index}.aar-fodt-ikke-valgt`} value={undefined} key={0}>
                             {' '}
                         </option>,
                         ...Array.from({ length: 21 }, (_, i) => i).map((value: number) => {
                             const currentYear = getYear();
                             const year = currentYear - value;
                             return (
-                                <option id={`aar-fodt-${year}`} value={year} key={year}>
+                                <option value={year} key={year}>
                                     {year}
                                 </option>
                             );
