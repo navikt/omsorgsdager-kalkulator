@@ -1,4 +1,5 @@
 import { Option } from 'fp-ts/lib/Option';
+import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 
 export enum YesOrNo {
     Yes = 'Yes',
@@ -25,4 +26,9 @@ export interface BarnInput {
     kroniskSykt?: boolean;
     borSammen?: boolean;
     aleneOmOmsorgen?: boolean;
+}
+
+export interface BarnFeiloppsummeringFeil extends FeiloppsummeringFeil {
+    barnIndex: number;
+    antallBarn: number;
 }

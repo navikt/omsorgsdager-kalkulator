@@ -14,10 +14,11 @@ import { intlHelper } from '../i18n/utils';
 
 export const isNotLastChild = (index: number, listLength: number) => index + 1 < listLength;
 
-export const erFerdigUtfylt = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfoAndMapToBarn(barnInfo));
+export const erFerdigUtfylt = (barnInfo: BarnInfo, antallBarn: number): boolean =>
+    isRight(validateBarnInfoAndMapToBarn(barnInfo, antallBarn));
 
-export const skalViseGåTilNesteBarnKnapp = (barnInfo: BarnInfo, index: number, listLength: number): boolean =>
-    erFerdigUtfylt(barnInfo) && isNotLastChild(index, listLength);
+export const skalViseGåTilNesteBarnKnapp = (barnInfo: BarnInfo, index: number, antallBarn: number): boolean =>
+    erFerdigUtfylt(barnInfo, antallBarn) && isNotLastChild(index, antallBarn);
 
 export type RadioValue = YesOrNo | undefined;
 

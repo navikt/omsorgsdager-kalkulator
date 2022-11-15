@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Systemtittel } from 'nav-frontend-typografi';
 import FormBlock from '../components/form-block/FormBlock';
 
 const FlereBarnUtfyllingsInfoView = ({ nBarn }: { nBarn: number }) => (
     <>
         {nBarn > 1 && (
             <FormBlock>
-                <Undertittel tag="h2">Opplysninger om barna</Undertittel>
+                <Systemtittel tag="h2">Opplysninger om barna</Systemtittel>
             </FormBlock>
         )}
         {nBarn === 1 && (
             <FormBlock>
-                <Undertittel tag="h2">Opplysninger om barnet</Undertittel>
+                <Systemtittel tag="h2">Opplysninger om barnet</Systemtittel>
             </FormBlock>
         )}
     </>

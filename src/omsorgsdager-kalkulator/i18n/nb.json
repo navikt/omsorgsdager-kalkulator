@@ -24,10 +24,13 @@
     "oms-calc.alene-om-omsorgen.description.content.2": "Hvis du og den andre forelderen har en avtale om delt bosted, hvor barnet bor fast hos dere begge, vil ingen av dere bli regnet som alene om omsorgen.",
     "oms-calc.alene-om-omsorgen.description.content.3": "Les mer om fast bosted og samvær",
 
-    "oms-calc.error.årstall.notAnswered": "Då må svare på hvilket årstall barnet er født.",
-    "oms-calc.error.kronisk_sykt.notAnswered": "Då må svare på om du har fått ekstra omsorgsdager fordi barnet har en kronisk sykdom eller en funksjonshemning.",
-    "oms-calc.error.bor_fast.notAnswered": "Då må svare på om barnet bor fast hos deg.",
-    "oms-calc.error.aleneomsorg.notAnswered": "Då må svare på om du er alene om omsorgen med barnet.",
+    "oms-calc.error.årstall.notAnswered": "Då må svare på hvilket årstall {barn} er født.",
+    "oms-calc.error.kronisk_sykt.notAnswered": "Då må svare på om du har fått ekstra omsorgsdager fordi {barn} har en kronisk sykdom eller en funksjonshemning.",
+    "oms-calc.error.bor_fast.notAnswered": "Då må svare på om {barn} bor fast hos deg.",
+    "oms-calc.error.aleneomsorg.notAnswered": "Då må svare på om du er alene om omsorgen med {barn}.",
+
+    "barn.flereBarn.navn": "barn {index}",
+    "barn.ettBarn.navn": "barnet",
 
     "oms-calc.neste-barn-knapp": "Neste barn",
     "oms-calc.resultat-area.beregn-knapp": "Beregn",

@@ -1,14 +1,13 @@
-import { BarnInfo, ValueWithId } from './types';
-import { initializeValue } from './initializers';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { beregnButton, empty, ResultView } from '../types/ResultView';
 import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import { beregnButton, empty, ResultView } from '../types/ResultView';
+import { initializeValue } from './initializers';
+import { BarnFeiloppsummeringFeil, BarnInfo, ValueWithId } from './types';
 
 export interface State {
     readonly nBarnMaks: number;
     nBarn: ValueWithId<number>;
     barn: BarnInfo[];
-    resultViewData: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>;
+    resultViewData: ResultView<BarnFeiloppsummeringFeil[], Omsorgsprinsipper>;
 }
 
 export const createInitialState = (listeAvBarnInfo: BarnInfo[]): State => {

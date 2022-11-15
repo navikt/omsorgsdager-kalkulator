@@ -1,7 +1,7 @@
 import { createInitialState, State } from './state';
 import { Action, ActionType } from './actions';
 import { initializeNBarn } from './initializers';
-import { BarnInfo } from './types';
+import { BarnFeiloppsummeringFeil, BarnInfo } from './types';
 import { updateResultView } from './utils';
 import {
     setAleneOmOmsorgen,
@@ -10,7 +10,6 @@ import {
     setÅrFødtAndMaybeWipeValues,
 } from './reducerUtils';
 import { beregnButton, isBeregnButtonAndErrorSummary, ResultView } from '../types/ResultView';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
@@ -71,7 +70,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
 
         case ActionType.Beregn: {
-            const updatedResultViewData: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> = updateResultView(
+            const updatedResultViewData: ResultView<BarnFeiloppsummeringFeil[], Omsorgsprinsipper> = updateResultView(
                 state.barn,
                 state.resultViewData,
                 true
