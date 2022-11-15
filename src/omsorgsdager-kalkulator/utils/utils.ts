@@ -197,5 +197,5 @@ export const updateResultView = (
 
 export const getBarnNavn = (intl: IntlShape, barnIndex: number, antallBarn: number) =>
     antallBarn === 1
-        ? intlHelper(intl, 'barn.ettBarn.navn')
-        : intlHelper(intl, 'barn.flereBarn.navn', { index: barnIndex + 1 });
+        ? intlHelper(intl, 'oms-calc.barn.ettBarn.navn')
+        : intlHelper(intl, 'oms-calc.barn.flereBarn.navn', { index: barnIndex + 1 });

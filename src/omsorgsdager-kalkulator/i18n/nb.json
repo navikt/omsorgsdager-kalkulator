@@ -29,8 +29,10 @@
     "oms-calc.error.bor_fast.notAnswered": "Då må svare på om {barn} bor fast hos deg.",
     "oms-calc.error.aleneomsorg.notAnswered": "Då må svare på om du er alene om omsorgen med {barn}.",
 
-    "barn.flereBarn.navn": "barn {index}",
-    "barn.ettBarn.navn": "barnet",
+    "oms-calc.barn.flereBarn.navn": "barn {index}",
+    "oms-calc.barn.ettBarn.navn": "barnet",
+    "oms-calc.barnSection.flereBarn.tittel": "Opplysninger om barna",
+    "oms-calc.barnSection.ettBarn.tittel": "Opplysninger om barnet",
 
     "oms-calc.neste-barn-knapp": "Neste barn",
     "oms-calc.resultat-area.beregn-knapp": "Beregn",
