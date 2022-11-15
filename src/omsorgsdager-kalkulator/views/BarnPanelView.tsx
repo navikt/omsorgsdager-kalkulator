@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
-import FormBlock from '../components/form-block/FormBlock';
 import bemUtils from '../utils/bemUtils';
 
 const bem = bemUtils('BarnPanelView');
@@ -22,11 +21,7 @@ const BarnPanelView: React.FC<Props> = ({
     onClick,
 }: React.PropsWithChildren<Props>) => {
     if (length === 1) {
-        return (
-            <div className={bem.element('border-top')}>
-                <FormBlock>{children}</FormBlock>
-            </div>
-        );
+        return <>{children}</>;
     }
 
     return (

@@ -4,7 +4,7 @@ import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgspr
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import Box from '../components/box/Box';
 import FormBlock from '../components/form-block/FormBlock';
 import ValidationSummary from '../components/validation-summary/ValidationSummary';
@@ -85,7 +85,10 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
             return (
                 <>
                     <ResultBox type={'SUCCESS'}>
-                        <p style={{ marginTop: 0 }}>
+                        <Box>
+                            <Systemtittel tag="h2">Resultat</Systemtittel>
+                        </Box>
+                        <p>
                             <FormattedMessage id={'oms-calc.resultat-area.green.1'} />
                         </p>
 

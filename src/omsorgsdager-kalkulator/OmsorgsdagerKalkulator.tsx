@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react';
 import { IntlProvider } from 'react-intl';
 import Box from './components/box/Box';
-import FormBlock from './components/form-block/FormBlock';
 import { applicationIntlMessages } from './i18n/applicationMessages';
 import { Locale } from './i18n/types';
 import { setPanelErÅpent } from './utils/actions';
@@ -49,33 +48,33 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true, locale
                 <IntroTextView nBarn={barn.length} />
                 <NbarnSelectView nBarn={nBarn} dispatch={dispatch} nBarnMaks={nBarnMaks} />
                 <FlereBarnUtfyllingsInfoView nBarn={barn.length} />
-                <FormBlock margin="m">
-                    {barn.map((barnInfo: BarnInfo, index: number, listeAvBarn: BarnInfo[]) => {
-                        return (
-                            <div style={{ paddingTop: '1rem' }} key={index} id={`barnPanel_${barnInfo.id}`}>
-                                <BarnPanelView
-                                    id={barnInfo.id}
+
+                {barn.map((barnInfo: BarnInfo, index: number, listeAvBarn: BarnInfo[]) => {
+                    return (
+                        <div style={{ paddingTop: '1rem' }} key={index} id={`barnPanel_${barnInfo.id}`}>
+                            <BarnPanelView
+                                id={barnInfo.id}
+                                index={index}
+                                length={barn.length}
+                                apen={barnInfo.panelErÅpent}
+                                onClick={() => {
+                                    dispatch(setPanelErÅpent(barnInfo.id, !barnInfo.panelErÅpent));
+                                }}>
+                                <BarnÅrFødtView barnInfo={barnInfo} dispatch={dispatch} state={state} />
+                                <BarnKroniskSyktView barnInfo={barnInfo} state={state} dispatch={dispatch} />
+                                <BarnBorSammenView barnInfo={barnInfo} state={state} dispatch={dispatch} />
+                                <BarnAleneOmOmsorgenView barnInfo={barnInfo} state={state} dispatch={dispatch} />
+                                <MaybeNesteBarnKnapp
+                                    barnInfo={barnInfo}
                                     index={index}
-                                    length={barn.length}
-                                    apen={barnInfo.panelErÅpent}
-                                    onClick={() => {
-                                        dispatch(setPanelErÅpent(barnInfo.id, !barnInfo.panelErÅpent));
-                                    }}>
-                                    <BarnÅrFødtView barnInfo={barnInfo} dispatch={dispatch} state={state} />
-                                    <BarnKroniskSyktView barnInfo={barnInfo} state={state} dispatch={dispatch} />
-                                    <BarnBorSammenView barnInfo={barnInfo} state={state} dispatch={dispatch} />
-                                    <BarnAleneOmOmsorgenView barnInfo={barnInfo} state={state} dispatch={dispatch} />
-                                    <MaybeNesteBarnKnapp
-                                        barnInfo={barnInfo}
-                                        index={index}
-                                        listeAvBarn={listeAvBarn}
-                                        dispatch={dispatch}
-                                    />
-                                </BarnPanelView>
-                            </div>
-                        );
-                    })}
-                </FormBlock>
+                                    listeAvBarn={listeAvBarn}
+                                    dispatch={dispatch}
+                                />
+                            </BarnPanelView>
+                        </div>
+                    );
+                })}
+
                 <ResultatArea resultView={resultViewData} dispatch={dispatch} />
             </Box>
         </IntlProvider>

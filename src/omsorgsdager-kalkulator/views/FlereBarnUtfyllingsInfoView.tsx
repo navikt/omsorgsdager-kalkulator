@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import { Undertittel } from 'nav-frontend-typografi';
 import FormBlock from '../components/form-block/FormBlock';
-import { FormattedMessage } from 'react-intl';
 
 const FlereBarnUtfyllingsInfoView = ({ nBarn }: { nBarn: number }) => (
     <>
         {nBarn > 1 && (
             <FormBlock>
-                <AlertStripeInfo>
-                    <FormattedMessage id={'oms-calc.info-flere-barn'} />
-                </AlertStripeInfo>
+                <Undertittel tag="h2">Opplysninger om barna</Undertittel>
+            </FormBlock>
+        )}
+        {nBarn === 1 && (
+            <FormBlock>
+                <Undertittel tag="h2">Opplysninger om barnet</Undertittel>
             </FormBlock>
         )}
     </>
