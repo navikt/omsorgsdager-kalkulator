@@ -1,10 +1,13 @@
-import { BarnInfo, BarnInput } from './types';
-import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
+import { beregnOmsorgsdager } from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
+import Barn, { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 import { separate, sequence } from 'fp-ts/lib/Array';
+import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
+import { isSome, some } from 'fp-ts/lib/Option';
+import { pipe } from 'fp-ts/lib/pipeable';
+import { none } from 'fp-ts/Option';
 import moment, { Moment } from 'moment';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { pipe } from 'fp-ts/lib/pipeable';
-import { isSome, some } from 'fp-ts/lib/Option';
 import {
     beregnButton,
     beregnButtonAndErrorSummary,
@@ -14,6 +17,9 @@ import {
     resultBox,
     ResultView,
 } from '../types/ResultView';
+import { getYear } from './dateUtils';
+import { initializeValue } from './initializers';
+import { BarnInfo, BarnInput } from './types';
 import {
     kroniskSyktIsValid,
     validateAleneOmOmsorgen,
@@ -22,12 +28,6 @@ import {
     validateÅrFødt,
     årFødtIsValid,
 } from './validationUtils';
-import Barn, { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
-import { beregnOmsorgsdager } from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
-import { none } from 'fp-ts/Option';
-import { initializeValue } from './initializers';
-import { getYear } from './dateUtils';
 
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

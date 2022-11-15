@@ -57,7 +57,6 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true, locale
                                     id={barnInfo.id}
                                     index={index}
                                     length={barn.length}
-                                    barnInfo={barnInfo}
                                     apen={barnInfo.panelErÅpent}
                                     onClick={() => {
                                         dispatch(setPanelErÅpent(barnInfo.id, !barnInfo.panelErÅpent));

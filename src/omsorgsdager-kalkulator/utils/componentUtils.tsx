@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { isBeregnButtonAndErrorSummary, ResultView } from '../types/ResultView';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { Either, isLeft } from 'fp-ts/lib/Either';
-import { ValueWithId } from './types';
-import { Option } from 'fp-ts/lib/Option';
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 import { IntlShape } from 'react-intl';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import { Either, isLeft } from 'fp-ts/lib/Either';
+import { Option } from 'fp-ts/lib/Option';
+import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { intlHelper } from '../i18n/utils';
+import { isBeregnButtonAndErrorSummary, ResultView } from '../types/ResultView';
+import { ValueWithId } from './types';
 
 export function valueToFeilProps<T>(
     value: ValueWithId<Option<T>>,

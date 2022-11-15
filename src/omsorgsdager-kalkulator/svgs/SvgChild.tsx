@@ -1,7 +1,14 @@
 import React from 'react';
 
 const SvgChild = () => (
-    <svg focusable={false} xmlns="http://www.w3.org/2000/svg" width="61" height="85" fill="none" viewBox="0 0 61 85">
+    <svg
+        focusable={false}
+        xmlns="http://www.w3.org/2000/svg"
+        width="61"
+        height="85"
+        fill="none"
+        viewBox="0 0 61 85"
+        role="presentation">
         <path
             fill="#5C4378"
             fillRule="evenodd"
