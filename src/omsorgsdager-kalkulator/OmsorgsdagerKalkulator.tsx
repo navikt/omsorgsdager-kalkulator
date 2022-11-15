@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react';
-import { IntlProvider } from 'react-intl';
+import { useIntl } from 'react-intl';
 import Box from './components/box/Box';
-import { applicationIntlMessages } from './i18n/applicationMessages';
-import { Locale } from './i18n/types';
+import DocumentTitle from './components/document-title/DocumentTitle';
+import { intlHelper } from './i18n/utils';
 import { setPanelErÅpent } from './utils/actions';
 import bemUtils from './utils/bemUtils';
 import { KalkulatorReducer, reducer } from './utils/reducer';
@@ -27,22 +27,18 @@ const bem = bemUtils('omsorgsdagerkalkulator');
 export interface Props {
     initialBarnListe?: BarnInput[];
     includeHeader?: boolean;
-    locale?: Locale;
 }
 
-const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true, locale }: Props) => {
+const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true }: Props) => {
+    const intl = useIntl();
     const [state, dispatch] = useReducer<KalkulatorReducer>(
         reducer,
         createInitialState(maybeBarnInputListToBarnInfoList(initialBarnListe))
     );
     const { nBarn, nBarnMaks, barn, resultViewData }: State = state;
-    const i18n =
-        locale && applicationIntlMessages[locale]
-            ? { locale: locale, messages: applicationIntlMessages[locale] }
-            : { locale: 'nb', messages: applicationIntlMessages['nb'] };
 
     return (
-        <IntlProvider locale={i18n.locale} messages={i18n.messages}>
+        <DocumentTitle title={intlHelper(intl, 'oms-calc.tittel.beregn')}>
             <Box className={bem.element('wrapper')}>
                 {includeHeader && <KalkulatorLogoAndTitle />}
                 <IntroTextView nBarn={barn.length} />
@@ -77,7 +73,7 @@ const OmsorgsdagerKalkulator = ({ initialBarnListe, includeHeader = true, locale
 
                 <ResultatArea resultView={resultViewData} dispatch={dispatch} />
             </Box>
-        </IntlProvider>
+        </DocumentTitle>
     );
 };
 

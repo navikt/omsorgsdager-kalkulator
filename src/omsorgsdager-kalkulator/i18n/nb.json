@@ -1,5 +1,7 @@
 {
     "oms-calc.tittel": "Kalkulator for omsorgsdager",
+    "oms-calc.tittel.beregn": "Kalkulator for omsorgsdager - beregn omsorgsdager",
+    "oms-calc.tittel.introside": "Kalkulator for omsorgsdager - inngang",
     "oms-calc.intro-tekst.1": "Kalkulatoren beregner hvor mange omsorgsdager du har ut fra svarene du oppgir. Det betyr at riktig resultat er avhengig av at du gir riktige opplysninger. Kalkulatoren er ment som et hjelpeverktøy for deg, det er ikke et vedtak eller en bekreftelse fra NAV.",
     "oms-calc.intro-tekst.2": "Du må svare på alle spørsmålene nedenfor for å få et resultat.",
     "oms-calc.n-barn-select-label": "Hvor mange egne barn har du i husstanden?",
