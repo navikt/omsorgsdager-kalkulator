@@ -4,7 +4,7 @@ import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgspr
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import Box from '../components/box/Box';
 import FormBlock from '../components/form-block/FormBlock';
 import ValidationSummary from '../components/validation-summary/ValidationSummary';
@@ -13,20 +13,23 @@ import { caseResultViewOf, ResultView } from '../types/ResultView';
 import { Action, beregn } from '../utils/actions';
 import bemUtils from '../utils/bemUtils';
 import { getStartDate, getYear } from '../utils/dateUtils';
-import { summerAntallOmsorgsdager } from '../utils/utils';
+import { getBarnNavn, summerAntallOmsorgsdager } from '../utils/utils';
 import ResultBox from './ResultBox';
+import { BarnFeiloppsummeringFeil } from '../utils/types';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
 const errorkeyToText =
     (intl: IntlShape) =>
-    (error: FeiloppsummeringFeil): FeiloppsummeringFeil => ({
+    (error: BarnFeiloppsummeringFeil): FeiloppsummeringFeil => ({
         ...error,
-        feilmelding: intlHelper(intl, error.feilmelding),
+        feilmelding: intlHelper(intl, error.feilmelding, {
+            barn: getBarnNavn(intl, error.barnIndex, error.antallBarn),
+        }),
     });
 
 interface Props {
-    resultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>;
+    resultView: ResultView<BarnFeiloppsummeringFeil[], Omsorgsprinsipper>;
     dispatch: React.Dispatch<Action>;
 }
 
@@ -41,7 +44,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                 </Hovedknapp>
             </Box>
         ),
-        (errors: FeiloppsummeringFeil[]) => (
+        (errors: BarnFeiloppsummeringFeil[]) => (
             <FormBlock margin={'xxl'}>
                 <Box margin={'xl'} className={bem.element('flex-center')}>
                     <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
@@ -85,7 +88,10 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
             return (
                 <>
                     <ResultBox type={'SUCCESS'}>
-                        <p style={{ marginTop: 0 }}>
+                        <Box>
+                            <Systemtittel tag="h2">Resultat</Systemtittel>
+                        </Box>
+                        <p>
                             <FormattedMessage id={'oms-calc.resultat-area.green.1'} />
                         </p>
 

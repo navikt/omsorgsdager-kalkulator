@@ -1,10 +1,14 @@
-import { BarnInfo, BarnInput } from './types';
-import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
+import { beregnOmsorgsdager } from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
+import Barn, { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 import { separate, sequence } from 'fp-ts/lib/Array';
-import moment, { Moment } from 'moment';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { pipe } from 'fp-ts/lib/pipeable';
+import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
 import { isSome, some } from 'fp-ts/lib/Option';
+import { pipe } from 'fp-ts/lib/pipeable';
+import { none } from 'fp-ts/Option';
+import moment, { Moment } from 'moment';
+import { IntlShape } from 'react-intl';
+import { intlHelper } from '../i18n/utils';
 import {
     beregnButton,
     beregnButtonAndErrorSummary,
@@ -14,6 +18,9 @@ import {
     resultBox,
     ResultView,
 } from '../types/ResultView';
+import { getYear } from './dateUtils';
+import { initializeValue } from './initializers';
+import { BarnFeiloppsummeringFeil, BarnInfo, BarnInput } from './types';
 import {
     kroniskSyktIsValid,
     validateAleneOmOmsorgen,
@@ -22,12 +29,6 @@ import {
     validateÅrFødt,
     årFødtIsValid,
 } from './validationUtils';
-import Barn, { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
-import { beregnOmsorgsdager } from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
-import { none } from 'fp-ts/Option';
-import { initializeValue } from './initializers';
-import { getYear } from './dateUtils';
 
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -39,6 +40,7 @@ export function uuidv4() {
 
 export const toBarnInfo = (barnInput: BarnInput, index: number): BarnInfo => ({
     id: uuidv4(),
+    index,
     panelErÅpent: index === 0,
     årFødt: initializeValue(barnInput.årFødt ? some(barnInput.årFødt) : none),
     kroniskSykt: initializeValue(barnInput.kroniskSykt !== undefined ? some(barnInput.kroniskSykt) : none),
@@ -46,8 +48,9 @@ export const toBarnInfo = (barnInput: BarnInput, index: number): BarnInfo => ({
     aleneOmOmsorgen: initializeValue(barnInput.aleneOmOmsorgen !== undefined ? some(barnInput.aleneOmOmsorgen) : none),
 });
 
-export const maybeBarnInputListToBarnInfoList = (maybeBarnInputListe?: BarnInput[]): BarnInfo[] =>
-    maybeBarnInputListe ? maybeBarnInputListe.map(toBarnInfo) : [];
+export const maybeBarnInputListToBarnInfoList = (maybeBarnInputListe?: BarnInput[]): BarnInfo[] => {
+    return maybeBarnInputListe ? maybeBarnInputListe.map((barn, index) => toBarnInfo(barn, index)) : [];
+};
 
 export const erForbiDetTolvteKalenderår = (årFødt: number, now: Moment): boolean => now.year() - årFødt > 12;
 
@@ -72,11 +75,20 @@ export const borIkkeSammen = (barnInfo: BarnInfo): boolean =>
     isSome(barnInfo.borSammen.value) && !barnInfo.borSammen.value.value;
 
 export const isVisibleAndBorIkkeSammen = (barnInfo: BarnInfo): boolean =>
-    årFødtIsValid(barnInfo.årFødt) && kroniskSyktIsValid(barnInfo.kroniskSykt) && borIkkeSammen(barnInfo);
+    årFødtIsValid(barnInfo.årFødt, barnInfo.index, 0) &&
+    kroniskSyktIsValid(barnInfo.kroniskSykt, barnInfo.index, 0) &&
+    borIkkeSammen(barnInfo);
 
-export const toFeiloppsummeringsFeil = (id: string, error: string): FeiloppsummeringFeil => ({
+export const toBarnFeiloppsummeringsFeil = (
+    id: string,
+    error: string,
+    barnIndex: number,
+    antallBarn: number
+): BarnFeiloppsummeringFeil => ({
     skjemaelementId: id,
     feilmelding: error,
+    antallBarn,
+    barnIndex,
 });
 
 export const skalKoronadagerInkluderes = () => getYear() === 2022;
@@ -102,12 +114,27 @@ export const summerAntallOmsorgsdager = (result: Omsorgsprinsipper): number => {
     );
 };
 
-export const validateBarnInfoAndMapToBarn = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, Barn> => {
+export const validateBarnInfoAndMapToBarn = (
+    barnInfo: BarnInfo,
+    antallBarn: number
+): Either<BarnFeiloppsummeringFeil, Barn> => {
     const { id, årFødt, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
-    const årFødtOrError: Either<FeiloppsummeringFeil, number> = validateÅrFødt(årFødt);
-    const kroniskSyktOrError: Either<FeiloppsummeringFeil, boolean> = validateKroniskSykt(kroniskSykt);
-    const borSammenOrError: Either<FeiloppsummeringFeil, boolean> = validateBorSammen(borSammen);
-    const aleneOrError: Either<FeiloppsummeringFeil, boolean> = validateAleneOmOmsorgen(aleneOmOmsorgen);
+    const årFødtOrError: Either<BarnFeiloppsummeringFeil, number> = validateÅrFødt(årFødt, barnInfo.index, antallBarn);
+    const kroniskSyktOrError: Either<BarnFeiloppsummeringFeil, boolean> = validateKroniskSykt(
+        kroniskSykt,
+        barnInfo.index,
+        antallBarn
+    );
+    const borSammenOrError: Either<BarnFeiloppsummeringFeil, boolean> = validateBorSammen(
+        borSammen,
+        barnInfo.index,
+        antallBarn
+    );
+    const aleneOrError: Either<BarnFeiloppsummeringFeil, boolean> = validateAleneOmOmsorgen(
+        aleneOmOmsorgen,
+        barnInfo.index,
+        antallBarn
+    );
 
     // TODO: Returnere en liste av FeiloppsummeringFeil, istede for kun den første som oppdages
     return pipe(
@@ -121,8 +148,8 @@ export const validateBarnInfoAndMapToBarn = (barnInfo: BarnInfo): Either<Feilopp
 };
 
 export const extractEitherFromList = (
-    list: Either<FeiloppsummeringFeil, Barn>[]
-): Either<FeiloppsummeringFeil[], Barn[]> =>
+    list: Either<BarnFeiloppsummeringFeil, Barn>[]
+): Either<BarnFeiloppsummeringFeil[], Barn[]> =>
     pipe(
         sequence(either)(list),
         fold(
@@ -133,20 +160,22 @@ export const extractEitherFromList = (
 
 export const updateResultView = (
     listeAvBarnInfo: BarnInfo[],
-    previousResultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>,
+    previousResultView: ResultView<BarnFeiloppsummeringFeil[], Omsorgsprinsipper>,
     didClickBeregn: boolean
-): ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
+): ResultView<BarnFeiloppsummeringFeil[], Omsorgsprinsipper> => {
     const listeAvBarnUtenInvalids: BarnInfo[] = listeAvBarnInfo.filter(includeChild);
-    const listOfEitherErrorOrBarn: Either<FeiloppsummeringFeil, Barn>[] =
-        listeAvBarnUtenInvalids.map(validateBarnInfoAndMapToBarn);
-    const validationResult: Either<FeiloppsummeringFeil[], Barn[]> = extractEitherFromList(listOfEitherErrorOrBarn);
+    const antallBarn = listeAvBarnInfo.length;
+    const listOfEitherErrorOrBarn: Either<BarnFeiloppsummeringFeil, Barn>[] = listeAvBarnUtenInvalids.map((info) =>
+        validateBarnInfoAndMapToBarn(info, antallBarn)
+    );
+    const validationResult: Either<BarnFeiloppsummeringFeil[], Barn[]> = extractEitherFromList(listOfEitherErrorOrBarn);
 
-    const updatedResultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> = fold<
-        FeiloppsummeringFeil[],
+    const updatedResultView: ResultView<BarnFeiloppsummeringFeil[], Omsorgsprinsipper> = fold<
+        BarnFeiloppsummeringFeil[],
         Barn[],
-        ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>
+        ResultView<BarnFeiloppsummeringFeil[], Omsorgsprinsipper>
     >(
-        (errors: FeiloppsummeringFeil[]) => beregnButtonAndErrorSummary<FeiloppsummeringFeil[]>(errors),
+        (errors: BarnFeiloppsummeringFeil[]) => beregnButtonAndErrorSummary<BarnFeiloppsummeringFeil[]>(errors),
         (barnListe: Barn[]) => {
             if (barnListe.length === 0) {
                 return noValidChildrenOrange;
@@ -165,3 +194,8 @@ export const updateResultView = (
         () => (didClickBeregn ? updatedResultView : beregnButton)
     )(previousResultView);
 };
+
+export const getBarnNavn = (intl: IntlShape, barnIndex: number, antallBarn: number) =>
+    antallBarn === 1
+        ? intlHelper(intl, 'oms-calc.barn.ettBarn.navn')
+        : intlHelper(intl, 'oms-calc.barn.flereBarn.navn', { index: barnIndex + 1 });

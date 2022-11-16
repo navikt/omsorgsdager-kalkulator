@@ -15,6 +15,7 @@ import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
 import Box from '../components/box/Box';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { intlHelper } from '../i18n/utils';
+import { getBarnNavn } from '../utils/utils';
 
 interface Props {
     state: State;
@@ -58,8 +59,9 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => {
                         feil={valueToFeilProps(
                             barnInfo.aleneOmOmsorgen,
                             state.resultViewData,
-                            validateAleneOmOmsorgen,
-                            intl
+                            (value) => validateAleneOmOmsorgen(value, barnInfo.index, state.nBarn.value),
+                            intl,
+                            { barn: getBarnNavn(intl, barnInfo.index, state.nBarn.value) }
                         )}
                         onChange={(evt, value) => {
                             if (isYesOrNo(value)) {

@@ -9,7 +9,7 @@ import { Element } from 'nav-frontend-typografi';
 import { valueToFeilProps } from '../utils/componentUtils';
 import { validateBorSammen } from '../utils/validationUtils';
 import { isYesOrNo } from '../utils/typeguards';
-import { isVisibleAndBorIkkeSammen } from '../utils/utils';
+import { getBarnNavn, isVisibleAndBorIkkeSammen } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
 import FormBlock from '../components/form-block/FormBlock';
@@ -40,7 +40,13 @@ const BarnBorSammenView = ({ state, dispatch, barnInfo }: Props) => {
                                 <FormattedMessage id={'oms-calc.bor-sammen.description.content'} />
                             </ExpandableInfo>
                         }
-                        feil={valueToFeilProps(barnInfo.borSammen, state.resultViewData, validateBorSammen, intl)}
+                        feil={valueToFeilProps(
+                            barnInfo.borSammen,
+                            state.resultViewData,
+                            (value) => validateBorSammen(value, barnInfo.index, state.nBarn.value),
+                            intl,
+                            { barn: getBarnNavn(intl, barnInfo.index, state.nBarn.value) }
+                        )}
                         onChange={(evt, value) => {
                             if (isYesOrNo(value)) {
                                 dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));

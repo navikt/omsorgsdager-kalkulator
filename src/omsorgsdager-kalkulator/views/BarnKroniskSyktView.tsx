@@ -9,7 +9,7 @@ import { Element } from 'nav-frontend-typografi';
 import { valueToFeilProps } from '../utils/componentUtils';
 import { validateKroniskSykt } from '../utils/validationUtils';
 import { isYesOrNo } from '../utils/typeguards';
-import { barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt } from '../utils/utils';
+import { barnetErForbiDetTolvteKalenderårOgIkkeKroniskSykt, getBarnNavn } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import FormBlock from '../components/form-block/FormBlock';
 import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
@@ -40,7 +40,13 @@ const BarnKroniskSyktView = ({ dispatch, barnInfo, state }: Props) => {
                                 <FormattedMessage id={'oms-calc.kronisk-sykt.description.content'} />
                             </ExpandableInfo>
                         }
-                        feil={valueToFeilProps(barnInfo.kroniskSykt, state.resultViewData, validateKroniskSykt, intl)}
+                        feil={valueToFeilProps(
+                            barnInfo.kroniskSykt,
+                            state.resultViewData,
+                            (value) => validateKroniskSykt(value, barnInfo.index, state.nBarn.value),
+                            intl,
+                            { barn: getBarnNavn(intl, barnInfo.index, state.nBarn.value) }
+                        )}
                         onChange={(evt, value) => {
                             if (isYesOrNo(value)) {
                                 dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));

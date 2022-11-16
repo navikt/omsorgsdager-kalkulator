@@ -5,7 +5,7 @@ import { Action, setÅrFødtForBarnInfo } from '../utils/actions';
 import { State } from '../utils/state';
 import { Element } from 'nav-frontend-typografi';
 import { isSome, none, some } from 'fp-ts/lib/Option';
-import { barnetErForbiDetAttendeKalenderår } from '../utils/utils';
+import { barnetErForbiDetAttendeKalenderår, getBarnNavn } from '../utils/utils';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import FormBlock from '../components/form-block/FormBlock';
 import ExpandableInfo from '../components/expandable-content/ExpandableInfo';
@@ -42,7 +42,13 @@ const BarnÅrFødtView = ({ barnInfo, dispatch, state }: Props) => {
                     id={barnInfo.årFødt.id}
                     value={isSome(barnInfo.årFødt.value) ? barnInfo.årFødt.value.value : undefined}
                     bredde={'xs'}
-                    feil={valueToFeilProps(barnInfo.årFødt, state.resultViewData, validateÅrFødt, intl)}
+                    feil={valueToFeilProps(
+                        barnInfo.årFødt,
+                        state.resultViewData,
+                        (value) => validateÅrFødt(value, barnInfo.index, state.nBarn.value),
+                        intl,
+                        { barn: getBarnNavn(intl, barnInfo.index, state.nBarn.value) }
+                    )}
                     autoComplete={'off'}
                     onChange={(event) => {
                         const maybeNumber: number = parseInt(event.target.value, 10);
@@ -53,14 +59,14 @@ const BarnÅrFødtView = ({ barnInfo, dispatch, state }: Props) => {
                         }
                     }}>
                     {[
-                        <option id={`aar-fodt-ikke-valgt`} value={undefined} key={0}>
+                        <option id={`${barnInfo.index}.aar-fodt-ikke-valgt`} value={undefined} key={0}>
                             {' '}
                         </option>,
                         ...Array.from({ length: 21 }, (_, i) => i).map((value: number) => {
                             const currentYear = getYear();
                             const year = currentYear - value;
                             return (
-                                <option id={`aar-fodt-${year}`} value={year} key={year}>
+                                <option value={year} key={year}>
                                     {year}
                                 </option>
                             );

@@ -16,7 +16,9 @@ const KalkulatorLogoAndTitle = () => {
                 <Sidetittel>
                     <FormattedMessage id={'oms-calc.tittel'} />
                 </Sidetittel>
-                <SvgHeaderUnderline />
+                <div role="presentation" aria-hidden={true}>
+                    <SvgHeaderUnderline />
+                </div>
             </FormBlock>
         </div>
     );

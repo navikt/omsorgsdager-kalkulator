@@ -10,8 +10,9 @@ export function initializeValue<T>(value: T): ValueWithId<T> {
     };
 }
 
-export const createInitialBarnInformasjon = (ekspanderbartPanelErÅpent: boolean): BarnInfo => ({
+export const createInitialBarnInformasjon = (ekspanderbartPanelErÅpent: boolean, index: number): BarnInfo => ({
     id: uuidv4(),
+    index,
     panelErÅpent: ekspanderbartPanelErÅpent,
     årFødt: initializeValue(none),
     kroniskSykt: initializeValue(none),
@@ -20,4 +21,4 @@ export const createInitialBarnInformasjon = (ekspanderbartPanelErÅpent: boolean
 });
 
 export const initializeNBarn = (n: number) =>
-    Array.from({ length: n }, (_, index: number) => createInitialBarnInformasjon(index === 0));
+    Array.from({ length: n }, (_, index: number) => createInitialBarnInformasjon(index === 0, index));

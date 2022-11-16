@@ -1,6 +1,9 @@
 {
     "oms-calc.tittel": "Kalkulator for omsorgsdager",
-    "oms-calc.intro-tekst": "Kalkulatoren beregner hvor mange omsorgsdager du har ut fra svarene du oppgir. Det betyr at riktig resultat er avhengig av at du gir riktige opplysninger. Kalkulatoren er ment som et hjelpeverktøy for deg, det er ikke et vedtak eller en bekreftelse fra NAV.",
+    "oms-calc.tittel.beregn": "Kalkulator for omsorgsdager - beregn omsorgsdager",
+    "oms-calc.tittel.introside": "Kalkulator for omsorgsdager - inngang",
+    "oms-calc.intro-tekst.1": "Kalkulatoren beregner hvor mange omsorgsdager du har ut fra svarene du oppgir. Det betyr at riktig resultat er avhengig av at du gir riktige opplysninger. Kalkulatoren er ment som et hjelpeverktøy for deg, det er ikke et vedtak eller en bekreftelse fra NAV.",
+    "oms-calc.intro-tekst.2": "Du må svare på alle spørsmålene nedenfor for å få et resultat.",
     "oms-calc.n-barn-select-label": "Hvor mange egne barn har du i husstanden?",
     "oms-calc.n-barn-select-description": "Med egne barn menes biologiske barn, adoptivbarn og fosterbarn.",
     "oms-calc.info-flere-barn": "Legg inn opplysninger for ett barn om gangen.",
@@ -22,6 +25,17 @@
     "oms-calc.alene-om-omsorgen.description.content.1": "Når det gjelder omsorgsdager, er du regnet som alene om omsorgen hvis du ikke bor sammen med den andre forelderen, og barnet bor fast bare hos deg. Dette gjelder også hvis du får ny samboer eller ektefelle.",
     "oms-calc.alene-om-omsorgen.description.content.2": "Hvis du og den andre forelderen har en avtale om delt bosted, hvor barnet bor fast hos dere begge, vil ingen av dere bli regnet som alene om omsorgen.",
     "oms-calc.alene-om-omsorgen.description.content.3": "Les mer om fast bosted og samvær",
+
+    "oms-calc.error.årstall.notAnswered": "Då må svare på hvilket årstall {barn} er født.",
+    "oms-calc.error.kronisk_sykt.notAnswered": "Då må svare på om du har fått ekstra omsorgsdager fordi {barn} har en kronisk sykdom eller en funksjonshemning.",
+    "oms-calc.error.bor_fast.notAnswered": "Då må svare på om {barn} bor fast hos deg.",
+    "oms-calc.error.aleneomsorg.notAnswered": "Då må svare på om du er alene om omsorgen med {barn}.",
+
+    "oms-calc.barn.flereBarn.navn": "barn {index}",
+    "oms-calc.barn.ettBarn.navn": "barnet",
+    "oms-calc.barnSection.flereBarn.tittel": "Opplysninger om barna",
+    "oms-calc.barnSection.ettBarn.tittel": "Opplysninger om barnet",
+
     "oms-calc.neste-barn-knapp": "Neste barn",
     "oms-calc.resultat-area.beregn-knapp": "Beregn",
     "oms-calc.resultat-area.orange.1": "Beregningen baserer seg på svarene du har lagt inn i kalkulatoren. Det betyr at resultatet er avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du",
