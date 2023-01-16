@@ -58,7 +58,7 @@
         "nav-frontend-typografi-style": "^2.0.2",
         "promise": "^8.3.0",
         "react-collapse": "^5.1.1",
-        "react-day-picker": "^7.4.10",
+        "react-day-picker": "^8.4.1",
         "react-intl": "^6.2.5"
     },
     "devDependencies": {
