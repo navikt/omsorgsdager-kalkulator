@@ -8,7 +8,7 @@
     "livenessPath": "/omsorgspenger/kalkulator-antall-omsorgsdager/health/isAlive",
     "readinessPath": "/omsorgspenger/kalkulator-antall-omsorgsdager/health/isReady",
     "env": {
-        "DEKORATOR_URL": "https://dekoratoren.dev.nav.no",
+        "DEKORATOR_URL": "https://dekoratoren.dev.nav.no/?logoutUrl=https://omsorgsdager-kalkulator.intern.dev.nav.no/oauth2/logout&redirectToApp=true",
         "PUBLIC_PATH": "/omsorgspenger/kalkulator-antall-omsorgsdager",
         "NPM_CONFIG_CACHE": "/tmp"
     }
