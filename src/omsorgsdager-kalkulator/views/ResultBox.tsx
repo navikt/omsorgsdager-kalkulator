@@ -37,7 +37,6 @@ const ResultBox: React.FC<Props> = ({ type, children }: PropsWithChildren<Props>
 
     useEffect(() => {
         if (box && box.current) {
-            console.log(box);
             box.current.focus({ preventScroll: false });
             box.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
