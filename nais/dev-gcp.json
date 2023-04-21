@@ -5,7 +5,7 @@
     "team": "dusseldorf",
     "minReplicas": "1",
     "maxReplicas": "1",
-    "ingresses": ["https://omsorgsdager-kalkulator.dev.nav.no"],
+    "ingresses": ["https://omsorgsdager-kalkulator.intern.dev.nav.no"],
     "externalHosts": ["www.nav.no", "dekoratoren.dev.nav.no", "dekoratoren.ekstern.dev.nav.no"],
     "livenessPath": "/omsorgspenger/kalkulator-antall-omsorgsdager/health/isAlive",
     "readinessPath": "/omsorgspenger/kalkulator-antall-omsorgsdager/health/isReady",
