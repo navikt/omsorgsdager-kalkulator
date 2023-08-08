@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
@@ -16,6 +15,7 @@ import { getStartDate, getYear } from '../utils/dateUtils';
 import { getBarnNavn, summerAntallOmsorgsdager } from '../utils/utils';
 import ResultBox from './ResultBox';
 import { BarnFeiloppsummeringFeil } from '../utils/types';
+import Omsorgsprinsipper from '../components/kalkulerOmsorgsdager/types/Omsorgsprinsipper';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
