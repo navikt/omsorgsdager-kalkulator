@@ -1,6 +1,6 @@
 # omsorgsdager-kalkulator
 
-En kalkulator for beregning av omsorgsdager. Utregning bassert på bibliotek @navikt/kalkuler-omsorgsdager.
+En kalkulator for beregning av omsorgsdager.
 
 # Start lokalt
 

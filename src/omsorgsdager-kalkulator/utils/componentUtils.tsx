@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IntlShape } from 'react-intl';
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import Omsorgsprinsipper from '../components/kalkulerOmsorgsdager/types/Omsorgsprinsipper';
 import { Either, isLeft } from 'fp-ts/lib/Either';
 import { Option } from 'fp-ts/lib/Option';
 import { intlHelper } from '../i18n/utils';

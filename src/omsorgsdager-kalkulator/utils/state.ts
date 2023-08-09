@@ -1,4 +1,4 @@
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import Omsorgsprinsipper from '../components/kalkulerOmsorgsdager/types/Omsorgsprinsipper';
 import { beregnButton, empty, ResultView } from '../types/ResultView';
 import { initializeValue } from './initializers';
 import { BarnFeiloppsummeringFeil, BarnInfo, ValueWithId } from './types';

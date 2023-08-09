@@ -1,6 +1,3 @@
-import { beregnOmsorgsdager } from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
-import Barn, { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
 import { separate, sequence } from 'fp-ts/lib/Array';
 import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
 import { isSome, some } from 'fp-ts/lib/Option';
@@ -29,6 +26,9 @@ import {
     validateÅrFødt,
     årFødtIsValid,
 } from './validationUtils';
+import Barn, { AlderType } from '../components/kalkulerOmsorgsdager/types/Barn';
+import Omsorgsprinsipper from '../components/kalkulerOmsorgsdager/types/Omsorgsprinsipper';
+import { beregnOmsorgsdager } from '../components/kalkulerOmsorgsdager/kalkulerOmsorgsdager';
 
 export function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

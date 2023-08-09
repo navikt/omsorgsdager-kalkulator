@@ -10,7 +10,7 @@ import {
     setÅrFødtAndMaybeWipeValues,
 } from './reducerUtils';
 import { beregnButton, isBeregnButtonAndErrorSummary, ResultView } from '../types/ResultView';
-import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import Omsorgsprinsipper from '../components/kalkulerOmsorgsdager/types/Omsorgsprinsipper';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
 
