@@ -1,6 +1,6 @@
 import { BarnInfo, ValueWithId } from './types';
 import { none } from 'fp-ts/lib/Option';
-import { uuidv4 } from './utils';
+import { v4 as uuidv4 } from 'uuid';
 
 export function initializeValue<T>(value: T): ValueWithId<T> {
     const uuid = uuidv4();
