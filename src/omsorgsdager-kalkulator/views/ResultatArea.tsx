@@ -16,6 +16,7 @@ import { getBarnNavn, summerAntallOmsorgsdager } from '../utils/utils';
 import ResultBox from './ResultBox';
 import { BarnFeiloppsummeringFeil } from '../utils/types';
 import Omsorgsprinsipper from '../components/kalkulerOmsorgsdager/types/Omsorgsprinsipper';
+import { lenker } from '../utils/lenker';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -74,10 +75,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                     <FormattedMessage id={'oms-calc.resultat-area.orange.3'} />
                 </p>
                 <p>
-                    <Lenke
-                        href={
-                            'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du'
-                        }>
+                    <Lenke href={lenker.omsorgspengerNavno}>
                         <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
                     </Lenke>
                 </p>
@@ -108,10 +106,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) => {
                             <FormattedMessage id={'oms-calc.resultat-area.3.2'} />
                         </p>
                         <p>
-                            <Lenke
-                                href={
-                                    'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger#Hvor-mange-omsorgsdager-har-du'
-                                }>
+                            <Lenke href={lenker.omsorgspengerNavno}>
                                 <FormattedMessage id={'oms-calc.tilbake-til-omsorgspenger'} />
                             </Lenke>
                         </p>
